@@ -22,28 +22,25 @@ export function Sidebar() {
   ];
 
   return (
-    <aside className="w-3xs px-4 py-7 shadow-[4px_0_8px_-4px_rgba(0,0,0,0.1)]">
+    <aside className="w-3xs px-2 py-7 bg-(--background) border-r-1 border-r-(--divider)">
       <div className="mb-10">
         <span className="text-2xl font-bold tracking-tight text-gray-900">HealthLog</span>
       </div>
 
       <nav className="mt-4">
-        <ul className="flex flex-col gap-2">
-          <li>
-            {menuItems.map((item) => (
+        <ul className="flex flex-col gap-1">
+          {menuItems.map((item) => (
+            <li key={item.href}>
               <Link
                 href={item.href}
-                key={item.href}
-                className={`flex items-center gap-3 px-4 py-3 rounded-xl transition hover:bg-indigo-100 border-l-4 ${
-                  pathname === item.href
-                    ? 'text-indigo-600 bg-indigo-50 border-l-4 border-indigo-600 font-semibold'
-                    : 'text-gray-500 border-l-4 border-transparent font-medium'
-                }`}
+                className={`block w-full text-(--text) text-base font-medium px-3 py-2 hover:bg-(--nav-hover) rounded-lg
+                  ${pathname === item.href ? 'text-(--text) bg-(--nav-active) ' : 'text-(--text-subtitle)'}
+                  `}
               >
                 {item.label}
               </Link>
-            ))}
-          </li>
+            </li>
+          ))}
         </ul>
       </nav>
     </aside>
