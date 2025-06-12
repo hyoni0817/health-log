@@ -24,7 +24,7 @@ export default async function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="ko" data-theme="dark">
       <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
         <div className="flex">
           <Sidebar />
