@@ -1,22 +1,75 @@
 @import 'tailwindcss';
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-  --spacing: 4px;
+@custom-variant dark (&:where([data-theme=dark], [data-theme=dark] *));
+
+@theme {
+  --color-white: #ffffff;
+  --color-gray-50: #f9fafb;
+  --color-gray-100: #e5e5e5;
+  --color-gray-200: #e8e8e8;
+  --color-gray-300: #222222;
+  --color-gray-500: #999999;
+  --color-gray-600: #4b4b4b;
+  --color-gray-700: #374151;
+  --color-gray-800: #252525;
+  --color-gray-875: #1c1c1f;
+  --color-gray-900: #0d0d0d;
+  --color-red-400: #f87171;
+  --color-orange-500: #fb923c;
+  --color-blue-400: #3b82f6;
+  --color-navy-600: #1e293b;
+  --color-yellow-400: #fbbf24;
+  --color-green-500: #34c759;
+}
+
+@layer base {
+  :root {
+    --background: var(--color-gray-50);
+    --nav-active: var(--color-gray-200);
+    --nav-hover: var(--color-gray-100);
+    --card: var(--color-white);
+    --divider: var(--color-gray-300);
+    --text: var(--color-gray-700);
+    --text-subtitle: var(--color-gray-500);
+    --success: var(--color-green-500);
+    --chart-systolic: var(--color-orange-500);
+    --chart-diastolic: var(--color-navy-600);
+  }
+
+  html[data-theme='dark'] {
+    --background: var(--color-gray-900);
+    --nav-active: var(--color-gray-800);
+    --nav-hover: var(--color-gray-875);
+    --card: var(--color-gray-800);
+    --divider: var(--color-gray-600);
+    --text: var(--color-white);
+    --text-subtitle: var(--color-gray-500);
+    --success: var(--color-green-500);
+    --chart-systolic: var(--color-blue-400);
+    --chart-diastolic: var(--color-yellow-400);
+  }
 }
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
+  /* --color-background: var(--background);
+  --color-foreground: var(--foreground); */
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+    --background: var(--color-gray-900);
+    --card: var(--color-gray-800);
+    --divider: var(--color-gray-600);
+    --text: var(--color-white);
+    --text-subtitle: var(--color-gray-100);
+    --success: var(--color-green-500);
+    --chart-systolic: var(--color-blue-400);
+    --chart-diastolic: var(--color-yellow-400);
   }
 }
 
