@@ -2,7 +2,7 @@
 
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { House, Droplet, HeartPulse } from 'lucide-react';
+import { Activity, House, Droplet, HeartPulse } from 'lucide-react';
 
 export function Sidebar() {
   const pathname = usePathname();
@@ -27,8 +27,9 @@ export function Sidebar() {
 
   return (
     <aside className="w-3xs px-2 py-7 bg-(--background) border-r-1 border-r-(--divider)">
-      <div className="mb-10">
-        <span className="text-2xl font-bold tracking-tight text-gray-900">HealthLog</span>
+      <div className="flex items-center gap-2 mb-10">
+        <Activity className="text-(--text)" />
+        <span className="text-2xl font-bold tracking-tight text-(--text)">HealthLog</span>
       </div>
 
       <nav className="mt-4">
