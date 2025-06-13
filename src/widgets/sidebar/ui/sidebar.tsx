@@ -2,6 +2,7 @@
 
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
+import { House, Droplet, HeartPulse } from 'lucide-react';
 
 export function Sidebar() {
   const pathname = usePathname();
@@ -10,14 +11,17 @@ export function Sidebar() {
     {
       label: '홈',
       href: '/',
+      icon: <House />,
     },
     {
       label: '혈당',
       href: '/glucose',
+      icon: <Droplet />,
     },
     {
       label: '혈압',
       href: '/blood-pressure',
+      icon: <HeartPulse />,
     },
   ];
 
@@ -33,10 +37,11 @@ export function Sidebar() {
             <li key={item.href}>
               <Link
                 href={item.href}
-                className={`block w-full text-(--text) text-base font-medium px-3 py-2 hover:bg-(--nav-hover) rounded-lg
+                className={`flex items-center gap-3 w-full text-(--text) text-base font-medium px-4 py-2 hover:bg-(--nav-hover) rounded-lg
                   ${pathname === item.href ? 'text-(--text) bg-(--nav-active) ' : 'text-(--text-subtitle)'}
                   `}
               >
+                {item.icon}
                 {item.label}
               </Link>
             </li>
