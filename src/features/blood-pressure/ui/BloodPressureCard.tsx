@@ -5,7 +5,7 @@ import React from 'react';
 
 export const BloodPressureCard = () => {
   return (
-    <Card>
+    <Card className="w-1/2">
       <div className="flex items-center justify-between gap-2">
         <h3 className="text-base font-medium text-(--text) mb-2">최근 혈압 수치</h3>
         <p className="text-sm text-(--text-subtitle)">마지막 업데이트: 3일전</p>
