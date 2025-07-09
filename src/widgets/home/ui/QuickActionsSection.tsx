@@ -1,0 +1,21 @@
+import React from 'react';
+import { Button, Card } from '@/shared/ui/components';
+import { Droplet, HeartPulse, Plus } from 'lucide-react';
+
+export const QuickActionsSection = () => {
+  return (
+    <section className="mb-8 max-w-[40%]">
+      <Card>
+        <h2 className="text-white text-xl font-semibold mb-4">빠른 실행</h2>
+        <div className="space-y-3">
+          <Button variant="action" fullWidth leftIcon={<Droplet />} rightIcon={<Plus />}>
+            혈당 데이터 추가
+          </Button>
+          <Button variant="action" fullWidth leftIcon={<HeartPulse />} rightIcon={<Plus />}>
+            혈압 데이터 추가
+          </Button>
+        </div>
+      </Card>
+    </section>
+  );
+};

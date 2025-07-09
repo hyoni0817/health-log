@@ -1,4 +1,4 @@
-import { LatestMetricsSection } from '@/widgets/home';
+import { LatestMetricsSection, QuickActionsSection } from '@/widgets/home';
 
 export function HomePage() {
   return (
@@ -8,6 +8,7 @@ export function HomePage() {
 
       <div>
         <LatestMetricsSection />
+        <QuickActionsSection />
       </div>
     </main>
   );
