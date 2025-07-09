@@ -8,6 +8,9 @@ export function HomePage() {
 
       <div>
         <LatestMetricsSection />
+      </div>
+
+      <div className="flex gap-4">
         <QuickActionsSection />
         <HealthInsightSection />
       </div>

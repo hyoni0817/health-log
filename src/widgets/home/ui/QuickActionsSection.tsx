@@ -4,8 +4,8 @@ import { Droplet, HeartPulse, Plus } from 'lucide-react';
 
 export const QuickActionsSection = () => {
   return (
-    <section className="mb-8 max-w-[40%]">
-      <Card>
+    <section className="mb-8 w-[40%] flex-1">
+      <Card className="h-full">
         <h2 className="text-white text-xl font-semibold mb-4">빠른 실행</h2>
         <div className="space-y-3">
           <Button variant="action" fullWidth leftIcon={<Droplet />} rightIcon={<Plus />}>
