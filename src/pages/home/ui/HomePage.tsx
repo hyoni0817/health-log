@@ -1,4 +1,4 @@
-import { LatestMetricsSection, QuickActionsSection } from '@/widgets/home';
+import { HealthInsightSection, LatestMetricsSection, QuickActionsSection } from '@/widgets/home';
 
 export function HomePage() {
   return (
@@ -9,6 +9,7 @@ export function HomePage() {
       <div>
         <LatestMetricsSection />
         <QuickActionsSection />
+        <HealthInsightSection />
       </div>
     </main>
   );
