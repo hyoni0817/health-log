@@ -1,5 +1,5 @@
 import React from 'react';
-import { Card } from '@/shared/ui/components';
+import { Card } from '@/shared/ui';
 import Link from 'next/link';
 import { MoveRight } from 'lucide-react';
 

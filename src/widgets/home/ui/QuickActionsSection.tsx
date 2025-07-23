@@ -1,5 +1,5 @@
 import React from 'react';
-import { Button, Card } from '@/shared/ui/components';
+import { Button, Card } from '@/shared/ui';
 import { Droplet, HeartPulse, Plus } from 'lucide-react';
 
 export const QuickActionsSection = () => {
