@@ -1,2 +1,2 @@
 export * from './Card';
-export { Button } from './components/Button';
+export * from './Button';
