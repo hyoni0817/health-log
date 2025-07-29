@@ -3,6 +3,7 @@ import { Geist, Geist_Mono } from 'next/font/google';
 import './globals.css';
 import { Sidebar } from '@/widgets/sidebar';
 import { QueryProvider } from '@/providers/QueryProvider';
+import { ModalProvider } from '@/shared/ui';
 
 const geistSans = Geist({
   variable: '--font-geist-sans',
@@ -28,10 +29,12 @@ export default async function RootLayout({
     <html lang="ko" data-theme="dark">
       <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
         <QueryProvider>
-          <div className="flex">
-            <Sidebar />
-            {children}
-          </div>
+          <ModalProvider>
+            <div className="flex">
+              <Sidebar />
+              {children}
+            </div>
+          </ModalProvider>
         </QueryProvider>
       </body>
     </html>
