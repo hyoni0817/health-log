@@ -88,3 +88,14 @@ ul {
 button {
   cursor: pointer;
 }
+
+/* date picker 아이콘 - 라이트 모드에서는 기본 검은색 */
+input[type='date']::-webkit-calendar-picker-indicator {
+  opacity: 0.7;
+}
+
+/* date picker 아이콘 - 다크 모드에서는 반전시켜서 흰색으로 */
+[data-theme='dark'] input[type='date']::-webkit-calendar-picker-indicator {
+  filter: invert(1);
+  opacity: 1;
+}
