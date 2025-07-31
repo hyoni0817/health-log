@@ -99,3 +99,12 @@ input[type='date']::-webkit-calendar-picker-indicator {
   filter: invert(1);
   opacity: 1;
 }
+
+/* input autofill 배경색 제거 */
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus {
+  -webkit-box-shadow: 0 0 0 30px var(--background) inset !important;
+  -webkit-text-fill-color: var(--text) !important;
+  transition: background-color 5000s ease-in-out 0s;
+}
