@@ -3,6 +3,7 @@ import { BloodSugarFormData, BloodSugarFormErrors, UseBloodSugarFormReturn } fro
 import { validateBloodSugarForm, isRequiredField } from '../lib/validation';
 import { isDirtyField, isEmptyObject } from '@/shared/utils/form';
 import { MealTiming } from '@/entities/blood-sugar/model/types/bloodSugar';
+import { useCreateBloodSugar } from '@/features/blood-pressure/hooks/useCreateBloodSugar';
 
 const initialFormData: BloodSugarFormData = {
   value: '',
@@ -19,6 +20,7 @@ const initialFormData: BloodSugarFormData = {
 export const useBloodSugarForm = (
   onSubmit?: (data: BloodSugarFormData) => void | Promise<void>
 ): UseBloodSugarFormReturn => {
+  const { mutate } = useCreateBloodSugar();
   const [values, setValues] = useState<BloodSugarFormData>(initialFormData);
   const [errors, setErrors] = useState<BloodSugarFormErrors>({});
   const [touched, setTouched] = useState<Record<keyof BloodSugarFormData, boolean>>({
@@ -103,6 +105,14 @@ export const useBloodSugarForm = (
       });
 
       if (isEmptyObject(validationErrors) && onSubmit) {
+        mutate({
+          value: Number(values.value),
+          date: values.date,
+          meal_timing: values.meal_timing,
+          note: values.note,
+          user_id: 1,
+        });
+
         await onSubmit(values);
       }
     },
@@ -135,6 +145,7 @@ export const useBloodSugarForm = (
     isDirty,
     toPayload: () => ({
       value: Number(values.value),
+      date: values.date,
       meal_timing: values.meal_timing,
       note: values.note,
     }),
