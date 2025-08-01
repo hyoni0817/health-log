@@ -13,6 +13,7 @@ export interface BloodSugarPayload {
   meal_timing: (typeof MealTiming)[keyof typeof MealTiming];
   note?: string;
   user_id: number;
+  date: string;
 }
 
 export interface BloodSugarRecord extends BloodSugarPayload {
