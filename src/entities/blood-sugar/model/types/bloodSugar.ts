@@ -8,9 +8,15 @@ export enum MealTiming {
   FASTING = 'FASTING',
 }
 
+export enum PostMealTime {
+  THIRTY_MINUTES = '30',
+  TWO_HOURS = '120',
+}
+
 export interface BloodSugarPayload {
   value: number;
   meal_timing: (typeof MealTiming)[keyof typeof MealTiming];
+  post_meal_time?: (typeof PostMealTime)[keyof typeof PostMealTime];
   note?: string;
   user_id: number;
   date: string;
