@@ -4,6 +4,7 @@ import { SelectField, SelectOption } from './SelectField';
 
 const POST_MEAL_TIME_OPTIONS: SelectOption<PostMealTime>[] = [
   { value: PostMealTime.THIRTY_MINUTES, label: '30분 후' },
+  { value: PostMealTime.ONE_HOUR, label: '1시간 후' },
   { value: PostMealTime.TWO_HOURS, label: '2시간 후' },
 ];
 

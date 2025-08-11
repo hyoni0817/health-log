@@ -10,6 +10,7 @@ export enum MealTiming {
 
 export enum PostMealTime {
   THIRTY_MINUTES = '30',
+  ONE_HOUR = '60',
   TWO_HOURS = '120',
 }
 
