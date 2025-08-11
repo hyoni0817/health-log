@@ -16,7 +16,7 @@ export enum PostMealTime {
 export interface BloodSugarPayload {
   value: number;
   meal_timing: (typeof MealTiming)[keyof typeof MealTiming];
-  post_meal_time?: (typeof PostMealTime)[keyof typeof PostMealTime];
+  post_meal_time?: (typeof PostMealTime)[keyof typeof PostMealTime] | null;
   note?: string;
   user_id: number;
   date: string;

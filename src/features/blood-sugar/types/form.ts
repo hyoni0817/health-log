@@ -1,4 +1,4 @@
-import { MealTiming, BloodSugarPayload } from '@/entities/blood-sugar/model/types/bloodSugar';
+import { MealTiming, BloodSugarPayload, PostMealTime } from '@/entities/blood-sugar/model/types/bloodSugar';
 
 /**
  * 폼에서 사용하는 데이터 타입 (문자열 기반)
@@ -7,6 +7,7 @@ export interface BloodSugarFormData {
   value: string; // 문자열로 받아서 나중에 number로 변환
   date: string; // HTML input[type="date"]의 값
   meal_timing: MealTiming;
+  post_meal_time: PostMealTime;
   note: string;
 }
 
@@ -17,6 +18,7 @@ export interface BloodSugarFormErrors {
   value?: string;
   date?: string;
   meal_timing?: string;
+  post_meal_time?: string;
   note?: string;
 }
 
@@ -31,6 +33,7 @@ export interface UseBloodSugarFormReturn {
     value: (value: string) => void;
     date: (value: string) => void;
     meal_timing: (value: MealTiming) => void;
+    post_meal_time: (value: PostMealTime) => void;
     note: (value: string) => void;
   };
   handleSubmit: (e: React.FormEvent) => void;

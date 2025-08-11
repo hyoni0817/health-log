@@ -2,13 +2,14 @@ import { useState, useCallback } from 'react';
 import { BloodSugarFormData, BloodSugarFormErrors, UseBloodSugarFormReturn } from '../types/form';
 import { validateBloodSugarForm, isRequiredField } from '../lib/validation';
 import { isDirtyField, isEmptyObject } from '@/shared/utils/form';
-import { MealTiming } from '@/entities/blood-sugar/model/types/bloodSugar';
+import { MealTiming, PostMealTime } from '@/entities/blood-sugar/model/types/bloodSugar';
 import { useCreateBloodSugar } from '@/features/blood-pressure/hooks/useCreateBloodSugar';
 
 const initialFormData: BloodSugarFormData = {
   value: '',
   date: '',
   meal_timing: MealTiming.FASTING,
+  post_meal_time: PostMealTime.THIRTY_MINUTES,
   note: '',
 };
 
@@ -27,6 +28,7 @@ export const useBloodSugarForm = (
     value: false,
     date: false,
     meal_timing: false,
+    post_meal_time: false,
     note: false,
   });
 
@@ -78,6 +80,15 @@ export const useBloodSugarForm = (
       [validateField]
     ),
 
+    post_meal_time: useCallback(
+      (value: PostMealTime) => {
+        validateField('post_meal_time', value);
+        setValues((prev) => ({ ...prev, post_meal_time: value }));
+        setTouched((prev) => ({ ...prev, post_meal_time: true }));
+      },
+      [validateField]
+    ),
+
     note: useCallback((value: string) => {
       setValues((prev) => ({ ...prev, note: value }));
       setTouched((prev) => ({ ...prev, note: true }));
@@ -101,14 +112,18 @@ export const useBloodSugarForm = (
         value: true,
         date: true,
         meal_timing: true,
+        post_meal_time: true,
         note: true,
       });
 
       if (isEmptyObject(validationErrors) && onSubmit) {
+        const postMealTime = values.meal_timing.includes('AFTER') ? (values.post_meal_time as PostMealTime) : null;
+
         mutate({
           value: Number(values.value),
           date: values.date,
-          meal_timing: values.meal_timing,
+          meal_timing: values.meal_timing as MealTiming,
+          post_meal_time: postMealTime,
           note: values.note,
           user_id: 1,
         });
