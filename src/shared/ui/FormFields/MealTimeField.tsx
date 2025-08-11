@@ -1,8 +1,8 @@
 import React from 'react';
-import { FormFieldStyles } from './styles';
 import { MealTiming } from '@/entities/blood-sugar/model';
+import { SelectField, SelectOption } from './SelectField';
 
-const MEAL_TIME_OPTIONS: { value: MealTiming; label: string }[] = [
+const MEAL_TIME_OPTIONS: SelectOption<MealTiming>[] = [
   { value: MealTiming.FASTING, label: '공복' },
   { value: MealTiming.BEFORE_BREAKFAST, label: '아침 식사 전' },
   { value: MealTiming.AFTER_BREAKFAST, label: '아침 식사 후' },
@@ -30,27 +30,14 @@ export const MealTimeField = ({
   className,
 }: MealTimeFieldProps) => {
   return (
-    <div className={`${FormFieldStyles.formField} ${className}`}>
-      <label htmlFor={id} className={FormFieldStyles.label}>
-        {label}
-      </label>
-
-      <div className={FormFieldStyles.inputWrapper}>
-        <select
-          id={id}
-          value={value}
-          onChange={(e) => onChange?.(e.target.value as MealTiming)}
-          className={`${FormFieldStyles.input} w-full`}
-        >
-          {MEAL_TIME_OPTIONS.map((option) => (
-            <option key={option.value} value={option.value}>
-              {option.label}
-            </option>
-          ))}
-        </select>
-      </div>
-
-      {error && <p className="text-sm text-(--color-red-500) mt-1">{error}</p>}
-    </div>
+    <SelectField<MealTiming>
+      id={id}
+      label={label}
+      value={value}
+      onChange={onChange}
+      error={error}
+      className={className}
+      options={MEAL_TIME_OPTIONS}
+    />
   );
 };
