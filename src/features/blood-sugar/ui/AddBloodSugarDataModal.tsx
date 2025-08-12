@@ -8,9 +8,11 @@ import { blockNonNumericKeyDown } from '@/shared/utils';
 import { useBloodSugarForm } from '../hooks/useBloodSugarForm';
 import { HealthMessage } from '@/shared/ui/HealthMessage';
 import { getBloodSugarRecommendation, getBloodSugarStatus, getBloodSugarStatusLabel } from '../lib/status';
+import { toast } from 'react-toastify';
 
 const AddBloodSugarDataModal = ({ close }: ModalComponentProps) => {
   const { values, errors, handleChange, handleSubmit } = useBloodSugarForm(() => {
+    toast.success('혈당 기록이 저장되었습니다.');
     close();
   });
 
