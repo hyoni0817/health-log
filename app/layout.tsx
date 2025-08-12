@@ -4,6 +4,7 @@ import './globals.css';
 import { Sidebar } from '@/widgets/sidebar';
 import { QueryProvider } from '@/providers/QueryProvider';
 import { ModalProvider } from '@/shared/ui';
+import { ToastContainer } from 'react-toastify';
 
 const geistSans = Geist({
   variable: '--font-geist-sans',
@@ -34,6 +35,7 @@ export default async function RootLayout({
               <Sidebar />
               {children}
             </div>
+            <ToastContainer />
           </ModalProvider>
         </QueryProvider>
       </body>
