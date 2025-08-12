@@ -31,9 +31,10 @@ export default async function RootLayout({
       <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
         <QueryProvider>
           <ModalProvider>
-            <div className="flex">
+            <div className="flex h-screen">
               <Sidebar />
-              {children}
+
+              <div className="pl-[255px]">{children}</div>
             </div>
             <ToastContainer />
           </ModalProvider>

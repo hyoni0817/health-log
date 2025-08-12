@@ -26,7 +26,7 @@ export function Sidebar() {
   ];
 
   return (
-    <aside className="w-3xs px-2 py-7 bg-(--background) border-r-1 border-r-(--divider)">
+    <aside className="fixed top-0 left-0 w-3xs h-screen px-2 py-7 bg-(--background) border-r-1 border-r-(--divider)">
       <div className="flex items-center gap-2 mb-10">
         <Activity className="text-(--text)" />
         <span className="text-2xl font-bold tracking-tight text-(--text)">HealthLog</span>
