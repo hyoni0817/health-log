@@ -7,7 +7,7 @@ import { X } from 'lucide-react';
 import { blockNonNumericKeyDown } from '@/shared/utils';
 import { useBloodSugarForm } from '../hooks/useBloodSugarForm';
 import { HealthMessage } from '@/shared/ui/HealthMessage';
-import { getBloodSugarRecommendation, getBloodSugarStatusLabel } from '../lib/status';
+import { getBloodSugarRecommendation, getBloodSugarStatus, getBloodSugarStatusLabel } from '../lib/status';
 
 const AddBloodSugarDataModal = ({ close }: ModalComponentProps) => {
   const { values, errors, handleChange, handleSubmit } = useBloodSugarForm(() => {
@@ -64,10 +64,14 @@ const AddBloodSugarDataModal = ({ close }: ModalComponentProps) => {
         {values.value && (
           <HealthMessage
             value={values.value}
-            status={'RECHECK'}
-            label={getBloodSugarStatusLabel('RECHECK')}
+            status={getBloodSugarStatus(Number(values.value), values.meal_timing, values.post_meal_time)}
+            label={getBloodSugarStatusLabel(
+              getBloodSugarStatus(Number(values.value), values.meal_timing, values.post_meal_time)
+            )}
             unit="mg/dL"
-            recommendation={getBloodSugarRecommendation('RECHECK')}
+            recommendation={getBloodSugarRecommendation(
+              getBloodSugarStatus(Number(values.value), values.meal_timing, values.post_meal_time)
+            )}
           />
         )}
 
