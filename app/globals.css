@@ -18,11 +18,19 @@
   --color-gray-800: #252525;
   --color-gray-875: #1c1c1f;
   --color-gray-900: #0d0d0d;
+  --color-red-50: #fceff0;
   --color-red-400: #f87171;
+  --color-red-500: #db4757;
+  --color-orange-50: #fdf6eb;
+  --color-orange-400: #e4982e;
   --color-orange-500: #fb923c;
+  --color-orange-600: #e3702b;
   --color-blue-400: #3b82f6;
   --color-navy-600: #1e293b;
+  --color-yellow-50: #fefbe9;
   --color-yellow-400: #fbbf24;
+  --color-green-50: #edfcf4;
+  --color-green-400: #4ead79;
   --color-green-500: #34c759;
 }
 
