@@ -1,0 +1,70 @@
+'use client';
+
+import React from 'react';
+import { Bar } from 'react-chartjs-2';
+import { Chart as ChartJS, CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend } from 'chart.js';
+import { BloodSugarTrendRecord } from '@/entities/blood-sugar/model/types/bloodSugar';
+import { mapToBloodSugarFloatingBarData } from '../lib/chartMapping';
+
+ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend);
+
+export const BloodSugarFloatingBar = ({ chartData }: { chartData: BloodSugarTrendRecord[] }) => {
+  const options = {
+    plugins: {
+      title: {
+        display: false,
+      },
+      tooltip: {
+        callbacks: {
+          label: (context: any) => {
+            const meta = context.raw.meta;
+            if (meta.isSingleValue) {
+              return `혈당: ${meta.actualMin}mg/dL`;
+            }
+            return `최저: ${meta.actualMin}mg/dL / 최고: ${meta.actualMax}mg/dL`;
+          },
+        },
+      },
+      legend: {
+        // 라벨 숨김 여부 결정
+        display: false,
+      },
+    },
+    responsive: true,
+    interaction: {
+      mode: 'index' as const,
+      intersect: false,
+    },
+    scales: {
+      x: {
+        stacked: true,
+      },
+      y: {
+        stacked: true,
+      },
+    },
+  };
+
+  const data = {
+    datasets: [
+      {
+        data: mapToBloodSugarFloatingBarData(chartData),
+        backgroundColor: (context: any) => {
+          const chart = context.chart;
+          const { ctx, chartArea } = chart;
+          if (!chartArea) return '#10b981'; // fallback
+          // 혈당 추이에 어울리는 색상 - 건강한 초록 그라데이션 (현재 적용)
+          // 의미: 건강함, 안정감, 생명력을 나타내는 색상
+          const gradient = ctx.createLinearGradient(0, chartArea.top, 0, chartArea.bottom);
+          gradient.addColorStop(0, '#34d399'); // 밝은 에메랄드 (emerald-400) - 희망적
+          gradient.addColorStop(0.5, '#10b981'); // 에메랄드 (emerald-500) - 안정적
+          gradient.addColorStop(1, '#047857'); // 진한 에메랄드 (emerald-700) - 신뢰감
+          return gradient;
+        },
+        stack: 'Stack 0',
+      },
+    ],
+  };
+
+  return <Bar data={data} options={options} />;
+};
