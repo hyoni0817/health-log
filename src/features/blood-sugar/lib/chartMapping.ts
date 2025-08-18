@@ -1,4 +1,5 @@
 import { BloodSugarTrendRecord } from '@/entities/blood-sugar/model/types/bloodSugar';
+import dayjs from 'dayjs';
 
 type FloatingBarDataPoint = {
   x: string;
@@ -20,7 +21,7 @@ export const mapToBloodSugarFloatingBarData = (dailyStats: BloodSugarTrendRecord
     const isSingle = minValue === maxValue;
 
     return {
-      x: stat.date,
+      x: dayjs(stat.date).format('MM.DD'),
       // 시각화용: 동일한 값일 때만 작은 범위 생성
       y: isSingle ? [minValue - 0.5, maxValue + 0.5] : [minValue, maxValue],
       // 실제 데이터 보존
