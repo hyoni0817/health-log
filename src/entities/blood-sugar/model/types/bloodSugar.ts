@@ -28,3 +28,9 @@ export interface BloodSugarRecord extends BloodSugarPayload {
   created_at: string;
   updated_at: string;
 }
+
+export interface BloodSugarTrendRecord {
+  date: string;
+  min_value: number;
+  max_value: number;
+}
