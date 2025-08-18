@@ -1,4 +1,9 @@
-import { HealthInsightSection, LatestMetricsSection, QuickActionsSection } from '@/widgets/home';
+import {
+  BloodSugarTrendSection,
+  HealthInsightSection,
+  LatestMetricsSection,
+  QuickActionsSection,
+} from '@/widgets/home';
 
 export function HomePage() {
   return (
@@ -13,6 +18,10 @@ export function HomePage() {
       <div className="flex gap-4">
         <QuickActionsSection />
         <HealthInsightSection />
+      </div>
+
+      <div className="flex gap-4">
+        <BloodSugarTrendSection />
       </div>
     </main>
   );
