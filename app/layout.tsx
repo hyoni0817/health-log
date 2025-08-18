@@ -5,6 +5,13 @@ import { Sidebar } from '@/widgets/sidebar';
 import { QueryProvider } from '@/providers/QueryProvider';
 import { ModalProvider } from '@/shared/ui';
 import { ToastContainer } from 'react-toastify';
+import dayjs from 'dayjs';
+import timezone from 'dayjs/plugin/timezone';
+import utc from 'dayjs/plugin/utc';
+
+dayjs.extend(utc);
+dayjs.extend(timezone);
+dayjs.tz.setDefault('Asia/Seoul');
 
 const geistSans = Geist({
   variable: '--font-geist-sans',
