@@ -38,6 +38,9 @@ export const BloodSugarFloatingBar = ({ chartData }: { chartData: BloodSugarTren
     scales: {
       x: {
         stacked: true,
+        ticks: {
+          maxTicksLimit: 7, // 최대 7개 라벨만 표시
+        },
       },
       y: {
         stacked: true,
