@@ -5,12 +5,17 @@ import { Button, Card } from '@/shared/ui';
 import { Droplet, HeartPulse, Plus } from 'lucide-react';
 import { useModal } from '@/shared/ui';
 import AddBloodSugarDataModal from '@/features/blood-sugar/ui/AddBloodSugarDataModal';
+import AddBloodPressureDataModal from '@/features/blood-pressure/ui/AddBloodPressureDataModal';
 
 export const QuickActionsSection = () => {
   const { openModal } = useModal();
 
   const handleAddBloodSugarData = () => {
     openModal(AddBloodSugarDataModal);
+  };
+
+  const handleAddBloodPressureData = () => {
+    openModal(AddBloodPressureDataModal);
   };
 
   return (
@@ -27,7 +32,13 @@ export const QuickActionsSection = () => {
           >
             혈당 데이터 추가
           </Button>
-          <Button variant="action" fullWidth leftIcon={<HeartPulse />} rightIcon={<Plus />}>
+          <Button
+            onClick={handleAddBloodPressureData}
+            variant="action"
+            fullWidth
+            leftIcon={<HeartPulse />}
+            rightIcon={<Plus />}
+          >
             혈압 데이터 추가
           </Button>
         </div>
