@@ -3,6 +3,7 @@
 import React from 'react';
 import { ModalComponentProps } from '@/shared/ui';
 import { X } from 'lucide-react';
+import { blockNonNumericKeyDown } from '@/shared/utils';
 
 const AddBloodPressureDataModal = ({ close }: ModalComponentProps) => {
   return (
@@ -17,8 +18,55 @@ const AddBloodPressureDataModal = ({ close }: ModalComponentProps) => {
           <X />
         </button>
       </div>
+
+      <form>
+        <div className="w-full flex gap-2">
+          <div className={Styles.formField}>
+            <label htmlFor="systolicBloodPressure" className={Styles.label}>
+              수축기 혈압 (mmHg)
+            </label>
+
+            <div className={Styles.inputWrapper}>
+              <input
+                type="text"
+                id="systolicBloodPressure"
+                pattern="[0-9]*"
+                inputMode="numeric"
+                placeholder="상위 수치를 입력하세요."
+                onKeyDown={blockNonNumericKeyDown}
+                className={Styles.input}
+              />
+            </div>
+          </div>
+
+          <div className={Styles.formField}>
+            <label htmlFor="diastolicBloodPressure" className={Styles.label}>
+              이완기 혈압 (mmHg)
+            </label>
+
+            <div className={Styles.inputWrapper}>
+              <input
+                type="text"
+                id="diastolicBloodPressure"
+                pattern="[0-9]*"
+                inputMode="numeric"
+                placeholder="하위 수치를 입력하세요."
+                onKeyDown={blockNonNumericKeyDown}
+                className={Styles.input}
+              />
+            </div>
+          </div>
+        </div>
+      </form>
     </div>
   );
 };
 
 export default AddBloodPressureDataModal;
+
+const Styles = {
+  label: 'text-sm text-(--text) mb-1',
+  formField: 'flex flex-1 flex-col gap-1 mb-5 ',
+  inputWrapper: 'border border-(--divider) rounded-md p-2',
+  input: 'outline-none text-(--text)',
+};
