@@ -57,6 +57,24 @@ const AddBloodPressureDataModal = ({ close }: ModalComponentProps) => {
             </div>
           </div>
         </div>
+
+        <div className={Styles.formField}>
+          <label htmlFor="bloodPressure" className={Styles.label}>
+            맥박 (bpm) - 선택사항
+          </label>
+
+          <div className={Styles.inputWrapper}>
+            <input
+              type="text"
+              id="pulse"
+              pattern="[0-9]*"
+              inputMode="numeric"
+              placeholder="맥박수를 입력하세요."
+              onKeyDown={blockNonNumericKeyDown}
+              className={Styles.input}
+            />
+          </div>
+        </div>
       </form>
     </div>
   );
