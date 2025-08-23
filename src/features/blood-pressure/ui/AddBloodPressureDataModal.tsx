@@ -4,6 +4,7 @@ import React from 'react';
 import { ModalComponentProps } from '@/shared/ui';
 import { X } from 'lucide-react';
 import { blockNonNumericKeyDown } from '@/shared/utils';
+import { DateField } from '@/shared/ui/FormFields';
 
 const AddBloodPressureDataModal = ({ close }: ModalComponentProps) => {
   return (
@@ -75,6 +76,8 @@ const AddBloodPressureDataModal = ({ close }: ModalComponentProps) => {
             />
           </div>
         </div>
+
+        <DateField />
       </form>
     </div>
   );
