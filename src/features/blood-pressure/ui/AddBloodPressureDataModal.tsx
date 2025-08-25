@@ -3,7 +3,7 @@
 import React from 'react';
 import { ModalComponentProps } from '@/shared/ui';
 import { X } from 'lucide-react';
-import { blockNonNumericKeyDown } from '@/shared/utils';
+import { filterNonNumericInput } from '@/shared/utils';
 import { DateField } from '@/shared/ui/FormFields';
 
 const AddBloodPressureDataModal = ({ close }: ModalComponentProps) => {
@@ -34,7 +34,7 @@ const AddBloodPressureDataModal = ({ close }: ModalComponentProps) => {
                 pattern="[0-9]*"
                 inputMode="numeric"
                 placeholder="상위 수치를 입력하세요."
-                onKeyDown={blockNonNumericKeyDown}
+                onInput={filterNonNumericInput}
                 className={Styles.input}
               />
             </div>
@@ -52,7 +52,7 @@ const AddBloodPressureDataModal = ({ close }: ModalComponentProps) => {
                 pattern="[0-9]*"
                 inputMode="numeric"
                 placeholder="하위 수치를 입력하세요."
-                onKeyDown={blockNonNumericKeyDown}
+                onInput={filterNonNumericInput}
                 className={Styles.input}
               />
             </div>
@@ -71,7 +71,7 @@ const AddBloodPressureDataModal = ({ close }: ModalComponentProps) => {
               pattern="[0-9]*"
               inputMode="numeric"
               placeholder="맥박수를 입력하세요."
-              onKeyDown={blockNonNumericKeyDown}
+              onInput={filterNonNumericInput}
               className={Styles.input}
             />
           </div>

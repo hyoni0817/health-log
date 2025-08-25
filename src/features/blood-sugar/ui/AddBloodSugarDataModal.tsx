@@ -4,7 +4,7 @@ import React from 'react';
 import { Button, ModalComponentProps } from '@/shared/ui';
 import { DateField, MealTimeField, NoteField, PostMealTimeField } from '@/shared/ui/FormFields';
 import { X } from 'lucide-react';
-import { blockNonNumericKeyDown } from '@/shared/utils';
+import { filterNonNumericInput } from '@/shared/utils';
 import { useBloodSugarForm } from '../hooks/useBloodSugarForm';
 import { HealthMessage } from '@/shared/ui/HealthMessage';
 import { getBloodSugarRecommendation, getBloodSugarStatus, getBloodSugarStatusLabel } from '../lib/status';
@@ -44,7 +44,7 @@ const AddBloodSugarDataModal = ({ close }: ModalComponentProps) => {
               pattern="[0-9]*"
               inputMode="numeric"
               placeholder="측정값을 입력하세요."
-              onKeyDown={blockNonNumericKeyDown}
+              onInput={filterNonNumericInput}
               className={Styles.input}
             />
           </div>
