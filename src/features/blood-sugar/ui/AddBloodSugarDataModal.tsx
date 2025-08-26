@@ -2,7 +2,7 @@
 
 import React from 'react';
 import { Button, ModalComponentProps } from '@/shared/ui';
-import { DateField, MealTimeField, NoteField, PostMealTimeField } from '@/shared/ui/FormFields';
+import { DateField, MeasurementTimeField, NoteField, PostMealTimeField } from '@/shared/ui/FormFields';
 import { X } from 'lucide-react';
 import { filterNonNumericInput } from '@/shared/utils';
 import { useBloodSugarForm } from '../hooks/useBloodSugarForm';
@@ -53,7 +53,11 @@ const AddBloodSugarDataModal = ({ close }: ModalComponentProps) => {
 
         <DateField value={values.date} onChange={handleChange.date} error={errors.date} />
 
-        <MealTimeField value={values.meal_timing} onChange={handleChange.meal_timing} error={errors.meal_timing} />
+        <MeasurementTimeField
+          value={values.meal_timing}
+          onChange={handleChange.meal_timing}
+          error={errors.meal_timing}
+        />
 
         {values.meal_timing.includes('AFTER') && (
           <PostMealTimeField

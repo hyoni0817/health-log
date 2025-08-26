@@ -2,7 +2,7 @@ import React from 'react';
 import { MealTiming } from '@/entities/blood-sugar/model';
 import { SelectField, SelectOption } from './SelectField';
 
-const MEAL_TIME_OPTIONS: SelectOption<MealTiming>[] = [
+const MEASUREMENT_TIME_OPTIONS: SelectOption<MealTiming>[] = [
   { value: MealTiming.FASTING, label: '공복' },
   { value: MealTiming.BEFORE_BREAKFAST, label: '아침 식사 전' },
   { value: MealTiming.AFTER_BREAKFAST, label: '아침 식사 후' },
@@ -12,7 +12,7 @@ const MEAL_TIME_OPTIONS: SelectOption<MealTiming>[] = [
   { value: MealTiming.AFTER_DINNER, label: '저녁 식사 후' },
 ];
 
-interface MealTimeFieldProps {
+interface MeasurementTimeFieldProps {
   id?: string;
   label?: string;
   value?: MealTiming;
@@ -21,14 +21,14 @@ interface MealTimeFieldProps {
   className?: string;
 }
 
-export const MealTimeField = ({
-  id = 'mealTime',
-  label = '식사 시간',
+export const MeasurementTimeField = ({
+  id = 'measurementTime',
+  label = '측정 시간',
   value,
   onChange,
   error,
   className,
-}: MealTimeFieldProps) => {
+}: MeasurementTimeFieldProps) => {
   return (
     <SelectField<MealTiming>
       id={id}
@@ -37,7 +37,7 @@ export const MealTimeField = ({
       onChange={onChange}
       error={error}
       className={className}
-      options={MEAL_TIME_OPTIONS}
+      options={MEASUREMENT_TIME_OPTIONS}
     />
   );
 };
