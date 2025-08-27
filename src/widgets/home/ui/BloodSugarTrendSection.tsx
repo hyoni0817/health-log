@@ -3,7 +3,7 @@
 import React from 'react';
 import { Card } from '@/shared/ui';
 import { BloodSugarFloatingBar } from '@/features/blood-sugar';
-import { useGetBloodSugarTrend } from '@/features/blood-pressure/hooks/useGetBloodSugarTrend';
+import { useGetBloodSugarTrend } from '@/features/blood-sugar';
 
 export const BloodSugarTrendSection = () => {
   const { data: bloodSugarTrend } = useGetBloodSugarTrend(30);

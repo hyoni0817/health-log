@@ -5,7 +5,7 @@ import { Button, ModalComponentProps } from '@/shared/ui';
 import { DateField, MeasurementTimeField, NoteField, PostMealTimeField } from '@/shared/ui/FormFields';
 import { X } from 'lucide-react';
 import { filterNonNumericInput } from '@/shared/utils';
-import { useBloodSugarForm } from '../hooks/useBloodSugarForm';
+import { useBloodSugarForm } from '@/features/blood-sugar';
 import { HealthMessage } from '@/shared/ui/HealthMessage';
 import { getBloodSugarRecommendation, getBloodSugarStatus, getBloodSugarStatusLabel } from '../lib/status';
 import { toast } from 'react-toastify';
