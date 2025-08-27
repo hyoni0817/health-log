@@ -1,7 +1,7 @@
 'use client';
 
 import React from 'react';
-import { ModalComponentProps } from '@/shared/ui';
+import { Button, ModalComponentProps } from '@/shared/ui';
 import { X } from 'lucide-react';
 import { filterNonNumericInput } from '@/shared/utils';
 import { DateField, MeasurementTimeField, NoteField } from '@/shared/ui/FormFields';
@@ -82,6 +82,15 @@ const AddBloodPressureDataModal = ({ close }: ModalComponentProps) => {
         <MeasurementTimeField />
 
         <NoteField />
+
+        <div className="w-full flex gap-2 justify-end mt-10">
+          <Button type="button" onClick={close} variant="modal-cancel">
+            취소
+          </Button>
+          <Button type="submit" variant="modal-ok">
+            저장
+          </Button>
+        </div>
       </form>
     </div>
   );
