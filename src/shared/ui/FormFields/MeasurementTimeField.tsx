@@ -1,22 +1,22 @@
 import React from 'react';
-import { MealTiming } from '@/entities/blood-sugar/model';
+import { MeasurementTiming } from '@/entities/blood-sugar/model';
 import { SelectField, SelectOption } from './SelectField';
 
-const MEASUREMENT_TIME_OPTIONS: SelectOption<MealTiming>[] = [
-  { value: MealTiming.FASTING, label: '공복' },
-  { value: MealTiming.BEFORE_BREAKFAST, label: '아침 식사 전' },
-  { value: MealTiming.AFTER_BREAKFAST, label: '아침 식사 후' },
-  { value: MealTiming.BEFORE_LUNCH, label: '점심 식사 전' },
-  { value: MealTiming.AFTER_LUNCH, label: '점심 식사 후' },
-  { value: MealTiming.BEFORE_DINNER, label: '저녁 식사 전' },
-  { value: MealTiming.AFTER_DINNER, label: '저녁 식사 후' },
+const MEASUREMENT_TIME_OPTIONS: SelectOption<MeasurementTiming>[] = [
+  { value: MeasurementTiming.FASTING, label: '공복' },
+  { value: MeasurementTiming.BEFORE_BREAKFAST, label: '아침 식사 전' },
+  { value: MeasurementTiming.AFTER_BREAKFAST, label: '아침 식사 후' },
+  { value: MeasurementTiming.BEFORE_LUNCH, label: '점심 식사 전' },
+  { value: MeasurementTiming.AFTER_LUNCH, label: '점심 식사 후' },
+  { value: MeasurementTiming.BEFORE_DINNER, label: '저녁 식사 전' },
+  { value: MeasurementTiming.AFTER_DINNER, label: '저녁 식사 후' },
 ];
 
 interface MeasurementTimeFieldProps {
   id?: string;
   label?: string;
-  value?: MealTiming;
-  onChange?: (value: MealTiming) => void;
+  value?: MeasurementTiming;
+  onChange?: (value: MeasurementTiming) => void;
   error?: string;
   className?: string;
 }
@@ -30,7 +30,7 @@ export const MeasurementTimeField = ({
   className,
 }: MeasurementTimeFieldProps) => {
   return (
-    <SelectField<MealTiming>
+    <SelectField<MeasurementTiming>
       id={id}
       label={label}
       value={value}

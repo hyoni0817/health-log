@@ -1,4 +1,4 @@
-import { MealTiming, PostMealTime } from '@/entities/blood-sugar/model';
+import { MeasurementTiming, PostMealTime } from '@/entities/blood-sugar/model';
 import { BLOOD_SUGAR_RANGES } from '../consts/ranges';
 import type { CommonStatusKey as BloodSugarStatusKey } from '@/shared/types/status';
 
@@ -22,14 +22,14 @@ export const getBloodSugarStatusLabel = (status: BloodSugarStatusKey): string =>
  */
 export const getBloodSugarStatus = (
   value: number,
-  mealTiming: MealTiming,
+  measurementTiming: MeasurementTiming,
   postMealTime: PostMealTime
 ): BloodSugarStatusKey => {
   const { BEFORE_MEAL_TIME, AFTER_MEAL_TIME } = BLOOD_SUGAR_RANGES;
-  const isBeforeMealTiming = mealTiming.includes('BEFORE');
-  const isFasting = mealTiming === 'FASTING';
+  const isBeforeMeasurementTiming = measurementTiming.includes('BEFORE');
+  const isFasting = measurementTiming === 'FASTING';
 
-  if (isBeforeMealTiming) {
+  if (isBeforeMeasurementTiming) {
     // 식전
     if (value <= BEFORE_MEAL_TIME.PRE_MEAL.LOW.MAX) return 'LOW';
     if (BEFORE_MEAL_TIME.PRE_MEAL.NORMAL.MIN <= value && value <= BEFORE_MEAL_TIME.PRE_MEAL.NORMAL.MAX) return 'NORMAL';

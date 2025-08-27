@@ -1,6 +1,6 @@
 // form.ts는 수정 여부 확인, 유효성 검증 등 폼 관련 유틸리티 함수들을 모아둔 파일
 
-import { MealTiming } from '@/entities/blood-sugar/model';
+import { MeasurementTiming } from '@/entities/blood-sugar/model';
 
 /**
  * 객체의 모든 값이 비어있는지 확인
@@ -65,7 +65,7 @@ export const validateField = {
   /**
    * 식사 시간 필드 검증
    */
-  mealTime: (value: MealTiming | undefined): string | undefined => {
+  mealTime: (value: MeasurementTiming | undefined): string | undefined => {
     if (!value) {
       return '식사 시간을 선택해주세요.';
     }

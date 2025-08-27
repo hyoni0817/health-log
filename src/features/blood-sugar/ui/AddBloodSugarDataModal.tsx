@@ -54,12 +54,12 @@ const AddBloodSugarDataModal = ({ close }: ModalComponentProps) => {
         <DateField value={values.date} onChange={handleChange.date} error={errors.date} />
 
         <MeasurementTimeField
-          value={values.meal_timing}
-          onChange={handleChange.meal_timing}
-          error={errors.meal_timing}
+          value={values.measurement_timing}
+          onChange={handleChange.measurement_timing}
+          error={errors.measurement_timing}
         />
 
-        {values.meal_timing.includes('AFTER') && (
+        {values.measurement_timing.includes('AFTER') && (
           <PostMealTimeField
             value={values.post_meal_time}
             onChange={handleChange.post_meal_time}
@@ -70,13 +70,13 @@ const AddBloodSugarDataModal = ({ close }: ModalComponentProps) => {
         {values.value && (
           <HealthMessage
             value={values.value}
-            status={getBloodSugarStatus(Number(values.value), values.meal_timing, values.post_meal_time)}
+            status={getBloodSugarStatus(Number(values.value), values.measurement_timing, values.post_meal_time)}
             label={getBloodSugarStatusLabel(
-              getBloodSugarStatus(Number(values.value), values.meal_timing, values.post_meal_time)
+              getBloodSugarStatus(Number(values.value), values.measurement_timing, values.post_meal_time)
             )}
             unit="mg/dL"
             recommendation={getBloodSugarRecommendation(
-              getBloodSugarStatus(Number(values.value), values.meal_timing, values.post_meal_time)
+              getBloodSugarStatus(Number(values.value), values.measurement_timing, values.post_meal_time)
             )}
           />
         )}

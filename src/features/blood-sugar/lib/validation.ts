@@ -3,7 +3,7 @@ import { validateField } from '@/shared/utils/form';
 import { BLOOD_SUGAR_RANGES } from '../consts/ranges';
 
 // 필수 입력 필드 정의
-export const REQUIRED_FIELDS = ['value', 'date', 'meal_timing'] as const;
+export const REQUIRED_FIELDS = ['value', 'date', 'measurement_timing'] as const;
 export type RequiredField = (typeof REQUIRED_FIELDS)[number];
 
 /**
@@ -41,8 +41,8 @@ export const validateBloodSugarForm = (values: BloodSugarFormData): BloodSugarFo
   }
 
   // 식사 시간 검증 (필수)
-  if (isRequiredField('meal_timing') && !values.meal_timing) {
-    errors.meal_timing = '식사 시간을 선택해주세요.';
+  if (isRequiredField('measurement_timing') && !values.measurement_timing) {
+    errors.measurement_timing = '식사 시간을 선택해주세요.';
   }
 
   // 메모 검증 (선택)

@@ -2,13 +2,13 @@ import { useState, useCallback } from 'react';
 import { BloodSugarFormData, BloodSugarFormErrors, UseBloodSugarFormReturn } from '../types/form';
 import { validateBloodSugarForm, isRequiredField } from '../lib/validation';
 import { isDirtyField, isEmptyObject } from '@/shared/utils/form';
-import { MealTiming, PostMealTime } from '@/entities/blood-sugar/model/types/bloodSugar';
+import { MeasurementTiming, PostMealTime } from '@/entities/blood-sugar/model/types/bloodSugar';
 import { useCreateBloodSugar } from '@/features/blood-pressure/hooks/useCreateBloodSugar';
 
 const initialFormData: BloodSugarFormData = {
   value: '',
   date: '',
-  meal_timing: MealTiming.FASTING,
+  measurement_timing: MeasurementTiming.FASTING,
   post_meal_time: PostMealTime.THIRTY_MINUTES,
   note: '',
 };
@@ -27,14 +27,14 @@ export const useBloodSugarForm = (
   const [touched, setTouched] = useState<Record<keyof BloodSugarFormData, boolean>>({
     value: false,
     date: false,
-    meal_timing: false,
+    measurement_timing: false,
     post_meal_time: false,
     note: false,
   });
 
   // 특정 필드의 유효성 검사
   const validateField = useCallback(
-    (fieldName: keyof BloodSugarFormData, newValue: string | MealTiming) => {
+    (fieldName: keyof BloodSugarFormData, newValue: string | MeasurementTiming) => {
       // 필수 필드가 아니면 validation 하지 않음
       if (!isRequiredField(fieldName)) return;
 
@@ -71,11 +71,11 @@ export const useBloodSugarForm = (
       [validateField]
     ),
 
-    meal_timing: useCallback(
-      (value: MealTiming) => {
-        validateField('meal_timing', value);
-        setValues((prev) => ({ ...prev, meal_timing: value }));
-        setTouched((prev) => ({ ...prev, meal_timing: true }));
+    measurement_timing: useCallback(
+      (value: MeasurementTiming) => {
+        validateField('measurement_timing', value);
+        setValues((prev) => ({ ...prev, measurement_timing: value }));
+        setTouched((prev) => ({ ...prev, measurement_timing: true }));
       },
       [validateField]
     ),
@@ -111,18 +111,20 @@ export const useBloodSugarForm = (
       setTouched({
         value: true,
         date: true,
-        meal_timing: true,
+        measurement_timing: true,
         post_meal_time: true,
         note: true,
       });
 
       if (isEmptyObject(validationErrors) && onSubmit) {
-        const postMealTime = values.meal_timing.includes('AFTER') ? (values.post_meal_time as PostMealTime) : null;
+        const postMealTime = values.measurement_timing.includes('AFTER')
+          ? (values.post_meal_time as PostMealTime)
+          : null;
 
         mutate({
           value: Number(values.value),
           date: values.date,
-          meal_timing: values.meal_timing as MealTiming,
+          measurement_timing: values.measurement_timing as MeasurementTiming,
           post_meal_time: postMealTime,
           note: values.note,
           user_id: 1,
@@ -161,7 +163,7 @@ export const useBloodSugarForm = (
     toPayload: () => ({
       value: Number(values.value),
       date: values.date,
-      meal_timing: values.meal_timing,
+      measurement_timing: values.measurement_timing,
       note: values.note,
     }),
   };

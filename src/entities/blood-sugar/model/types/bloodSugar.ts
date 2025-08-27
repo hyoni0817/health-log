@@ -1,4 +1,4 @@
-export enum MealTiming {
+export enum MeasurementTiming {
   BEFORE_BREAKFAST = 'BEFORE_BREAKFAST',
   AFTER_BREAKFAST = 'AFTER_BREAKFAST',
   BEFORE_LUNCH = 'BEFORE_LUNCH',
@@ -16,7 +16,7 @@ export enum PostMealTime {
 
 export interface BloodSugarPayload {
   value: number;
-  meal_timing: (typeof MealTiming)[keyof typeof MealTiming];
+  measurement_timing: (typeof MeasurementTiming)[keyof typeof MeasurementTiming];
   post_meal_time?: (typeof PostMealTime)[keyof typeof PostMealTime] | null;
   note?: string;
   user_id: number;
