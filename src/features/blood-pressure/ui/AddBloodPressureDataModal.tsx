@@ -61,7 +61,7 @@ const AddBloodPressureDataModal = ({ close }: ModalComponentProps) => {
 
         <div className={Styles.formField}>
           <label htmlFor="bloodPressure" className={Styles.label}>
-            맥박 (bpm) - 선택사항
+            맥박 (bpm)
           </label>
 
           <div className={Styles.inputWrapper}>
