@@ -4,7 +4,7 @@ import React from 'react';
 import { ModalComponentProps } from '@/shared/ui';
 import { X } from 'lucide-react';
 import { filterNonNumericInput } from '@/shared/utils';
-import { DateField } from '@/shared/ui/FormFields';
+import { DateField, MeasurementTimeField, NoteField } from '@/shared/ui/FormFields';
 
 const AddBloodPressureDataModal = ({ close }: ModalComponentProps) => {
   return (
@@ -78,6 +78,10 @@ const AddBloodPressureDataModal = ({ close }: ModalComponentProps) => {
         </div>
 
         <DateField />
+
+        <MeasurementTimeField />
+
+        <NoteField />
       </form>
     </div>
   );
