@@ -1,4 +1,4 @@
-import { MeasurementTiming, PostMealTime } from '@/entities/blood-sugar/model';
+import { MeasurementTiming, PostMealTime } from '@/shared/types/measurement';
 import { BLOOD_SUGAR_RANGES } from '../consts/ranges';
 import type { CommonStatusKey as BloodSugarStatusKey } from '@/shared/types/status';
 

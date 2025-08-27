@@ -2,7 +2,7 @@ import { useState, useCallback } from 'react';
 import { BloodSugarFormData, BloodSugarFormErrors, UseBloodSugarFormReturn } from '../types/form';
 import { validateBloodSugarForm, isRequiredField } from '../lib/validation';
 import { isDirtyField, isEmptyObject } from '@/shared/utils/form';
-import { MeasurementTiming, PostMealTime } from '@/entities/blood-sugar/model/types/bloodSugar';
+import { MeasurementTiming, PostMealTime } from '@/shared/types/measurement';
 import { useCreateBloodSugar } from '@/features/blood-sugar';
 
 const initialFormData: BloodSugarFormData = {

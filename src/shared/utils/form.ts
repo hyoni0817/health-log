@@ -1,6 +1,6 @@
 // form.ts는 수정 여부 확인, 유효성 검증 등 폼 관련 유틸리티 함수들을 모아둔 파일
 
-import { MeasurementTiming } from '@/entities/blood-sugar/model';
+import { MeasurementTiming } from '@/shared/types/measurement';
 
 /**
  * 객체의 모든 값이 비어있는지 확인

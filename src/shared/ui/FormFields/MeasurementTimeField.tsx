@@ -1,5 +1,5 @@
 import React from 'react';
-import { MeasurementTiming } from '@/entities/blood-sugar/model';
+import { MeasurementTiming } from '@/shared/types/measurement';
 import { SelectField, SelectOption } from './SelectField';
 
 const MEASUREMENT_TIME_OPTIONS: SelectOption<MeasurementTiming>[] = [
