@@ -3,7 +3,7 @@
 import React from 'react';
 import { Bar } from 'react-chartjs-2';
 import { Chart as ChartJS, CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend } from 'chart.js';
-import { BloodSugarTrendRecord } from '@/entities/blood-sugar/model/types/bloodSugar';
+import { type BloodSugarTrendRecord } from '@/entities/blood-sugar/model';
 import { mapToBloodSugarFloatingBarData } from '../lib/chartMapping';
 
 ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend);

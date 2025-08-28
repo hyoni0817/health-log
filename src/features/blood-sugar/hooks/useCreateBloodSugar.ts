@@ -1,4 +1,4 @@
-import { bloodSugarApi, BloodSugarPayload } from '@/entities/blood-sugar/model';
+import { bloodSugarApi, type BloodSugarPayload } from '@/entities/blood-sugar/model';
 import { useMutation } from '@tanstack/react-query';
 
 /**

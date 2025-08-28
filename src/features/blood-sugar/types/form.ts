@@ -1,5 +1,5 @@
 import { MeasurementTiming, PostMealTime } from '@/shared/types/measurement';
-import { BloodSugarPayload } from '@/entities/blood-sugar/model/types/bloodSugar';
+import { type BloodSugarPayload } from '@/entities/blood-sugar/model';
 
 /**
  * 폼에서 사용하는 데이터 타입 (문자열 기반)

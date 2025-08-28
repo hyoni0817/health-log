@@ -1,4 +1,4 @@
-import { BloodSugarTrendRecord } from '@/entities/blood-sugar/model/types/bloodSugar';
+import { type BloodSugarTrendRecord } from '@/entities/blood-sugar/model';
 import dayjs from 'dayjs';
 
 type FloatingBarDataPoint = {
