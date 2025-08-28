@@ -2,7 +2,7 @@
 
 import React from 'react';
 import { Card } from '@/shared/ui';
-import { BloodSugarFloatingBar } from '@/features/blood-sugar';
+import { BloodSugarFloatingBar } from '@/features/blood-sugar/ui/BloodSugarFloatingBar';
 import { useGetBloodSugarTrend } from '@/features/blood-sugar';
 
 export const BloodSugarTrendSection = () => {
