@@ -5,8 +5,15 @@ import { Button, ModalComponentProps } from '@/shared/ui';
 import { X } from 'lucide-react';
 import { filterNonNumericInput } from '@/shared/utils';
 import { DateField, MeasurementTimeField, NoteField } from '@/shared/ui/FormFields';
+import { useBloodPressureForm } from '@/features/blood-pressure/hooks/useBloodPressureForm';
+import { toast } from 'react-toastify';
 
 const AddBloodPressureDataModal = ({ close }: ModalComponentProps) => {
+  const { values, errors, handleChange, handleSubmit } = useBloodPressureForm(() => {
+    toast.success('혈압 기록이 저장되었습니다.');
+    close();
+  });
+
   return (
     <div className="w-[516px] h-fit bg-(--background) p-5 rounded-lg border border-(--divider)">
       <div className="mb-4 flex justify-between items-start">
@@ -20,7 +27,7 @@ const AddBloodPressureDataModal = ({ close }: ModalComponentProps) => {
         </button>
       </div>
 
-      <form>
+      <form onSubmit={handleSubmit} noValidate>
         <div className="w-full flex gap-2">
           <div className={Styles.formField}>
             <label htmlFor="systolicBloodPressure" className={Styles.label}>
@@ -31,6 +38,8 @@ const AddBloodPressureDataModal = ({ close }: ModalComponentProps) => {
               <input
                 type="text"
                 id="systolicBloodPressure"
+                value={values.systolic_bp}
+                onChange={(e) => handleChange.systolic_bp(e.target.value)}
                 pattern="[0-9]*"
                 inputMode="numeric"
                 placeholder="상위 수치를 입력하세요."
@@ -38,6 +47,7 @@ const AddBloodPressureDataModal = ({ close }: ModalComponentProps) => {
                 className={Styles.input}
               />
             </div>
+            {errors.systolic_bp && <p className="text-sm text-(--color-red-500) mt-1">{errors.systolic_bp}</p>}
           </div>
 
           <div className={Styles.formField}>
@@ -49,6 +59,8 @@ const AddBloodPressureDataModal = ({ close }: ModalComponentProps) => {
               <input
                 type="text"
                 id="diastolicBloodPressure"
+                value={values.diastolic_bp}
+                onChange={(e) => handleChange.diastolic_bp(e.target.value)}
                 pattern="[0-9]*"
                 inputMode="numeric"
                 placeholder="하위 수치를 입력하세요."
@@ -56,6 +68,7 @@ const AddBloodPressureDataModal = ({ close }: ModalComponentProps) => {
                 className={Styles.input}
               />
             </div>
+            {errors.diastolic_bp && <p className="text-sm text-(--color-red-500) mt-1">{errors.diastolic_bp}</p>}
           </div>
         </div>
 
@@ -68,6 +81,8 @@ const AddBloodPressureDataModal = ({ close }: ModalComponentProps) => {
             <input
               type="text"
               id="pulse"
+              value={values.heart_rate}
+              onChange={(e) => handleChange.heart_rate(e.target.value)}
               pattern="[0-9]*"
               inputMode="numeric"
               placeholder="맥박수를 입력하세요."
@@ -75,13 +90,18 @@ const AddBloodPressureDataModal = ({ close }: ModalComponentProps) => {
               className={Styles.input}
             />
           </div>
+          {errors.heart_rate && <p className="text-sm text-(--color-red-500) mt-1">{errors.heart_rate}</p>}
         </div>
 
-        <DateField />
+        <DateField value={values.date} onChange={handleChange.date} error={errors.date} />
 
-        <MeasurementTimeField />
+        <MeasurementTimeField
+          value={values.measurement_timing}
+          onChange={handleChange.measurement_timing}
+          error={errors.measurement_timing}
+        />
 
-        <NoteField />
+        <NoteField value={values.note} onChange={handleChange.note} />
 
         <div className="w-full flex gap-2 justify-end mt-10">
           <Button type="button" onClick={close} variant="modal-cancel">
