@@ -1,4 +1,4 @@
-import { bloodSugarQueries } from '@/entities/blood-sugar/model/api/bloodSugar.queries';
+import { bloodSugarQueries } from '@/entities/blood-sugar/model';
 import { useQuery } from '@tanstack/react-query';
 
 /**
