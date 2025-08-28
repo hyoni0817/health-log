@@ -1,5 +1,5 @@
 import React from 'react';
-import { PostMealTime } from '@/entities/blood-sugar/model';
+import { PostMealTime } from '@/shared/types/measurement';
 import { SelectField, SelectOption } from './SelectField';
 
 const POST_MEAL_TIME_OPTIONS: SelectOption<PostMealTime>[] = [
