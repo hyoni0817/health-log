@@ -48,7 +48,7 @@ export const HealthMessage = ({ value, status, unit, label, recommendation }: He
       <div className="flex items-center gap-3">
         <div className={`${statusClasses[status].titleText}`}>{icon[status]}</div>
         <div>
-          <p className={`text-base font-bold mb-1 ${statusClasses[status].titleText}`}>현재 혈당 상태: {label}</p>
+          <p className={`text-base font-bold mb-1 ${statusClasses[status].titleText}`}>현재 상태: {label}</p>
           <p className="text-sm text-(--color-gray-500) mb-1">
             {value} {unit}
           </p>
