@@ -3,7 +3,14 @@ import { validateField } from '@/shared/utils/form';
 import { BLOOD_SUGAR_RANGES } from '@/features/blood-sugar/consts/ranges';
 
 // 필수 입력 필드 정의
-export const REQUIRED_FIELDS = ['value', 'date', 'measurement_timing'] as const;
+export const REQUIRED_FIELDS = [
+  'value',
+  'systolic_bp',
+  'diastolic_bp',
+  'heart_rate',
+  'date',
+  'measurement_timing',
+] as const;
 export type RequiredField = (typeof REQUIRED_FIELDS)[number];
 
 /**
