@@ -1,8 +1,7 @@
 module.exports = {
   moduleFileExtensions: ['js', 'json', 'jsx', 'ts', 'tsx', 'json'],
   transform: {
-    '^.+\\.(js|jsx)?$': 'babel-jest',
-    '^.+\\.(ts|tsx)?$': 'babel-jest', // TypeScript 파일 변환 추가
+    '^.+\\.(js|jsx|ts|tsx)$': ['@swc/jest'],
   },
   testEnvironment: 'node',
   moduleNameMapper: {
