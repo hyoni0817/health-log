@@ -16,6 +16,8 @@ export const HealthMessage = ({ value, status, unit, label, recommendation }: He
     LOW: <TriangleAlertIcon className={iconSize} />,
     NORMAL: <CircleCheckBigIcon className={iconSize} />,
     BORDERLINE: <OctagonAlertIcon className={iconSize} />,
+    HIGH_STAGE_1: <OctagonAlertIcon className={iconSize} />,
+    HIGH_STAGE_2: <OctagonAlertIcon className={iconSize} />,
     HIGH_RISK: <OctagonAlertIcon className={iconSize} />,
     RECHECK: <CircleX className={iconSize} />,
   };
@@ -32,6 +34,14 @@ export const HealthMessage = ({ value, status, unit, label, recommendation }: He
     BORDERLINE: {
       background: 'bg-(--color-orange-50)',
       titleText: 'text-(--color-orange-600)',
+    },
+    HIGH_STAGE_1: {
+      background: 'bg-(--color-orange-100)',
+      titleText: 'text-(--color-orange-700)',
+    },
+    HIGH_STAGE_2: {
+      background: 'bg-(--color-red-50)',
+      titleText: 'text-(--color-red-500)',
     },
     HIGH_RISK: {
       background: 'bg-(--color-red-50)',
