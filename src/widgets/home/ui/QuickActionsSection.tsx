@@ -1,9 +1,10 @@
 'use client';
 
 import React from 'react';
-import { Button, Card } from '@/shared/ui';
+import { Button } from '@/shared/ui/Button';
+import { Card } from '@/shared/ui/Card';
 import { Droplet, HeartPulse, Plus } from 'lucide-react';
-import { useModal } from '@/shared/ui';
+import { useModal } from '@/shared/ui/Modal/useModal';
 import AddBloodSugarDataModal from '@/features/blood-sugar/ui/AddBloodSugarDataModal';
 import AddBloodPressureDataModal from '@/features/blood-pressure/ui/AddBloodPressureDataModal';
 

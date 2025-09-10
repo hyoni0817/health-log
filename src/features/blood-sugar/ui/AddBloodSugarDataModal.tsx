@@ -1,7 +1,8 @@
 'use client';
 
 import React from 'react';
-import { Button, ModalComponentProps } from '@/shared/ui';
+import { Button } from '@/shared/ui/Button';
+import { ModalComponentProps } from '@/shared/ui/Modal/ModalContext';
 import { DateField, MeasurementTimeField, NoteField, PostMealTimeField } from '@/shared/ui/FormFields';
 import { X } from 'lucide-react';
 import { filterNonNumericInput } from '@/shared/utils';

@@ -1,7 +1,7 @@
 'use client';
 
 import React from 'react';
-import { Card } from '@/shared/ui';
+import { Card } from '@/shared/ui/Card';
 import { BloodSugarFloatingBar } from '@/features/blood-sugar/ui/BloodSugarFloatingBar';
 import { useGetBloodSugarTrend } from '@/features/blood-sugar';
 

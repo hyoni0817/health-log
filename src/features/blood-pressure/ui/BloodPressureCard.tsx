@@ -1,6 +1,6 @@
 'use client';
 
-import { Card } from '@/shared/ui';
+import { Card } from '@/shared/ui/Card';
 import React from 'react';
 
 export const BloodPressureCard = () => {

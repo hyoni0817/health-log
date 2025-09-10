@@ -1,12 +1,19 @@
 'use client';
 
 import React from 'react';
-import { Button, ModalComponentProps } from '@/shared/ui';
+import { Button } from '@/shared/ui/Button';
+import { ModalComponentProps } from '@/shared/ui/Modal/ModalContext';
 import { X } from 'lucide-react';
 import { filterNonNumericInput } from '@/shared/utils';
 import { DateField, MeasurementTimeField, NoteField } from '@/shared/ui/FormFields';
 import { useBloodPressureForm } from '@/features/blood-pressure/hooks/useBloodPressureForm';
 import { toast } from 'react-toastify';
+import { HealthMessage } from '@/shared/ui/HealthMessage';
+import {
+  getBloodPressureRecommendation,
+  getBloodPressureStatus,
+  getBloodPressureStatusLabel,
+} from '@/features/blood-pressure/lib';
 
 const AddBloodPressureDataModal = ({ close }: ModalComponentProps) => {
   const { values, errors, handleChange, handleSubmit } = useBloodPressureForm(() => {
@@ -100,6 +107,20 @@ const AddBloodPressureDataModal = ({ close }: ModalComponentProps) => {
           onChange={handleChange.measurement_timing}
           error={errors.measurement_timing}
         />
+
+        {values.systolic_bp && values.diastolic_bp && (
+          <HealthMessage
+            value={`${values.systolic_bp}/${values.diastolic_bp}`}
+            status={getBloodPressureStatus(Number(values.systolic_bp), Number(values.diastolic_bp))}
+            label={getBloodPressureStatusLabel(
+              getBloodPressureStatus(Number(values.systolic_bp), Number(values.diastolic_bp))
+            )}
+            unit="mg/dL"
+            recommendation={getBloodPressureRecommendation(
+              getBloodPressureStatus(Number(values.systolic_bp), Number(values.diastolic_bp))
+            )}
+          />
+        )}
 
         <NoteField value={values.note} onChange={handleChange.note} />
 
