@@ -162,6 +162,7 @@ export const useBloodPressureForm = (
     [values, onSubmit]
   );
 
+  // 데이터가 변경되었는지 확인
   const isDirty = Object.keys(initialFormData).some((key) =>
     isDirtyField(initialFormData[key as keyof BloodPressureFormData], values[key as keyof BloodPressureFormData])
   );
