@@ -63,11 +63,11 @@ export const validateField = {
   },
 
   /**
-   * 식사 시간 필드 검증
+   * 측정 시간 필드 검증
    */
   mealTime: (value: MeasurementTiming | undefined): string | undefined => {
     if (!value) {
-      return '식사 시간을 선택해주세요.';
+      return '측정 시간을 선택해주세요.';
     }
     return undefined;
   },

@@ -40,9 +40,9 @@ export const validateBloodSugarForm = (values: BloodSugarFormData): BloodSugarFo
     if (dateError) errors.date = dateError;
   }
 
-  // 식사 시간 검증 (필수)
+  // 측정 시간 검증 (필수)
   if (isRequiredField('measurement_timing') && !values.measurement_timing) {
-    errors.measurement_timing = '식사 시간을 선택해주세요.';
+    errors.measurement_timing = '측정 시간을 선택해주세요.';
   }
 
   // 메모 검증 (선택)
