@@ -5,11 +5,11 @@ import { Button } from '@/shared/ui/Button';
 import { ModalComponentProps } from '@/shared/ui/Modal/ModalContext';
 import { DateField, MeasurementTimeField, NoteField, PostMealTimeField } from '@/shared/ui/FormFields';
 import { X } from 'lucide-react';
-import { filterNonNumericInput } from '@/shared/utils';
 import { useBloodSugarForm } from '@/features/blood-sugar/hooks/useBloodSugarForm';
 import { HealthMessage } from '@/shared/ui/HealthMessage';
 import { getBloodSugarRecommendation, getBloodSugarStatus, getBloodSugarStatusLabel } from '../lib/status';
 import { toast } from 'react-toastify';
+import InputField from '@/shared/ui/FormFields/InputField';
 
 const AddBloodSugarDataModal = ({ close }: ModalComponentProps) => {
   const { values, errors, handleChange, handleSubmit } = useBloodSugarForm(() => {
@@ -36,20 +36,14 @@ const AddBloodSugarDataModal = ({ close }: ModalComponentProps) => {
             혈당 수치 (mg/dL)
           </label>
 
-          <div className={Styles.inputWrapper}>
-            <input
-              type="text"
-              id="bloodSugar"
-              value={values.value}
-              onChange={(e) => handleChange.value(e.target.value)}
-              pattern="[0-9]*"
-              inputMode="numeric"
-              placeholder="측정값을 입력하세요."
-              onInput={filterNonNumericInput}
-              className={Styles.input}
-            />
-          </div>
-          {errors.value && <p className="text-sm text-(--color-red-500) mt-1">{errors.value}</p>}
+          <InputField
+            fieldType="number"
+            id="bloodSugar"
+            value={values.value}
+            onChange={(e) => handleChange.value(e.target.value)}
+            placeholder="측정값을 입력하세요."
+            error={errors.value}
+          />
         </div>
 
         <DateField value={values.date} onChange={handleChange.date} error={errors.date} />
