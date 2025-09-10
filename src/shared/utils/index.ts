@@ -1,1 +1,1 @@
-export * from './input';
+export { filterNonNumericInput } from './input';
