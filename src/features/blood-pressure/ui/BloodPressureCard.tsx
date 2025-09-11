@@ -24,7 +24,7 @@ export const BloodPressureCard = async () => {
         <h3 className="text-base font-medium text-(--text) mb-2">최근 혈압 수치</h3>
         {bloodPressureLatest?.date && (
           <p className="text-sm text-(--text-subtitle)">
-            마지막 업데이트: {dayjs(bloodPressureLatest?.date).fromNow()}
+            측정일: {dayjs(bloodPressureLatest?.date).format('YYYY.MM.DD')}
           </p>
         )}
       </div>
