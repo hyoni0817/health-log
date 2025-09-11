@@ -3,7 +3,7 @@ import { filterNonNumericInput } from '@/shared/utils';
 
 type FieldType = 'number' | 'text';
 
-// 조건부 타입: fieldType이 'number'면 fieldTypeAttributes에서 지정한 pattern, inputMode 값이 있기 때문에 pattern, inputMode 사용을 금지함.
+// 조건부 타입: fieldType이 'number'면 fieldTypeAttributes에서 지정한 pattern, inputMode, onInput 값이 있기 때문에 pattern, inputMode, onInput 사용을 금지함.
 type ConditionalInputProps<T extends FieldType> = T extends 'number'
   ? {
       fieldType: T;
