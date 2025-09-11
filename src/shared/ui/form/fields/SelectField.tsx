@@ -1,5 +1,5 @@
 import React from 'react';
-import { FormFieldStyles } from './styles';
+import { FormFieldStyles } from '../styles/field';
 
 export interface SelectOption<T> {
   value: T;

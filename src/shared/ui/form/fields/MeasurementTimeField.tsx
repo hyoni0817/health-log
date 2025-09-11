@@ -1,6 +1,6 @@
 import React from 'react';
 import { MeasurementTiming } from '@/shared/types/measurement';
-import { SelectField, SelectOption } from './SelectField';
+import { SelectField, SelectOption } from '../fields/SelectField';
 
 const MEASUREMENT_TIME_OPTIONS: SelectOption<MeasurementTiming>[] = [
   { value: MeasurementTiming.FASTING, label: '공복' },

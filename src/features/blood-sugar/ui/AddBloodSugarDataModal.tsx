@@ -4,13 +4,13 @@ import React from 'react';
 import { useRouter } from 'next/navigation';
 import { Button } from '@/shared/ui/Button';
 import { ModalComponentProps } from '@/shared/ui/Modal/ModalContext';
-import { DateField, MeasurementTimeField, NoteField, PostMealTimeField } from '@/shared/ui/FormFields';
+import { DateField, MeasurementTimeField, NoteField, PostMealTimeField } from '@/shared/ui/form';
 import { X } from 'lucide-react';
 import { useBloodSugarForm } from '@/features/blood-sugar/hooks/useBloodSugarForm';
 import { HealthMessage } from '@/shared/ui/HealthMessage';
 import { getBloodSugarRecommendation, getBloodSugarStatus, getBloodSugarStatusLabel } from '../lib/status';
 import { toast } from 'react-toastify';
-import InputField from '@/shared/ui/FormFields/InputField';
+import InputField from '@/shared/ui/form/fields/InputField';
 
 const AddBloodSugarDataModal = ({ close }: ModalComponentProps) => {
   const router = useRouter();
