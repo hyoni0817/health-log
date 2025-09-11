@@ -1,6 +1,7 @@
 'use client';
 
 import React from 'react';
+import { useRouter } from 'next/navigation';
 import { Button } from '@/shared/ui/Button';
 import { ModalComponentProps } from '@/shared/ui/Modal/ModalContext';
 import { X } from 'lucide-react';
@@ -16,7 +17,10 @@ import {
 import InputField from '@/shared/ui/FormFields/InputField';
 
 const AddBloodPressureDataModal = ({ close }: ModalComponentProps) => {
+  const router = useRouter();
+
   const { values, errors, handleChange, handleSubmit } = useBloodPressureForm(() => {
+    router.refresh();
     toast.success('혈압 기록이 저장되었습니다.');
     close();
   });
@@ -124,5 +128,6 @@ export default AddBloodPressureDataModal;
 
 const Styles = {
   label: 'text-sm text-(--text) mb-1',
+  required: 'text-(--color-red-500)',
   formField: 'flex flex-1 flex-col gap-1 mb-5 ',
 };
