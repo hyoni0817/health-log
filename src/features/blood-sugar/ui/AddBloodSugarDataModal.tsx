@@ -1,6 +1,7 @@
 'use client';
 
 import React from 'react';
+import { useRouter } from 'next/navigation';
 import { Button } from '@/shared/ui/Button';
 import { ModalComponentProps } from '@/shared/ui/Modal/ModalContext';
 import { DateField, MeasurementTimeField, NoteField, PostMealTimeField } from '@/shared/ui/FormFields';
@@ -12,7 +13,10 @@ import { toast } from 'react-toastify';
 import InputField from '@/shared/ui/FormFields/InputField';
 
 const AddBloodSugarDataModal = ({ close }: ModalComponentProps) => {
+  const router = useRouter();
+
   const { values, errors, handleChange, handleSubmit } = useBloodSugarForm(() => {
+    router.refresh();
     toast.success('혈당 기록이 저장되었습니다.');
     close();
   });
