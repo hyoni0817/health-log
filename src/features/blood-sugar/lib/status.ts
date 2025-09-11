@@ -1,6 +1,8 @@
 import { MeasurementTiming, PostMealTime } from '@/shared/types/measurement';
 import { BLOOD_SUGAR_RANGES } from '../consts/ranges';
-import type { CommonStatusKey as BloodSugarStatusKey } from '@/shared/types/status';
+import type { CommonStatusKey } from '@/shared/types/status';
+
+export type BloodSugarStatusKey = Exclude<CommonStatusKey, 'HIGH_STAGE_1' | 'HIGH_STAGE_2'>;
 
 export const BLOOD_SUGAR_STATUS_LABELS: Record<BloodSugarStatusKey, string> = {
   LOW: '저혈당',
