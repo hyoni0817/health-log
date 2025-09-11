@@ -1,4 +1,5 @@
-import { bloodSugarApi, type BloodSugarPayload } from '@/entities/blood-sugar/model';
+import { bloodSugarApi, bloodSugarQueries, type BloodSugarPayload } from '@/entities/blood-sugar/model';
+import { queryClient } from '@/shared/api/queryClient';
 import { useMutation } from '@tanstack/react-query';
 
 /**
@@ -8,5 +9,8 @@ import { useMutation } from '@tanstack/react-query';
 export const useCreateBloodSugar = () => {
   return useMutation({
     mutationFn: (data: BloodSugarPayload) => bloodSugarApi.createGlucose(data),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: bloodSugarQueries.trends() });
+    },
   });
 };
