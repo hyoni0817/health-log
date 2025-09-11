@@ -9,3 +9,11 @@ export type CommonStatusKey =
   | 'HIGH_STAGE_2'
   | 'HIGH_RISK'
   | 'RECHECK';
+
+export type CommonStatusStyles = Record<
+  CommonStatusKey,
+  {
+    background: string;
+    titleText: string;
+  }
+>;
