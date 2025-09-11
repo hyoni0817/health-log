@@ -1,5 +1,5 @@
 import { supabase } from '@/shared/api/supabaseClient';
-import { BloodSugarPayload, BloodSugarTrendRecord } from '../types/bloodSugar';
+import { BloodSugarPayload, BloodSugarRecord, BloodSugarTrendRecord } from '../types/bloodSugar';
 
 export const bloodSugarApi = {
   // 새로운 혈당 기록 추가
@@ -22,5 +22,12 @@ export const bloodSugarApi = {
     }
 
     return data;
+  },
+
+  // 가장 최근 혈당 기록 불러오기
+  async getLatestBloodSugar(): Promise<BloodSugarRecord | null> {
+    const { data, error } = await supabase.from('glucose').select('*').order('date', { ascending: false }).limit(1);
+    if (error) throw error;
+    return data[0] || null;
   },
 };
