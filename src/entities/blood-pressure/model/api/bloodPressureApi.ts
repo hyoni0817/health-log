@@ -1,5 +1,5 @@
 import { supabase } from '@/shared/api/supabaseClient';
-import { BloodPressurePayload } from '../type/bloodPressure';
+import { BloodPressurePayload, BloodPressureRecord } from '../type/bloodPressure';
 
 export const bloodPressureApi = {
   // 새로운 혈압 기록 추가
@@ -7,5 +7,17 @@ export const bloodPressureApi = {
     const { data, error } = await supabase.from('blood_pressure').insert(payload);
     if (error) throw error;
     return data;
+  },
+
+  // 가장 최근 혈압 기록 불러오기
+  async getLatestBloodPressure(): Promise<BloodPressureRecord | null> {
+    const { data, error } = await supabase
+      .from('blood_pressure')
+      .select('*')
+      .order('date', { ascending: false })
+      .limit(1);
+    if (error) throw error;
+
+    return data[0] || null;
   },
 };
