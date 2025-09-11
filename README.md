@@ -1,36 +1,59 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+<h1 align="center">🫀Health Log</h1>
+<div align="center" >
+  Health Log는 혈당 및 혈압 관리를 도와주는 웹 애플리케이션 입니다.<br />
+</div>
 
-## Getting Started
+## 기능
 
-First, run the development server:
+📊 대시보드에서 DB에 저장된 혈당 및 혈압 수치를 기반으로 현재 건강 상태와 추이를 한눈에 파악할 수 있습니다(현재는 혈당 추이만 확인할 수 있습니다).   
+👀 혈압 및 혈당 데이터를 추가할 때, 입력한 값을 기반으로 건강 상태를 바로 알 수 있습니다.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+**<p align="center">🚀 이 외에도 다양한 기능이 계속 추가될 예정입니다 🚀</p>**
+
+## 기술
+
+- 코어: React, TypeScript, Next.js
+- 상태 관리: React Query (TanStack Query)
+- 스타일링: Tailwind CSS
+- 패키지 매니저: NPM
+- 테스트: Jest
+
+## 미리보기
+
+https://github.com/user-attachments/assets/d7bed7d4-f5cd-4d13-b7d1-6c97e9e03740
+
+## 데모 사이트
+
+준비중
+
+## 실행
+
+1. 프로젝트의 루트 경로에 아래 내용이 포함된 .env 파일을 생성합니다.
+
+```
+NEXT_PUBLIC_SUPABASE_URL="SUPABASE에서_제공하는_URL"
+NEXT_PUBLIC_SUPABASE_ANON_KEY="SUPABASE에서_발급받은_ANON_KEY"
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+2. 터미널에 아래 명령어를 순서대로 실행하면 Health Log를 실행하실 수 있습니다.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```
+npm ci
+npm run build && npm start
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## 개발 일지
 
-## Learn More
+✨ [개발일지 보러 바로 가기](https://steadfast-cardinal-956.notion.site/Health-Log-1f8216b709e280c2841af2fafeb5dcfe)  
+개발일지에는 아래의 내용이 담겨 있습니다.
 
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- 개발 배경
+- 개발하면서 고민하고, 참고한 문서들 기록
+- 진행 상황
+  - '진행 중' 및 '완료' 상태의 문서에는 다음 내용이 기록되어 있습니다.
+    - 화면 설계서 및 디자인
+    - ERD
+    - 해야 할 일
+    - 배운 점
+    - 리팩토링해야 할 점
+    - 트러블 슈팅
