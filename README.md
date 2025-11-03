@@ -24,7 +24,7 @@ https://github.com/user-attachments/assets/d7bed7d4-f5cd-4d13-b7d1-6c97e9e03740
 
 ## 데모 사이트
 
-준비중
+🏠 [Health Log 보러가기](http://13.125.229.209:3000/)
 
 ## 실행
 
