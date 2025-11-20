@@ -1,4 +1,6 @@
 import { bloodPressureApi, BloodPressurePayload } from '@/entities/blood-pressure/model';
+import { bloodPressureQueries } from '@/entities/blood-pressure/model/api/bloodPressure.queries';
+import { queryClient } from '@/shared/api/queryClient';
 import { useMutation } from '@tanstack/react-query';
 
 /**
@@ -8,5 +10,8 @@ import { useMutation } from '@tanstack/react-query';
 export const useCreateBloodPressure = () => {
   return useMutation({
     mutationFn: (data: BloodPressurePayload) => bloodPressureApi.createBloodPressure(data),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: bloodPressureQueries.systolicPressureTrends() });
+    },
   });
 };
