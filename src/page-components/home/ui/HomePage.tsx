@@ -1,4 +1,5 @@
 import {
+  BloodPressureTrendSection,
   BloodSugarTrendSection,
   HealthInsightSection,
   LatestMetricsSection,
@@ -22,6 +23,7 @@ export default function HomePage() {
 
       <div className="flex gap-4">
         <BloodSugarTrendSection />
+        <BloodPressureTrendSection />
       </div>
     </main>
   );
