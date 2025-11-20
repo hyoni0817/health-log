@@ -2,4 +2,4 @@
 export { bloodPressureApi } from './api/bloodPressureApi';
 
 // types
-export type { BloodPressurePayload, BloodPressureRecord } from './type/bloodPressure';
+export type { BloodPressurePayload, BloodPressureRecord, BloodPressureTrendRecord } from './type/bloodPressure';

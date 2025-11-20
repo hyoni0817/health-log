@@ -7,3 +7,10 @@ export interface BloodPressurePayload extends BaseMeasurementPayload {
 }
 
 export interface BloodPressureRecord extends BloodPressurePayload, BaseMeasurementRecord {}
+
+export interface BloodPressureTrendRecord {
+  date: string;
+  avg_value: number;
+  min_value: number;
+  max_value: number;
+}
