@@ -20,7 +20,7 @@ export const mapToBloodPressureLineChartData = (dailyStats: BloodPressureTrendRe
     const avgValue = stat.avg_value;
     const minValue = stat.min_value;
     const maxValue = stat.max_value;
-    const isSingle = minValue === maxValue;
+    const isSingle = stat.record_count === 1;
 
     return {
       x: dayjs(stat.date).format('MM.DD'),
