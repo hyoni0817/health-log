@@ -17,7 +17,13 @@ import { type BloodPressureTrendRecord } from '@/entities/blood-pressure/model';
 
 ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend);
 
-export const BloodPressureLineChart = ({ chartData }: { chartData: BloodPressureTrendRecord[] }) => {
+export const BloodPressureLineChart = ({
+  systolicChartData,
+  diastolicChartData,
+}: {
+  systolicChartData: BloodPressureTrendRecord[];
+  diastolicChartData: BloodPressureTrendRecord[];
+}) => {
   const options = {
     plugins: {
       title: {
@@ -64,8 +70,14 @@ export const BloodPressureLineChart = ({ chartData }: { chartData: BloodPressure
     datasets: [
       {
         label: '수축기 혈압',
-        data: mapToBloodPressureLineChartData(chartData),
+        data: mapToBloodPressureLineChartData(systolicChartData),
         borderColor: '#3155CD',
+        tension: 0.4,
+      },
+      {
+        label: '이완기 혈압',
+        data: mapToBloodPressureLineChartData(diastolicChartData),
+        borderColor: '#D58639',
         tension: 0.4,
       },
     ],
