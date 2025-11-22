@@ -35,4 +35,19 @@ export const bloodPressureApi = {
 
     return data;
   },
+
+  // 이완기 혈압 추이 조회
+  async getDiastolicPressureTrend(days?: number): Promise<BloodPressureTrendRecord[]> {
+    const query = await supabase.rpc('get_diastolic_pressure_trend', { days });
+
+    const { data, error } = await query;
+
+    if (error) throw error;
+
+    if (!data || data.length === 0) {
+      return [];
+    }
+
+    return data;
+  },
 };
