@@ -13,4 +13,5 @@ export interface BloodPressureTrendRecord {
   avg_value: number;
   min_value: number;
   max_value: number;
+  record_count: number;
 }
