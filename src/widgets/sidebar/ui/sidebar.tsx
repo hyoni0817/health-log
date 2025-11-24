@@ -2,7 +2,7 @@
 
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { Activity, House } from 'lucide-react';
+import { Activity, Droplet, House } from 'lucide-react';
 
 export function Sidebar() {
   const pathname = usePathname();
@@ -13,11 +13,11 @@ export function Sidebar() {
       href: '/',
       icon: <House />,
     },
-    // {
-    //   label: '혈당',
-    //   href: '/glucose',
-    //   icon: <Droplet />,
-    // },
+    {
+      label: '혈당',
+      href: '/glucose',
+      icon: <Droplet />,
+    },
     // {
     //   label: '혈압',
     //   href: '/blood-pressure',
