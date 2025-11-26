@@ -1,5 +1,10 @@
 import { supabase } from '@/shared/api/supabaseClient';
-import { BloodSugarPayload, BloodSugarRecord, BloodSugarTrendRecord } from '../types/bloodSugar';
+import {
+  BloodSugarPayload,
+  BloodSugarRecord,
+  BloodSugarStatsSummaryRecord,
+  BloodSugarTrendRecord,
+} from '../types/bloodSugar';
 
 export const bloodSugarApi = {
   // 새로운 혈당 기록 추가
@@ -29,5 +34,20 @@ export const bloodSugarApi = {
     const { data, error } = await supabase.from('glucose').select('*').order('date', { ascending: false }).limit(1);
     if (error) throw error;
     return data[0] || null;
+  },
+
+  // 혈당 통계 요약 조회
+  async getBloodSugarStatsSummary(days?: number): Promise<BloodSugarStatsSummaryRecord | null> {
+    const query = await supabase.rpc('get_blood_sugar_stats_summary', { days });
+
+    const { data, error } = await query;
+
+    if (error) throw error;
+
+    if (!data || data.length === 0) {
+      return null;
+    }
+
+    return data[0];
   },
 };

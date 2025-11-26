@@ -11,3 +11,10 @@ export interface BloodSugarTrendRecord {
   min_value: number;
   max_value: number;
 }
+
+export interface BloodSugarStatsSummaryRecord {
+  avg_value: number;
+  min_value: number;
+  max_value: number;
+  total_record_count: number;
+}
