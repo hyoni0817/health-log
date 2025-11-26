@@ -41,7 +41,7 @@ export default async function RootLayout({
             <div className="flex h-screen">
               <Sidebar />
 
-              <div className="pl-[255px]">{children}</div>
+              <div className="pl-[255px] w-full">{children}</div>
             </div>
             <ToastContainer />
           </ModalProvider>
