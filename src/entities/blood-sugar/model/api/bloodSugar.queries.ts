@@ -8,10 +8,10 @@ export const bloodSugarQueries = {
   statsSummaries: () => [...bloodSugarQueries.all(), 'stats-summary'] as const,
 
   // 쿼리 팩토리
-  trend: (days?: number) =>
+  trend: (days?: number, startDate?: Date | null, endDate?: Date | null) =>
     queryOptions({
-      queryKey: [...bloodSugarQueries.trends(), days],
-      queryFn: () => bloodSugarApi.getBloodSugarTrend(days),
+      queryKey: [...bloodSugarQueries.trends(), days, startDate, endDate],
+      queryFn: () => bloodSugarApi.getBloodSugarTrend(days, startDate, endDate),
     }),
   statsSummary: (days?: number, startDate?: Date | null, endDate?: Date | null) =>
     queryOptions({

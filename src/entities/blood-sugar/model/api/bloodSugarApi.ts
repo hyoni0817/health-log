@@ -15,8 +15,17 @@ export const bloodSugarApi = {
   },
 
   // 혈당 추이 조회
-  async getBloodSugarTrend(days?: number): Promise<BloodSugarTrendRecord[]> {
-    const query = await supabase.rpc('get_blood_sugar_trend', { days });
+  async getBloodSugarTrend(
+    days?: number,
+    startDate?: Date | null,
+    endDate?: Date | null
+  ): Promise<BloodSugarTrendRecord[]> {
+    // days가 존재하지 않거나 start_date와 end_date가 모두 존재하지 않으면 api를 호출하지 않음
+    if (!days && (!startDate || !endDate)) {
+      return [];
+    }
+
+    const query = await supabase.rpc('get_blood_sugar_trend', { days, start_date: startDate, end_date: endDate });
 
     const { data, error } = await query;
 
