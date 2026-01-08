@@ -37,8 +37,21 @@ export const bloodSugarApi = {
   },
 
   // 혈당 통계 요약 조회
-  async getBloodSugarStatsSummary(days?: number): Promise<BloodSugarStatsSummaryRecord | null> {
-    const query = await supabase.rpc('get_blood_sugar_stats_summary', { days });
+  async getBloodSugarStatsSummary(
+    days?: number,
+    startDate?: Date | null,
+    endDate?: Date | null
+  ): Promise<BloodSugarStatsSummaryRecord | null> {
+    // days가 존재하지 않거나 start_date와 end_date가 모두 존재하지 않으면 api를 호출하지 않음
+    if (!days && (!startDate || !endDate)) {
+      return null;
+    }
+
+    const query = await supabase.rpc('get_blood_sugar_stats_summary', {
+      days,
+      start_date: startDate,
+      end_date: endDate,
+    });
 
     const { data, error } = await query;
 

@@ -13,9 +13,9 @@ export const bloodSugarQueries = {
       queryKey: [...bloodSugarQueries.trends(), days],
       queryFn: () => bloodSugarApi.getBloodSugarTrend(days),
     }),
-  statsSummary: (days?: number) =>
+  statsSummary: (days?: number, startDate?: Date | null, endDate?: Date | null) =>
     queryOptions({
-      queryKey: [...bloodSugarQueries.statsSummaries(), days],
-      queryFn: () => bloodSugarApi.getBloodSugarStatsSummary(days),
+      queryKey: [...bloodSugarQueries.statsSummaries(), days, startDate, endDate],
+      queryFn: () => bloodSugarApi.getBloodSugarStatsSummary(days, startDate, endDate),
     }),
 };
