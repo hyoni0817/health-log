@@ -2,6 +2,8 @@ import React, { FC, useState } from 'react';
 import { useGetBloodSugarStatsSummary } from '@/features/blood-sugar/hooks/useGetBloodSugarStatsSummary';
 import { DateRangePicker } from '@/shared/ui/DateRangePicker';
 import dayjs from 'dayjs';
+import { BloodSugarFloatingBar } from '@/features/blood-sugar/ui/BloodSugarFloatingBar';
+import { useGetBloodSugarTrend } from '@/features/blood-sugar';
 
 interface BloodSugarStatSummaryProps {
   days?: number;
@@ -14,6 +16,7 @@ export const BloodSugarStatSummary: FC<BloodSugarStatSummaryProps> = (props) => 
   const [dateRange, setDateRange] = useState<[Date | null, Date | null]>([now, now]);
   const [startDate, endDate] = isCustomDateRange ? dateRange : [null, null];
   const { data: statsSummary } = useGetBloodSugarStatsSummary(days, startDate, endDate);
+  const { data: bloodSugarTrend } = useGetBloodSugarTrend(days, startDate, endDate);
 
   const getDisplayValue = (value: number | undefined) => {
     if (statsSummary?.total_record_count && statsSummary?.total_record_count > 0) {
@@ -49,7 +52,7 @@ export const BloodSugarStatSummary: FC<BloodSugarStatSummaryProps> = (props) => 
         </div>
       )}
 
-      <div className="flex gap-6">
+      <div className="flex gap-6 mb-5">
         {summaryList.map((summary) => (
           <div
             key={summary.label}
@@ -59,7 +62,9 @@ export const BloodSugarStatSummary: FC<BloodSugarStatSummaryProps> = (props) => 
             <span className="text-base text-(--color-gray-500)">{summary.label}</span>
           </div>
         ))}
-        <div></div>
+      </div>
+      <div className="h-64">
+        <BloodSugarFloatingBar chartData={bloodSugarTrend || []} />
       </div>
     </div>
   );

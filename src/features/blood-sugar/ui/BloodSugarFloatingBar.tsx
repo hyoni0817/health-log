@@ -31,6 +31,7 @@ export const BloodSugarFloatingBar = ({ chartData }: { chartData: BloodSugarTren
       },
     },
     responsive: true,
+    maintainAspectRatio: false, // 종횡비 유지 여부 결정 (디폴트 값이 true임. true일 때는 높이에 비례하여 너비가 조정됨)
     interaction: {
       mode: 'index' as const,
       intersect: false,
@@ -44,6 +45,9 @@ export const BloodSugarFloatingBar = ({ chartData }: { chartData: BloodSugarTren
       },
       y: {
         stacked: true,
+        ticks: {
+          maxTicksLimit: 7, // 최대 7개 라벨만 표시
+        },
       },
     },
   };
