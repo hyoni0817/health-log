@@ -1,5 +1,7 @@
-import React, { FC } from 'react';
+import React, { FC, useState } from 'react';
 import { useGetBloodSugarStatsSummary } from '@/features/blood-sugar/hooks/useGetBloodSugarStatsSummary';
+import { DateRangePicker } from '@/shared/ui/DateRangePicker';
+import dayjs from 'dayjs';
 
 interface BloodSugarStatSummaryProps {
   days?: number;
@@ -8,7 +10,10 @@ interface BloodSugarStatSummaryProps {
 
 export const BloodSugarStatSummary: FC<BloodSugarStatSummaryProps> = (props) => {
   const { days, isCustomDateRange } = props;
-  const { data: statsSummary } = useGetBloodSugarStatsSummary(days);
+  const now = dayjs().toDate();
+  const [dateRange, setDateRange] = useState<[Date | null, Date | null]>([now, now]);
+  const [startDate, endDate] = isCustomDateRange ? dateRange : [null, null];
+  const { data: statsSummary } = useGetBloodSugarStatsSummary(days, startDate, endDate);
 
   const getDisplayValue = (value: number | undefined) => {
     if (statsSummary?.total_record_count && statsSummary?.total_record_count > 0) {
@@ -38,6 +43,12 @@ export const BloodSugarStatSummary: FC<BloodSugarStatSummaryProps> = (props) => 
 
   return (
     <div>
+      {isCustomDateRange && (
+        <div className="mb-4">
+          <DateRangePicker startDate={startDate} endDate={endDate} onChange={setDateRange} />
+        </div>
+      )}
+
       <div className="flex gap-6">
         {summaryList.map((summary) => (
           <div
