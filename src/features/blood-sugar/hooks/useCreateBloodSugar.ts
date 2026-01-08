@@ -10,7 +10,9 @@ export const useCreateBloodSugar = () => {
   return useMutation({
     mutationFn: (data: BloodSugarPayload) => bloodSugarApi.createGlucose(data),
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: bloodSugarQueries.trends() });
+      queryClient.invalidateQueries({
+        queryKey: bloodSugarQueries.all(),
+      });
     },
   });
 };
