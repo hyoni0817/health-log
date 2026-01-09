@@ -15,7 +15,7 @@ export const BloodSugarTrendSection = () => {
         <p className="text-(--text-subtitle) text-sm mb-4">지난 30일 동안의 혈당 추이를 보여줍니다.</p>
 
         <div>
-          <BloodSugarFloatingBar chartData={bloodSugarTrend || []} />
+          <BloodSugarFloatingBar chartData={bloodSugarTrend || []} isMaintainAspectRatio />
         </div>
       </Card>
     </section>

@@ -8,7 +8,12 @@ import { mapToBloodSugarFloatingBarData } from '../lib/chartMapping';
 
 ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend);
 
-export const BloodSugarFloatingBar = ({ chartData }: { chartData: BloodSugarTrendRecord[] }) => {
+interface BloodSugarFloatingBarProps {
+  chartData: BloodSugarTrendRecord[];
+  isMaintainAspectRatio?: boolean;
+}
+
+export const BloodSugarFloatingBar = ({ chartData, isMaintainAspectRatio = false }: BloodSugarFloatingBarProps) => {
   const options = {
     plugins: {
       title: {
@@ -31,7 +36,7 @@ export const BloodSugarFloatingBar = ({ chartData }: { chartData: BloodSugarTren
       },
     },
     responsive: true,
-    maintainAspectRatio: false, // 종횡비 유지 여부 결정 (디폴트 값이 true임. true일 때는 높이에 비례하여 너비가 조정됨)
+    maintainAspectRatio: isMaintainAspectRatio, // 종횡비 유지 여부 결정 (디폴트 값이 true임. true일 때는 높이에 비례하여 너비가 조정됨)
     interaction: {
       mode: 'index' as const,
       intersect: false,
