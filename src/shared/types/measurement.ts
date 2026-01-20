@@ -1,4 +1,15 @@
 /**
+ * 기간 필터 유형
+ */
+export enum PeriodFilterType {
+  DAY = 'DAY',
+  MONTH = 'MONTH',
+  RANGE = 'RANGE',
+}
+
+export type PeriodFilterTypeKey = keyof typeof PeriodFilterType;
+
+/**
  * 측정 시간 (식사 전후 시간)
  */
 export enum MeasurementTiming {

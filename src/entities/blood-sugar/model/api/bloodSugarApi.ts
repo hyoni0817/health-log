@@ -5,6 +5,7 @@ import {
   BloodSugarStatsSummaryRecord,
   BloodSugarTrendRecord,
 } from '../types/bloodSugar';
+import { PeriodFilterType } from '@/shared/types/measurement';
 
 export const bloodSugarApi = {
   // 새로운 혈당 기록 추가
@@ -71,5 +72,34 @@ export const bloodSugarApi = {
     }
 
     return data[0];
+  },
+
+  // 혈당 내역 조회
+  async getBloodSugarHistory(
+    periodType: PeriodFilterType,
+    limit?: number,
+    offset?: number,
+    days?: number,
+    month?: string,
+    startDate?: Date | null,
+    endDate?: Date | null
+  ): Promise<BloodSugarRecord[]> {
+    const { data, error } = await supabase.rpc('get_blood_sugar_history', {
+      period_type: periodType,
+      days: days,
+      month: month,
+      start_date: startDate,
+      end_date: endDate,
+      limit: limit,
+      offset: offset,
+    });
+
+    if (error) throw error;
+
+    if (!data || data.length === 0) {
+      return [];
+    }
+
+    return data;
   },
 };
