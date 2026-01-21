@@ -85,13 +85,13 @@ export const bloodSugarApi = {
     endDate?: Date | null
   ): Promise<BloodSugarRecord[]> {
     const { data, error } = await supabase.rpc('get_blood_sugar_history', {
-      period_type: periodType,
-      days: days,
-      month: month,
-      start_date: startDate,
-      end_date: endDate,
-      limit: limit,
-      offset: offset,
+      p_period_type: periodType,
+      p_days: days,
+      p_month: month,
+      p_start_date: startDate,
+      p_end_date: endDate,
+      p_limit: limit,
+      p_offset: offset,
     });
 
     if (error) throw error;
