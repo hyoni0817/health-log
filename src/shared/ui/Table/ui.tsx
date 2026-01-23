@@ -7,6 +7,7 @@ export type ColumnProps<T> = {
     title: string;
     key: string;
     dataIndex: K;
+    width?: number | string;
     render?: (value: T[K], record: T) => React.ReactNode;
   };
 }[keyof T];
@@ -22,11 +23,16 @@ export const Table = <T extends DataRecord>({ columns, data }: TableProps<T>) =>
       <table className="w-full">
         <thead className="text-(--text-subtitle) text-sm text-left">
           <tr className="border-b-1 border-(--divider)">
-            {columns.map((column) => (
-              <th key={column.key} className="px-3 py-4">
-                {column.title}
-              </th>
-            ))}
+            {columns.map((column) => {
+              const isWidthString = typeof column.width === 'string';
+              const widthValue = isWidthString ? column.width : `${column.width}px`;
+
+              return (
+                <th key={column.key} className="px-3 py-4" style={{ ...(column.width ? { width: widthValue } : {}) }}>
+                  {column.title}
+                </th>
+              );
+            })}
           </tr>
         </thead>
 
