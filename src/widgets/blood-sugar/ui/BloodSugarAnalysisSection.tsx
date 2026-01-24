@@ -3,6 +3,7 @@
 import { Card } from '@/shared/ui/Card';
 import { Tabs } from '@/shared/ui/Tabs';
 import { BloodSugarStatSummary } from './BloodSugarStatSummary';
+import { BloodSugarHistoryTable } from './BloodSugarHistoryTable';
 
 export const BloodSugarAnalysisSection = () => {
   const tabItems = [
@@ -34,7 +35,11 @@ export const BloodSugarAnalysisSection = () => {
         <h2 className="text-white text-xl font-semibold mb-1">혈당 추이</h2>
         <p className="text-(--text-subtitle) text-sm mb-4">혈당 수치에 대한 통계 및 추이 분석해보세요.</p>
 
-        <Tabs items={tabItems} />
+        <div className="mb-4">
+          <Tabs items={tabItems} />
+        </div>
+
+        <BloodSugarHistoryTable />
       </Card>
     </section>
   );
