@@ -63,7 +63,8 @@ export const BloodSugarStatSummary: FC<BloodSugarStatSummaryProps> = (props) => 
           </div>
         ))}
       </div>
-      <div className="h-64">
+
+      <div className="h-64 mb-4">
         <BloodSugarFloatingBar chartData={bloodSugarTrend || []} />
       </div>
     </div>
