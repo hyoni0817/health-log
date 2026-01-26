@@ -1,20 +1,27 @@
-import React, { FC, useState } from 'react';
+import React, { FC } from 'react';
 import { useGetBloodSugarStatsSummary } from '@/features/blood-sugar/hooks/useGetBloodSugarStatsSummary';
-import { DateRangePicker } from '@/shared/ui/DateRangePicker';
-import dayjs from 'dayjs';
 import { BloodSugarFloatingBar } from '@/features/blood-sugar/ui/BloodSugarFloatingBar';
 import { useGetBloodSugarTrend } from '@/features/blood-sugar';
+import { Days, PeriodFilter, PeriodFilterType, RangeDate } from '@/shared/types/measurement';
 
 interface BloodSugarStatSummaryProps {
-  days?: number;
-  isCustomDateRange?: boolean;
+  periodFilter: PeriodFilter;
 }
 
 export const BloodSugarStatSummary: FC<BloodSugarStatSummaryProps> = (props) => {
-  const { days, isCustomDateRange } = props;
-  const now = dayjs().toDate();
-  const [dateRange, setDateRange] = useState<[Date | null, Date | null]>([now, now]);
-  const [startDate, endDate] = isCustomDateRange ? dateRange : [null, null];
+  const { periodFilter } = props;
+
+  let days: Days | undefined;
+  let startDate: RangeDate | undefined;
+  let endDate: RangeDate | undefined;
+
+  if (periodFilter.type === PeriodFilterType.DAY) {
+    days = periodFilter.days;
+  } else if (periodFilter.type === PeriodFilterType.RANGE) {
+    startDate = periodFilter.startDate;
+    endDate = periodFilter.endDate;
+  }
+
   const { data: statsSummary } = useGetBloodSugarStatsSummary(days, startDate, endDate);
   const { data: bloodSugarTrend } = useGetBloodSugarTrend(days, startDate, endDate);
 
@@ -46,12 +53,6 @@ export const BloodSugarStatSummary: FC<BloodSugarStatSummaryProps> = (props) => 
 
   return (
     <div>
-      {isCustomDateRange && (
-        <div className="mb-4">
-          <DateRangePicker startDate={startDate} endDate={endDate} onChange={setDateRange} />
-        </div>
-      )}
-
       <div className="flex gap-6 mb-5">
         {summaryList.map((summary) => (
           <div
