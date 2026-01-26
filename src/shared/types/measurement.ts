@@ -7,6 +7,41 @@ export enum PeriodFilterType {
   RANGE = 'RANGE',
 }
 
+/**
+ * 일 단위 기간 필터 타입
+ */
+export type Days = number;
+
+/**
+ * 월 단위 기간 필터 타입
+ * - yyyy-MM 형식
+ * @example '202601' => 2026년 1월
+ */
+export type Month = string;
+
+/**
+ * 기간 직접 설정 단위 필터 타입
+ */
+export type RangeDate = Date | null;
+
+/**
+ * 기간 필터
+ */
+export type PeriodFilter =
+  | {
+      type: PeriodFilterType.DAY;
+      days: Days;
+    }
+  | {
+      type: PeriodFilterType.MONTH;
+      month: Month;
+    }
+  | {
+      type: PeriodFilterType.RANGE;
+      startDate: RangeDate;
+      endDate: RangeDate;
+    };
+
 export type PeriodFilterTypeKey = keyof typeof PeriodFilterType;
 
 /**
