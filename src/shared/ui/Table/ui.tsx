@@ -45,22 +45,30 @@ export const Table = <T extends DataRecord>({ columns, data, getRowKey }: TableP
         </thead>
 
         <tbody className="text-(--text) text-sm">
-          {data.map((item, index) => {
-            const rowKey = getRowKey ? getRowKey(item, index) : item['id'];
-            return (
-              <tr key={rowKey} className="border-b-1 border-(--divider)">
-                {columns.map((column) => {
-                  return (
-                    <td key={`td-${column.key}`} className="px-3 py-4">
-                      {column.render
-                        ? (column.render(item[column.dataIndex], item) as React.ReactNode)
-                        : item[column.dataIndex]}
-                    </td>
-                  );
-                })}
-              </tr>
-            );
-          })}
+          {data.length > 0 ? (
+            data.map((item, index) => {
+              const rowKey = getRowKey ? getRowKey(item, index) : item['id'];
+              return (
+                <tr key={rowKey} className="border-b-1 border-(--divider)">
+                  {columns.map((column) => {
+                    return (
+                      <td key={`td-${column.key}`} className="px-3 py-4">
+                        {column.render
+                          ? (column.render(item[column.dataIndex], item) as React.ReactNode)
+                          : item[column.dataIndex]}
+                      </td>
+                    );
+                  })}
+                </tr>
+              );
+            })
+          ) : (
+            <tr>
+              <td colSpan={columns.length} className="px-3 py-20 text-center">
+                <span className="text-(--text-subtitle)">저장된 데이터가 없습니다.</span>
+              </td>
+            </tr>
+          )}
         </tbody>
       </table>
     </div>
