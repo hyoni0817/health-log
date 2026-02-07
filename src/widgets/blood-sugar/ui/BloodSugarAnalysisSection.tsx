@@ -8,6 +8,7 @@ import { PeriodFilterType } from '@/shared/types/measurement';
 import { DateRangePicker } from '@/shared/ui/DateRangePicker';
 import dayjs from 'dayjs';
 import { useState } from 'react';
+import { BloodSugarExport } from '@/features/blood-sugar/ui/BloodSugarExport';
 
 export const BloodSugarAnalysisSection = () => {
   const now = dayjs().toDate();
@@ -23,6 +24,7 @@ export const BloodSugarAnalysisSection = () => {
             <DateRangePicker startDate={startDate} endDate={endDate} onChange={setDateRange} />
           </div>
           <BloodSugarStatSummary periodFilter={{ type: PeriodFilterType.RANGE, startDate, endDate }} />
+          <BloodSugarExport periodFilter={{ type: PeriodFilterType.RANGE, startDate, endDate }} />
           <BloodSugarHistoryTable periodFilter={{ type: PeriodFilterType.RANGE, startDate, endDate }} />
         </>
       );
@@ -31,6 +33,7 @@ export const BloodSugarAnalysisSection = () => {
     return (
       <>
         <BloodSugarStatSummary periodFilter={{ type: PeriodFilterType.DAY, days: days as number }} />
+        <BloodSugarExport periodFilter={{ type: PeriodFilterType.DAY, days: days as number }} />
         <BloodSugarHistoryTable periodFilter={{ type: PeriodFilterType.DAY, days: days as number }} />
       </>
     );
