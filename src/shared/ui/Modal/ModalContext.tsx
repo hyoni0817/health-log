@@ -4,18 +4,20 @@ import React from 'react';
 
 export type ModalComponentProps = {
   close: () => void;
-  [key: string]: unknown;
 };
 
 export type ModalStackItem = {
   id: string;
-  Component: React.ComponentType<ModalComponentProps>;
-  props?: Record<string, unknown>;
+  Component: React.ComponentType<{ [key: string]: unknown }>;
+  props?: Omit<{ [key: string]: unknown }, keyof ModalComponentProps>;
 };
 
 export type ModalContextType = {
   modals: ModalStackItem[];
-  openModal: (Component: React.ComponentType<ModalComponentProps>, props?: Record<string, unknown>) => string; // returns modal id
+  openModal: <P extends ModalComponentProps>(
+    Component: React.ComponentType<P>,
+    props?: Omit<P, keyof ModalComponentProps>
+  ) => string; // returns modal id
   closeModal: (id: string) => void;
   closeTopModal: () => void;
 };
