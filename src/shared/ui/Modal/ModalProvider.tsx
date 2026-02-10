@@ -37,9 +37,15 @@ export const ModalProvider: React.FC<{ children: React.ReactNode }> = ({ childre
     setModals((prev) => prev.slice(0, -1));
   }, []);
 
+  const updateModalProps = useCallback<ModalContextType['updateModalProps']>((id, newProps) => {
+    setModals((prev) =>
+      prev.map((modal) => (modal.id === id ? { ...modal, props: { ...modal.props, ...newProps } } : modal))
+    );
+  }, []);
+
   const contextValue = useMemo(
-    () => ({ modals, openModal, closeModal, closeTopModal }),
-    [modals, openModal, closeModal, closeTopModal]
+    () => ({ modals, openModal, closeModal, closeTopModal, updateModalProps }),
+    [modals, openModal, closeModal, closeTopModal, updateModalProps]
   );
 
   return (

@@ -12,6 +12,7 @@ export function useModal() {
     openModal: context.openModal,
     closeModal: context.closeModal,
     closeTopModal: context.closeTopModal,
+    updateModalProps: context.updateModalProps,
     modals: context.modals,
   };
 }

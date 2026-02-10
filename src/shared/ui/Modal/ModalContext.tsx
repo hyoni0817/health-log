@@ -20,6 +20,10 @@ export type ModalContextType = {
   ) => string; // returns modal id
   closeModal: (id: string) => void;
   closeTopModal: () => void;
+  updateModalProps: <P extends ModalComponentProps>(
+    id: string,
+    newProps: Partial<Omit<P, keyof ModalComponentProps>>
+  ) => void;
 };
 
 export const ModalContext = React.createContext<ModalContextType | undefined>(undefined);
