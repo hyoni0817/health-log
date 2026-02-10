@@ -3,7 +3,7 @@
 import React from 'react';
 import { useRouter } from 'next/navigation';
 import { Button } from '@/shared/ui/Button';
-import { ModalComponentProps } from '@/shared/ui/Modal/ModalContext';
+import { ModalComponentProps } from '@/shared/ui/Modal';
 import { X } from 'lucide-react';
 import { DateField, MeasurementTimeField, NoteField } from '@/shared/ui/form';
 import { useBloodPressureForm } from '@/features/blood-pressure/hooks/useBloodPressureForm';

@@ -3,7 +3,7 @@
 import React from 'react';
 import { useRouter } from 'next/navigation';
 import { Button } from '@/shared/ui/Button';
-import { ModalComponentProps } from '@/shared/ui/Modal/ModalContext';
+import { ModalComponentProps } from '@/shared/ui/Modal';
 import { DateField, MeasurementTimeField, NoteField, PostMealTimeField } from '@/shared/ui/form';
 import { X } from 'lucide-react';
 import { useBloodSugarForm } from '@/features/blood-sugar/hooks/useBloodSugarForm';

@@ -3,7 +3,7 @@ import { Geist, Geist_Mono } from 'next/font/google';
 import './globals.css';
 import { Sidebar } from '@/widgets/sidebar';
 import { QueryProvider } from '@/providers/QueryProvider';
-import { ModalProvider } from '@/shared/ui/Modal/ModalProvider';
+import { ModalProvider } from '@/shared/ui/Modal';
 import { ToastContainer } from 'react-toastify';
 import dayjs from 'dayjs';
 import timezone from 'dayjs/plugin/timezone';
