@@ -1,6 +1,6 @@
 import { queryOptions } from '@tanstack/react-query';
 import { bloodSugarApi } from './bloodSugarApi';
-import { PeriodFilterType } from '@/shared/types/measurement';
+import { HistoryParams } from '@/shared/types/history';
 
 export const bloodSugarQueries = {
   // 키 전용 항목
@@ -20,17 +20,9 @@ export const bloodSugarQueries = {
       queryKey: [...bloodSugarQueries.statsSummaries(), days, startDate, endDate],
       queryFn: () => bloodSugarApi.getBloodSugarStatsSummary(days, startDate, endDate),
     }),
-  history: (
-    periodType: PeriodFilterType,
-    limit?: number,
-    offset?: number,
-    days?: number,
-    month?: string,
-    startDate?: Date | null,
-    endDate?: Date | null
-  ) =>
+  history: (params: HistoryParams) =>
     queryOptions({
-      queryKey: [...bloodSugarQueries.histories(), periodType, limit, offset, days, month, startDate, endDate],
-      queryFn: () => bloodSugarApi.getBloodSugarHistory(periodType, limit, offset, days, month, startDate, endDate),
+      queryKey: [...bloodSugarQueries.histories(), ...Object.values(params)],
+      queryFn: () => bloodSugarApi.getBloodSugarHistory(params),
     }),
 };

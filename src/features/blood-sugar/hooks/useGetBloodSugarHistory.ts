@@ -1,5 +1,5 @@
 import { bloodSugarQueries } from '@/entities/blood-sugar/model';
-import { PeriodFilterType } from '@/shared/types/measurement';
+import { HistoryParams } from '@/shared/types/history';
 import { useQuery } from '@tanstack/react-query';
 
 /**
@@ -9,14 +9,6 @@ import { useQuery } from '@tanstack/react-query';
  * @param endDate 종료 날짜
  * @returns 혈당 추이 데이터
  */
-export const useGetBloodSugarHistory = (
-  periodType: PeriodFilterType,
-  limit?: number,
-  offset?: number,
-  days?: number,
-  month?: string,
-  startDate?: Date | null,
-  endDate?: Date | null
-) => {
-  return useQuery(bloodSugarQueries.history(periodType, limit, offset, days, month, startDate, endDate));
+export const useGetBloodSugarHistory = (params: HistoryParams) => {
+  return useQuery(bloodSugarQueries.history(params));
 };

@@ -33,7 +33,15 @@ export const BloodSugarHistoryTable: FC<BloodSugarHistoryTableProps> = (props) =
     endDate = periodFilter.endDate;
   }
 
-  const { data } = useGetBloodSugarHistory(periodFilter.type, 20, 0, days, month, startDate, endDate);
+  const { data } = useGetBloodSugarHistory({
+    periodType: periodFilter.type,
+    limit: 20,
+    offset: 0,
+    days,
+    month,
+    startDate,
+    endDate,
+  });
 
   const onClickEdit = (id: BloodSugarRecord['id']) => {
     alert(id);

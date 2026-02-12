@@ -5,7 +5,7 @@ import {
   BloodSugarStatsSummaryRecord,
   BloodSugarTrendRecord,
 } from '../types/bloodSugar';
-import { PeriodFilterType } from '@/shared/types/measurement';
+import { HistoryParams } from '@/shared/types/history';
 
 export const bloodSugarApi = {
   // 새로운 혈당 기록 추가
@@ -76,25 +76,34 @@ export const bloodSugarApi = {
 
   // 혈당 내역 조회
   async getBloodSugarHistory(
-    periodType: PeriodFilterType,
-    limit?: number,
-    offset?: number,
-    days?: number,
-    month?: string,
-    startDate?: Date | null,
-    endDate?: Date | null
+    params: HistoryParams,
+    options?: { headers?: HeadersInit; signal?: AbortSignal }
   ): Promise<BloodSugarRecord[]> {
-    const { data, error } = await supabase.rpc('get_blood_sugar_history', {
-      p_period_type: periodType,
-      p_days: days,
-      p_month: month,
-      p_start_date: startDate,
-      p_end_date: endDate,
-      p_limit: limit,
-      p_offset: offset,
+    const SUPABASE_URL = process.env.NEXT_PUBLIC_SUPABASE_URL;
+    const SUPABASE_ANON_KEY = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
+    const { periodType, days, month, startDate, endDate, limit, offset } = params;
+
+    const reponse = await fetch(`${SUPABASE_URL}/rest/v1/rpc/get_blood_sugar_history`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        apikey: SUPABASE_ANON_KEY,
+        Authorization: `Bearer ${SUPABASE_ANON_KEY}`,
+        ...options?.headers,
+      } as HeadersInit,
+      body: JSON.stringify({
+        p_period_type: periodType,
+        p_days: days,
+        p_month: month,
+        p_start_date: startDate,
+        p_end_date: endDate,
+        p_limit: limit,
+        p_offset: offset,
+      }),
+      ...options,
     });
 
-    if (error) throw error;
+    const data = (await reponse.json()) as BloodSugarRecord[];
 
     if (!data || data.length === 0) {
       return [];
