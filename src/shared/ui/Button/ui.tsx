@@ -2,7 +2,7 @@
 
 import { ReactNode, ButtonHTMLAttributes } from 'react';
 
-type ButtonVariant = 'primary' | 'secondary' | 'action' | 'modal-cancel' | 'modal-ok';
+type ButtonVariant = 'primary' | 'outline' | 'action' | 'modal-cancel' | 'modal-ok' | 'modal-cancel-fill';
 type ButtonSize = 'compact' | 'default' | 'comfortable' | 'emphasis';
 
 interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
@@ -28,10 +28,12 @@ export const Button = ({
 
   const variantClasses: Record<ButtonVariant, string> = {
     primary: 'bg-blue-600 text-white hover:bg-blue-700 focus:ring-blue-500',
-    secondary: 'bg-gray-200 text-gray-900 hover:bg-gray-300 focus:ring-gray-500',
+    outline:
+      'border-2 border-(--color-gray-600) text-white hover:bg-(--color-gray-850) hover:border-(--color-gray-500) focus:ring-gray-600',
     action: 'bg-(--color-gray-75) text-gray-800 hover:bg-gray-200 focus:ring-gray-500 justify-between',
     'modal-ok': 'bg-(--color-gray-200) text-(--color-gray-900)',
     'modal-cancel': 'text-(--text) hover:bg-gray-300',
+    'modal-cancel-fill': 'bg-(--color-gray-800) text-(--color-gray-200) hover:bg-(--color-gray-600) hover:text-white',
   };
 
   // 8-point grid system 기반 사이즈 정의
