@@ -12,7 +12,8 @@ import { BloodSugarExport } from '@/features/blood-sugar/ui/BloodSugarExport';
 
 export const BloodSugarAnalysisSection = () => {
   const now = dayjs().toDate();
-  const [dateRange, setDateRange] = useState<[Date | null, Date | null]>([now, now]);
+  const before1year = dayjs().subtract(1, 'year').toDate();
+  const [dateRange, setDateRange] = useState<[Date | null, Date | null]>([before1year, now]);
 
   const bloodSugarAnalysisContent = (periodFilterType: PeriodFilterType, days?: number) => {
     if (periodFilterType === PeriodFilterType.RANGE) {
