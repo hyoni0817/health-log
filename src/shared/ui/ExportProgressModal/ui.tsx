@@ -23,7 +23,7 @@ export const ExportProgressModal: FC<ExportProgressModalProps> = (props) => {
               <p className="text-lg text-(--text-subtitle)">{progress}개</p>
             </div>
           </div>
-          <Button variant="secondary" onClick={onCancel}>
+          <Button variant="modal-cancel-fill" onClick={onCancel}>
             취소
           </Button>
         </div>
@@ -33,7 +33,7 @@ export const ExportProgressModal: FC<ExportProgressModalProps> = (props) => {
             <p className="text-xl text-(--text) font-bold">다운로드 중 오류가 발생했습니다.</p>
             <p className="text-lg text-(--text-subtitle)">다시 시도해주세요.</p>
           </div>
-          <Button variant="secondary" onClick={close}>
+          <Button variant="modal-cancel-fill" onClick={close}>
             닫기
           </Button>
         </div>
