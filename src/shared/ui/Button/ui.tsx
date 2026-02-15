@@ -6,7 +6,7 @@ type ButtonVariant = 'primary' | 'outline' | 'action' | 'modal-cancel' | 'modal-
 type ButtonSize = 'compact' | 'default' | 'comfortable' | 'emphasis';
 
 interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
-  children: ReactNode;
+  children?: ReactNode | string;
   variant?: ButtonVariant;
   size?: ButtonSize;
   fullWidth?: boolean;
