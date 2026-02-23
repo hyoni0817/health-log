@@ -9,7 +9,7 @@ import { useModal } from '@/shared/ui/Modal';
 import { ExportProgressModal, ExportProgressModalProps } from '@/shared/ui/ExportProgressModal';
 
 interface UseBloodSugarExportExcelReturn {
-  handleDownload: () => Promise<void>;
+  handleDownloadExcel: () => Promise<void>;
 }
 
 /**
@@ -92,7 +92,7 @@ export const useBloodSugarExportExcel = (periodFilter: PeriodFilter): UseBloodSu
     [periodFilter.type, days, month, startDate, endDate, updateModalProps]
   );
 
-  const handleDownload = useCallback(async () => {
+  const handleDownloadExcel = useCallback(async () => {
     if (isExporting) return;
 
     let modalId = '';
@@ -162,5 +162,5 @@ export const useBloodSugarExportExcel = (periodFilter: PeriodFilter): UseBloodSu
     }
   }, [days, isExporting, openModal, closeModal, fetchAllData]);
 
-  return { handleDownload };
+  return { handleDownloadExcel };
 };

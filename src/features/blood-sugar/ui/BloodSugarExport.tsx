@@ -9,11 +9,11 @@ interface BloodSugarExportExcelProps {
 
 export const BloodSugarExport: FC<BloodSugarExportExcelProps> = (props) => {
   const { periodFilter } = props;
-  const { handleDownload } = useBloodSugarExportExcel(periodFilter);
+  const { handleDownloadExcel } = useBloodSugarExportExcel(periodFilter);
 
   return (
     <div className="flex justify-end mb-4">
-      <ExportButton text="Excel로 내려받기" onClick={handleDownload} />
+      <ExportButton text="Excel로 내려받기" onClick={handleDownloadExcel} />
     </div>
   );
 };
