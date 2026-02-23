@@ -6,14 +6,16 @@ interface TabsProps {
     label: string;
     children: React.ReactNode;
   }[];
+  onChange: (key: string | number) => void;
 }
 
 export const Tabs: FC<TabsProps> = (props) => {
-  const { items } = props;
+  const { items, onChange } = props;
   const [activeTab, setActiveTab] = useState(items[0].key);
 
   const handleClickTab = (key: TabsProps['items'][number]['key']) => {
     setActiveTab(key);
+    onChange(key);
   };
 
   return (

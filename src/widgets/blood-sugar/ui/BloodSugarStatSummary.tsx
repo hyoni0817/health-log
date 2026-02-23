@@ -1,26 +1,12 @@
-import React, { FC } from 'react';
+import React from 'react';
 import { useGetBloodSugarStatsSummary } from '@/features/blood-sugar/hooks/useGetBloodSugarStatsSummary';
 import { BloodSugarFloatingBar } from '@/features/blood-sugar/ui/BloodSugarFloatingBar';
 import { useGetBloodSugarTrend } from '@/features/blood-sugar';
-import { Days, PeriodFilter, PeriodFilterType, RangeDate } from '@/shared/types/measurement';
+import { BloodSugarPeriodFilterContext } from './BloodSugarAnalysisSection';
+import { usePeriodFilter } from '@/shared/hooks/usePeriodFilter';
 
-interface BloodSugarStatSummaryProps {
-  periodFilter: PeriodFilter;
-}
-
-export const BloodSugarStatSummary: FC<BloodSugarStatSummaryProps> = (props) => {
-  const { periodFilter } = props;
-
-  let days: Days | undefined;
-  let startDate: RangeDate | undefined;
-  let endDate: RangeDate | undefined;
-
-  if (periodFilter.type === PeriodFilterType.DAY) {
-    days = periodFilter.days;
-  } else if (periodFilter.type === PeriodFilterType.RANGE) {
-    startDate = periodFilter.startDate;
-    endDate = periodFilter.endDate;
-  }
+export const BloodSugarStatSummary = () => {
+  const { days, startDate, endDate } = usePeriodFilter(BloodSugarPeriodFilterContext);
 
   const { data: statsSummary } = useGetBloodSugarStatsSummary(days, startDate, endDate);
   const { data: bloodSugarTrend } = useGetBloodSugarTrend(days, startDate, endDate);

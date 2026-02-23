@@ -20,9 +20,11 @@ export type Days = number;
 export type Month = string;
 
 /**
- * 기간 직접 설정 단위 필터 타입
+ * 기간 설정 단위 타입
  */
 export type RangeDate = Date | null;
+
+export type PeriodFilterTabKey = Days | 'manual';
 
 /**
  * 기간 필터

@@ -1,9 +1,8 @@
 'use client';
 
-import React, { FC } from 'react';
-import { Days, Month, PeriodFilter, PostMealTime, RangeDate } from '@/shared/types/measurement';
+import React from 'react';
+import { PostMealTime } from '@/shared/types/measurement';
 import { MeasurementTiming } from '@/shared/types/measurement';
-import { PeriodFilterType } from '@/shared/types/measurement';
 import { useGetBloodSugarHistory } from '@/features/blood-sugar/hooks/useGetBloodSugarHistory';
 import { ColumnProps, Table } from '@/shared/ui/Table/ui';
 import dayjs from 'dayjs';
@@ -12,29 +11,14 @@ import { getBloodSugarStatus, getBloodSugarStatusLabel } from '@/features/blood-
 import { BloodSugarRecord } from '@/entities/blood-sugar/model';
 import { getMeasurementTimingLabel } from '@/shared/utils';
 import { PencilIcon, Trash2 } from 'lucide-react';
+import { usePeriodFilter } from '@/shared/hooks/usePeriodFilter';
+import { BloodSugarPeriodFilterContext } from './BloodSugarAnalysisSection';
 
-interface BloodSugarHistoryTableProps {
-  periodFilter: PeriodFilter;
-}
-
-export const BloodSugarHistoryTable: FC<BloodSugarHistoryTableProps> = (props) => {
-  const { periodFilter } = props;
-  let days: Days | undefined;
-  let month: Month | undefined;
-  let startDate: RangeDate | undefined;
-  let endDate: RangeDate | undefined;
-
-  if (periodFilter.type === PeriodFilterType.DAY) {
-    days = periodFilter.days;
-  } else if (periodFilter.type === PeriodFilterType.MONTH) {
-    month = periodFilter.month;
-  } else if (periodFilter.type === PeriodFilterType.RANGE) {
-    startDate = periodFilter.startDate;
-    endDate = periodFilter.endDate;
-  }
+export const BloodSugarHistoryTable = () => {
+  const { periodType, days, month, startDate, endDate } = usePeriodFilter(BloodSugarPeriodFilterContext);
 
   const { data } = useGetBloodSugarHistory({
-    periodType: periodFilter.type,
+    periodType,
     limit: 20,
     offset: 0,
     days,

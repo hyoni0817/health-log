@@ -1,12 +1,14 @@
 import { useCallback, useRef, useState } from 'react';
 import { utils, writeFile } from 'xlsx';
-import { Days, Month, PeriodFilter, PeriodFilterType, PostMealTime, RangeDate } from '@/shared/types/measurement';
+import { PeriodFilterType, PostMealTime } from '@/shared/types/measurement';
 import { getBloodSugarStatus, getBloodSugarStatusLabel } from '../lib/status';
 import { getMeasurementTimingLabel } from '@/shared/utils';
 import dayjs from 'dayjs';
 import { bloodSugarApi, BloodSugarRecord } from '@/entities/blood-sugar/model';
 import { useModal } from '@/shared/ui/Modal';
 import { ExportProgressModal, ExportProgressModalProps } from '@/shared/ui/ExportProgressModal';
+import { usePeriodFilter } from '@/shared/hooks/usePeriodFilter';
+import { BloodSugarPeriodFilterContext } from '@/widgets/blood-sugar/ui/BloodSugarAnalysisSection';
 
 interface UseBloodSugarExportExcelReturn {
   handleDownloadExcel: () => Promise<void>;
@@ -17,25 +19,12 @@ interface UseBloodSugarExportExcelReturn {
  * @param periodFilter - 기간 필터를 위해 사용되는 파라미터 값
  * @returns 혈당 데이터를 Excel로 내려받을 수 있는 함수를 포함한 객체
  */
-export const useBloodSugarExportExcel = (periodFilter: PeriodFilter): UseBloodSugarExportExcelReturn => {
+export const useBloodSugarExportExcel = (): UseBloodSugarExportExcelReturn => {
   const { openModal, closeModal, updateModalProps } = useModal();
+  const { periodType, days, month, startDate, endDate } = usePeriodFilter(BloodSugarPeriodFilterContext);
   const [isExporting, setIsExporting] = useState<boolean>(false);
   const allDataRef = useRef<BloodSugarRecord[]>([]);
   const controllerRef = useRef<AbortController | null>(null);
-
-  let days: Days | undefined;
-  let month: Month | undefined;
-  let startDate: RangeDate | undefined;
-  let endDate: RangeDate | undefined;
-
-  if (periodFilter.type === PeriodFilterType.DAY) {
-    days = periodFilter.days;
-  } else if (periodFilter.type === PeriodFilterType.MONTH) {
-    month = periodFilter.month;
-  } else if (periodFilter.type === PeriodFilterType.RANGE) {
-    startDate = periodFilter.startDate;
-    endDate = periodFilter.endDate;
-  }
 
   const handleClickProgressCancel = () => {
     controllerRef.current?.abort();
@@ -52,7 +41,7 @@ export const useBloodSugarExportExcel = (periodFilter: PeriodFilter): UseBloodSu
       while (hasMore) {
         const data = await bloodSugarApi.getBloodSugarHistory(
           {
-            periodType: periodFilter.type,
+            periodType: periodType as PeriodFilterType,
             limit: CHUNK_SIZE,
             offset,
             days,
@@ -89,7 +78,7 @@ export const useBloodSugarExportExcel = (periodFilter: PeriodFilter): UseBloodSu
 
       return allDataRef.current;
     },
-    [periodFilter.type, days, month, startDate, endDate, updateModalProps]
+    [periodType, days, month, startDate, endDate, updateModalProps]
   );
 
   const handleDownloadExcel = useCallback(async () => {
