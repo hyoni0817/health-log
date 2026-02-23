@@ -4,3 +4,4 @@ export { BloodSugarCard } from './ui/BloodSugarCard';
 // hooks
 export { useCreateBloodSugar } from './hooks/useCreateBloodSugar';
 export { useGetBloodSugarTrend } from './hooks/useGetBloodSugarTrend';
+export { useBloodSugarExportExcel } from './hooks/useBloodSugarExportExcel';

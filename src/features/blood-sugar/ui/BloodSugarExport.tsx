@@ -1,7 +1,7 @@
 import { ExportButton } from '@/shared/ui/ExportButton';
 import { PeriodFilter } from '@/shared/types/measurement';
 import { FC } from 'react';
-import { useBloodSugarExportExcel } from '../hooks/useBloodSugarExportExcel';
+import { useBloodSugarExportExcel } from '@/features/blood-sugar/hooks/useBloodSugarExportExcel';
 
 interface BloodSugarExportExcelProps {
   periodFilter: PeriodFilter;
