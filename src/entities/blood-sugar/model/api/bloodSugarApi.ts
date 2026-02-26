@@ -5,7 +5,7 @@ import {
   BloodSugarStatsSummaryRecord,
   BloodSugarTrendRecord,
 } from '../types/bloodSugar';
-import { HistoryParams } from '@/shared/types/history';
+import { AllHistoryParams, HistoryParams } from '@/shared/types/history';
 
 export const bloodSugarApi = {
   // 새로운 혈당 기록 추가
@@ -110,5 +110,27 @@ export const bloodSugarApi = {
     }
 
     return data;
+  },
+
+  // 모든 혈당 내역 조회
+  async getAllBloodSugarHistory(params: AllHistoryParams): Promise<BloodSugarRecord[]> {
+    const CHUNK_SIZE = 1000;
+    let offset = 0;
+    const allData: BloodSugarRecord[] = [];
+
+    while (true) {
+      const data = await this.getBloodSugarHistory({
+        ...params,
+        limit: CHUNK_SIZE,
+        offset,
+      });
+
+      allData.push(...data);
+      offset += CHUNK_SIZE;
+
+      if (data.length < CHUNK_SIZE) break;
+    }
+
+    return allData;
   },
 };

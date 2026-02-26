@@ -9,3 +9,5 @@ export interface HistoryParams {
   startDate?: Date | null;
   endDate?: Date | null;
 }
+
+export type AllHistoryParams = Omit<HistoryParams, 'limit' | 'offset'>;
