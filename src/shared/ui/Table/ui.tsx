@@ -25,52 +25,49 @@ interface TableProps<T> {
   getRowKey?: (item: T, index: number) => string | number;
 }
 
+const getCellStyle = (width?: number | string): React.CSSProperties => {
+  if (!width) return { flex: 1, minWidth: 0 };
+  const widthValue = typeof width === 'string' ? width : `${width}px`;
+  return { width: widthValue, flexShrink: 0 };
+};
+
 export const Table = <T extends DataRecord>({ columns, data, getRowKey }: TableProps<T>) => {
   return (
-    <div className="w-full border-1 border-(--divider) rounded-md">
-      <table className="w-full">
-        <thead className="text-(--text-subtitle) text-sm text-left">
-          <tr className="border-b-1 border-(--divider)">
-            {columns.map((column) => {
-              const isWidthString = typeof column.width === 'string';
-              const widthValue = isWidthString ? column.width : `${column.width}px`;
+    <div role="table" className="w-full border-1 border-(--divider) rounded-md">
+      <div role="rowgroup" className="text-(--text-subtitle) text-sm text-left">
+        <div role="row" className="flex border-b-1 border-(--divider)">
+          {columns.map((column) => (
+            <div key={column.key} role="columnheader" className="px-3 py-4" style={getCellStyle(column.width)}>
+              {column.title}
+            </div>
+          ))}
+        </div>
+      </div>
 
-              return (
-                <th key={column.key} className="px-3 py-4" style={{ ...(column.width ? { width: widthValue } : {}) }}>
-                  {column.title}
-                </th>
-              );
-            })}
-          </tr>
-        </thead>
-
-        <tbody className="text-(--text) text-sm">
-          {data.length > 0 ? (
-            data.map((item, index) => {
-              const rowKey = getRowKey ? getRowKey(item, index) : item['id'];
-              return (
-                <tr key={rowKey} className="border-b-1 border-(--divider)">
-                  {columns.map((column) => {
-                    return (
-                      <td key={`td-${column.key}`} className="px-3 py-4">
-                        {column.render
-                          ? (column.render(item[column.dataIndex], item) as React.ReactNode)
-                          : item[column.dataIndex]}
-                      </td>
-                    );
-                  })}
-                </tr>
-              );
-            })
-          ) : (
-            <tr>
-              <td colSpan={columns.length} className="px-3 py-20 text-center">
-                <span className="text-(--text-subtitle)">저장된 데이터가 없습니다.</span>
-              </td>
-            </tr>
-          )}
-        </tbody>
-      </table>
+      <div role="rowgroup" className="text-(--text) text-sm">
+        {data.length > 0 ? (
+          data.map((item, index) => {
+            const rowKey = getRowKey ? getRowKey(item, index) : item['id'];
+            return (
+              <div key={rowKey} role="row" className="flex border-b-1 border-(--divider)">
+                {columns.map((column) => (
+                  <div key={`td-${column.key}`} role="cell" className="px-3 py-4" style={getCellStyle(column.width)}>
+                    {column.render
+                      ? (column.render(item[column.dataIndex], item) as React.ReactNode)
+                      : item[column.dataIndex]}
+                  </div>
+                ))}
+              </div>
+            );
+          })
+        ) : (
+          <div role="row">
+            <div role="cell" className="px-3 py-20 text-center">
+              <span className="text-(--text-subtitle)">저장된 데이터가 없습니다.</span>
+            </div>
+          </div>
+        )}
+      </div>
     </div>
   );
 };
