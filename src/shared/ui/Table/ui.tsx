@@ -51,7 +51,12 @@ export const Table = <T extends DataRecord>({ columns, data, getRowKey }: TableP
             return (
               <div key={rowKey} role="row" className="flex border-b-1 border-(--divider)">
                 {columns.map((column) => (
-                  <div key={`td-${column.key}`} role="cell" className="px-3 py-4" style={getCellStyle(column.width)}>
+                  <div
+                    key={`td-${column.key}`}
+                    role="cell"
+                    className="px-3 py-4 flex items-center"
+                    style={getCellStyle(column.width)}
+                  >
                     {column.render
                       ? (column.render(item[column.dataIndex], item) as React.ReactNode)
                       : item[column.dataIndex]}
