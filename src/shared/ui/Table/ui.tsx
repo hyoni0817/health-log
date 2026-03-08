@@ -33,7 +33,7 @@ const getCellStyle = (width?: number | string): React.CSSProperties => {
 
 export const Table = <T extends DataRecord>({ columns, data, getRowKey }: TableProps<T>) => {
   return (
-    <div role="table" className="w-full border-1 border-(--divider) rounded-md">
+    <div role="table" className="w-full border-t-1 border-(--divider)">
       <div role="rowgroup" className="text-(--text-subtitle) text-sm text-left">
         <div role="row" className="flex border-b-1 border-(--divider)">
           {columns.map((column) => (
@@ -49,7 +49,7 @@ export const Table = <T extends DataRecord>({ columns, data, getRowKey }: TableP
           data.map((item, index) => {
             const rowKey = getRowKey ? getRowKey(item, index) : item['id'];
             return (
-              <div key={rowKey} role="row" className="flex border-b-1 border-(--divider)">
+              <div key={rowKey} role="row" className="flex border-b-1 border-(--divider) last:border-b-0">
                 {columns.map((column) => (
                   <div
                     key={`td-${column.key}`}
