@@ -49,7 +49,11 @@ export const Table = <T extends DataRecord>({ columns, data, getRowKey }: TableP
           data.map((item, index) => {
             const rowKey = getRowKey ? getRowKey(item, index) : item['id'];
             return (
-              <div key={rowKey} role="row" className="flex border-b-1 border-(--divider) last:border-b-0">
+              <div
+                key={rowKey}
+                role="row"
+                className="flex border-b-1 border-(--divider) last:border-b-0 break-inside-avoid"
+              >
                 {columns.map((column) => (
                   <div
                     key={`td-${column.key}`}
