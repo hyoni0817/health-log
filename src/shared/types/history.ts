@@ -6,8 +6,8 @@ export interface HistoryParams {
   offset?: number;
   days?: number;
   month?: string;
-  startDate?: Date | null;
-  endDate?: Date | null;
+  startDate?: Date | string | null;
+  endDate?: Date | string | null;
 }
 
 export type AllHistoryParams = Omit<HistoryParams, 'limit' | 'offset'>;
