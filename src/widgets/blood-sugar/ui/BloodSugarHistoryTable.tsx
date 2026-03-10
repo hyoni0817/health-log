@@ -1,9 +1,8 @@
 'use client';
 
-import React from 'react';
+import React, { useContext } from 'react';
 import { PostMealTime } from '@/shared/types/measurement';
 import { MeasurementTiming } from '@/shared/types/measurement';
-import { useGetBloodSugarHistory } from '@/features/blood-sugar/hooks/useGetBloodSugarHistory';
 import { ColumnProps, Table } from '@/shared/ui/Table/ui';
 import dayjs from 'dayjs';
 import { getCommonStatusTextColor } from '@/shared/utils/status';
@@ -11,30 +10,44 @@ import { getBloodSugarStatus, getBloodSugarStatusLabel } from '@/features/blood-
 import { BloodSugarRecord } from '@/entities/blood-sugar/model';
 import { getMeasurementTimingLabel } from '@/shared/utils';
 import { PencilIcon, Trash2 } from 'lucide-react';
+import { BloodSugarAnalysisExportContext } from '@/features/blood-sugar/ui/BloodSugarAnalysisDocument';
+import { useGetBloodSugarHistory } from '@/features/blood-sugar/hooks/useGetBloodSugarHistory';
 import { usePeriodFilter } from '@/shared/hooks/usePeriodFilter';
-import { BloodSugarPeriodFilterContext } from './BloodSugarAnalysisSection';
+import { BloodSugarPeriodFilterContext } from '@/features/blood-sugar/model';
+import { useGetBloodSugarAllData } from '@/features/blood-sugar/hooks/useGetBloodSugarAllData';
 
 export const BloodSugarHistoryTable = () => {
   const { periodType, days, month, startDate, endDate } = usePeriodFilter(BloodSugarPeriodFilterContext);
+  const { isExport } = useContext(BloodSugarAnalysisExportContext);
 
-  const { data } = useGetBloodSugarHistory({
-    periodType,
-    limit: 20,
-    offset: 0,
-    days,
-    month,
-    startDate,
-    endDate,
-  });
+  const allDataQuery = useGetBloodSugarAllData(
+    {
+      periodType,
+      days,
+      month,
+      startDate,
+      endDate,
+    },
+    { enabled: isExport }
+  );
 
-  const onClickEdit = (id: BloodSugarRecord['id']) => {
-    alert(id);
-  };
-  const onClickDelete = (id: BloodSugarRecord['id']) => {
-    alert(id);
-  };
+  const historyQuery = useGetBloodSugarHistory(
+    {
+      periodType,
+      limit: 20,
+      offset: 0,
+      days,
+      month,
+      startDate,
+      endDate,
+    },
+    { enabled: !isExport }
+  );
 
-  const columns: ColumnProps<BloodSugarRecord>[] = [
+  const data = isExport ? allDataQuery.data : historyQuery.data;
+
+  // PDF export 시 사용할 컬럼 정의 (수정/삭제 컬럼 제외)
+  const bloodSugarPdfColumns: ColumnProps<BloodSugarRecord>[] = [
     {
       title: '날짜',
       key: 'date',
@@ -74,6 +87,17 @@ export const BloodSugarHistoryTable = () => {
       render: (value) => <span>{value ? `${value}분 후` : '-'}</span>,
     },
     { title: '메모', key: 'note', dataIndex: 'note', width: 300, render: (value) => <span>{value || '-'}</span> },
+  ];
+
+  const onClickEdit = (id: BloodSugarRecord['id']) => {
+    alert(id);
+  };
+  const onClickDelete = (id: BloodSugarRecord['id']) => {
+    alert(id);
+  };
+
+  const allColumns: ColumnProps<BloodSugarRecord>[] = [
+    ...bloodSugarPdfColumns,
     {
       title: '수정 / 삭제',
       key: 'id',
@@ -91,7 +115,7 @@ export const BloodSugarHistoryTable = () => {
     },
   ];
 
-  return <Table columns={columns} data={data || []} />;
+  return <Table columns={isExport ? bloodSugarPdfColumns : allColumns} data={data || []} />;
 };
 
 const ActionButtonClasses = 'rounded-md bg-(--color-gray-850) p-2';
