@@ -22,7 +22,7 @@ export type Month = string;
 /**
  * 기간 설정 단위 타입
  */
-export type RangeDate = Date | null;
+export type RangeDate = Date | string | null;
 
 export type PeriodFilterTabKey = Days | 'manual';
 
