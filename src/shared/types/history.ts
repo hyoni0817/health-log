@@ -1,4 +1,4 @@
-import { PeriodFilterType } from './measurement';
+import { PeriodFilterType, RangeDate } from './measurement';
 
 export interface HistoryParams {
   periodType: PeriodFilterType;
@@ -6,8 +6,8 @@ export interface HistoryParams {
   offset?: number;
   days?: number;
   month?: string;
-  startDate?: Date | string | null;
-  endDate?: Date | string | null;
+  startDate?: RangeDate;
+  endDate?: RangeDate;
 }
 
 export type AllHistoryParams = Omit<HistoryParams, 'limit' | 'offset'>;

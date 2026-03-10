@@ -6,6 +6,7 @@ import {
   BloodSugarTrendRecord,
 } from '../types/bloodSugar';
 import { AllHistoryParams, HistoryParams } from '@/shared/types/history';
+import { RangeDate } from '@/shared/types/measurement';
 
 export const bloodSugarApi = {
   // 새로운 혈당 기록 추가
@@ -18,8 +19,8 @@ export const bloodSugarApi = {
   // 혈당 추이 조회
   async getBloodSugarTrend(
     days?: number,
-    startDate?: Date | null,
-    endDate?: Date | null
+    startDate?: RangeDate,
+    endDate?: RangeDate
   ): Promise<BloodSugarTrendRecord[]> {
     // days가 존재하지 않거나 start_date와 end_date가 모두 존재하지 않으면 api를 호출하지 않음
     if (!days && (!startDate || !endDate)) {
@@ -49,8 +50,8 @@ export const bloodSugarApi = {
   // 혈당 통계 요약 조회
   async getBloodSugarStatsSummary(
     days?: number,
-    startDate?: Date | null,
-    endDate?: Date | null
+    startDate?: RangeDate,
+    endDate?: RangeDate
   ): Promise<BloodSugarStatsSummaryRecord | null> {
     // days가 존재하지 않거나 start_date와 end_date가 모두 존재하지 않으면 api를 호출하지 않음
     if (!days && (!startDate || !endDate)) {

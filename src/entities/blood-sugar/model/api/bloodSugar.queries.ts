@@ -3,6 +3,7 @@ import { bloodSugarApi } from './bloodSugarApi';
 import { AllHistoryParams, HistoryParams } from '@/shared/types/history';
 import { BloodSugarRecord } from '../types/bloodSugar';
 import { CustomQueryOptions } from '@/shared/types/query';
+import { RangeDate } from '@/shared/types/measurement';
 
 export const bloodSugarQueries = {
   // 키 전용 항목
@@ -13,12 +14,12 @@ export const bloodSugarQueries = {
   allHistories: () => [...bloodSugarQueries.all(), 'all-history'] as const,
 
   // 쿼리 팩토리
-  trend: (days?: number, startDate?: Date | null, endDate?: Date | null) =>
+  trend: (days?: number, startDate?: RangeDate, endDate?: RangeDate) =>
     queryOptions({
       queryKey: [...bloodSugarQueries.trends(), days, startDate, endDate],
       queryFn: () => bloodSugarApi.getBloodSugarTrend(days, startDate, endDate),
     }),
-  statsSummary: (days?: number, startDate?: Date | null, endDate?: Date | null) =>
+  statsSummary: (days?: number, startDate?: RangeDate, endDate?: RangeDate) =>
     queryOptions({
       queryKey: [...bloodSugarQueries.statsSummaries(), days, startDate, endDate],
       queryFn: () => bloodSugarApi.getBloodSugarStatsSummary(days, startDate, endDate),

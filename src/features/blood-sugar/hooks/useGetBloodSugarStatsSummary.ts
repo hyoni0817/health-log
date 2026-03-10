@@ -1,4 +1,5 @@
 import { bloodSugarQueries } from '@/entities/blood-sugar/model';
+import { RangeDate } from '@/shared/types/measurement';
 import { useQuery } from '@tanstack/react-query';
 
 /**
@@ -8,6 +9,6 @@ import { useQuery } from '@tanstack/react-query';
  * @param endDate 종료 날짜
  * @returns 혈당 통계 요약 데이터
  */
-export const useGetBloodSugarStatsSummary = (days?: number, startDate?: Date | null, endDate?: Date | null) => {
-  return useQuery(bloodSugarQueries.statsSummary(days, startDate, endDate));
+export const useGetBloodSugarStatsSummary = (days?: number, startDate?: RangeDate, endDate?: RangeDate) => {
+  return useQuery(bloodSugarQueries.statsSummary(days, startDate as Date | null, endDate as Date | null));
 };
