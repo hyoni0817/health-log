@@ -1,6 +1,8 @@
 import { queryOptions } from '@tanstack/react-query';
 import { bloodSugarApi } from './bloodSugarApi';
 import { AllHistoryParams, HistoryParams } from '@/shared/types/history';
+import { BloodSugarRecord } from '../types/bloodSugar';
+import { CustomQueryOptions } from '@/shared/types/query';
 
 export const bloodSugarQueries = {
   // 키 전용 항목
@@ -21,14 +23,16 @@ export const bloodSugarQueries = {
       queryKey: [...bloodSugarQueries.statsSummaries(), days, startDate, endDate],
       queryFn: () => bloodSugarApi.getBloodSugarStatsSummary(days, startDate, endDate),
     }),
-  history: (params: HistoryParams) =>
+  history: (params: HistoryParams, options?: CustomQueryOptions<BloodSugarRecord[]>) =>
     queryOptions({
       queryKey: [...bloodSugarQueries.histories(), ...Object.values(params)],
       queryFn: () => bloodSugarApi.getBloodSugarHistory(params),
+      ...options,
     }),
-  allHistory: (params: AllHistoryParams) =>
+  allHistory: (params: AllHistoryParams, options?: CustomQueryOptions<BloodSugarRecord[]>) =>
     queryOptions({
       queryKey: [...bloodSugarQueries.allHistories(), ...Object.values(params)],
       queryFn: () => bloodSugarApi.getAllBloodSugarHistory(params),
+      ...options,
     }),
 };
