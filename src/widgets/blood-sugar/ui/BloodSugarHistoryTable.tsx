@@ -10,7 +10,7 @@ import { getBloodSugarStatus, getBloodSugarStatusLabel } from '@/features/blood-
 import { BloodSugarRecord } from '@/entities/blood-sugar/model';
 import { getMeasurementTimingLabel } from '@/shared/utils';
 import { PencilIcon, Trash2 } from 'lucide-react';
-import { BloodSugarAnalysisExportContext } from '@/features/blood-sugar/ui/BloodSugarAnalysisDocument';
+import { BloodSugarAnalysisExportContext } from '@/features/blood-sugar/model';
 import { useGetBloodSugarHistory } from '@/features/blood-sugar/hooks/useGetBloodSugarHistory';
 import { usePeriodFilter } from '@/shared/hooks/usePeriodFilter';
 import { BloodSugarPeriodFilterContext } from '@/features/blood-sugar/model';
