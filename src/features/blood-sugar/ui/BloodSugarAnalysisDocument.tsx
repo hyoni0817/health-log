@@ -5,14 +5,28 @@ import { BloodSugarHistoryTable } from '@/widgets/blood-sugar/ui/BloodSugarHisto
 import { BloodSugarStatSummary } from '@/widgets/blood-sugar/ui/BloodSugarStatSummary';
 import { Document, DocumentGroup, Footer, Header } from '@/shared/lib/document-export';
 import { PeriodFilter, PeriodFilterType } from '@/shared/types/measurement';
-import dayjs from 'dayjs';
 import { BloodSugarPeriodFilterContext } from '../model';
 import { BloodSugarAnalysisExportContext } from '../model';
+import { useSearchParams } from 'next/navigation';
 
 export const BloodSugarAnalysisDocument = () => {
-  const now = dayjs().format('YYYY-MM-DD');
-  const before1year = dayjs().subtract(1, 'year').format('YYYY-MM-DD');
-  const periodFilter: PeriodFilter = { type: PeriodFilterType.RANGE, startDate: before1year, endDate: now };
+  const searchParams = useSearchParams();
+  const periodType = searchParams.get('periodType');
+  const days = searchParams.get('days');
+  const startDate = searchParams.get('startDate');
+  const endDate = searchParams.get('endDate');
+
+  const periodFilter: PeriodFilter =
+    periodType === PeriodFilterType.RANGE
+      ? {
+          type: PeriodFilterType.RANGE,
+          startDate: startDate as string,
+          endDate: endDate as string,
+        }
+      : {
+          type: PeriodFilterType.DAY,
+          days: Number(days),
+        };
 
   return (
     <BloodSugarAnalysisExportContext.Provider value={{ isExport: true }}>
