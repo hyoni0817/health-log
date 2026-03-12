@@ -1,6 +1,9 @@
-import { useCallback } from 'react';
+import { useCallback, useState } from 'react';
 import { usePeriodFilter } from '@/shared/hooks/usePeriodFilter';
 import { BloodSugarPeriodFilterContext } from '@/features/blood-sugar/model';
+import dayjs from 'dayjs';
+import { useModal } from '@/shared/ui/Modal';
+import { ExportProgressModal } from '@/shared/ui/ExportProgressModal';
 
 /**
  * 혈당 기록을 PDF로 내려받는 훅
@@ -8,23 +11,54 @@ import { BloodSugarPeriodFilterContext } from '@/features/blood-sugar/model';
  */
 export const useBloodSugarExportPdf = () => {
   const { periodType, days, month, startDate, endDate } = usePeriodFilter(BloodSugarPeriodFilterContext);
+  const { openModal, closeModal, updateModalProps } = useModal();
+  const [isExporting, setIsExporting] = useState<boolean>(false);
 
   const handleDownloadPdf = useCallback(async () => {
-    const res = await fetch('http://localhost:4000/pdf/blood-sugar', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ days, startDate, endDate }),
-    });
+    const controller = new AbortController();
+    const signal = controller.signal;
 
-    if (!res.ok) throw new Error('PDF 생성 실패');
+    if (isExporting) return;
 
-    const blob = await res.blob();
-    const url = URL.createObjectURL(blob);
-    const a = document.createElement('a');
-    a.href = url;
-    a.download = 'blood-sugar.pdf';
-    a.click();
-    URL.revokeObjectURL(url);
-  }, [days, startDate, endDate]);
+    let modalId = '';
+
+    try {
+      setIsExporting(true);
+      modalId = openModal(ExportProgressModal, { text: 'PDF 생성 중', onCancel: () => controller.abort() });
+
+      const res = await fetch('http://localhost:4000/pdf/blood-sugar', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ periodType, days, month, startDate, endDate }),
+        signal,
+      });
+
+      if (!res.ok) throw new Error('PDF 생성 실패');
+
+      const blob = await res.blob();
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = `혈당 리포트_${dayjs(startDate).format('YYYY-MM-DD')} ~ ${dayjs(endDate).format('YYYY-MM-DD')}.pdf`;
+      a.click();
+      URL.revokeObjectURL(url);
+
+      closeModal(modalId);
+    } catch (error) {
+      // 사용자가 직접 '취소'버튼을 누른 경우에는 error 상태를 표시하지 않음.
+      if (error instanceof Error && error.name === 'AbortError') {
+        closeModal(modalId);
+        return;
+      }
+
+      if (modalId) {
+        updateModalProps(modalId, { isError: true });
+      }
+
+      console.error(error);
+    } finally {
+      setIsExporting(false);
+    }
+  }, [periodType, days, month, startDate, endDate, isExporting, openModal, closeModal, updateModalProps]);
   return { handleDownloadPdf };
 };
