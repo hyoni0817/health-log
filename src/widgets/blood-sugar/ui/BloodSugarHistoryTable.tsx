@@ -47,7 +47,7 @@ export const BloodSugarHistoryTable = () => {
   const data = isExport ? allDataQuery.data : historyQuery.data;
 
   // PDF export 시 사용할 컬럼 정의 (수정/삭제 컬럼 제외)
-  const bloodSugarPdfColumns: ColumnProps<BloodSugarRecord>[] = [
+  const bloodSugarDocumentColumns: ColumnProps<BloodSugarRecord>[] = [
     {
       title: '날짜',
       key: 'date',
@@ -97,7 +97,7 @@ export const BloodSugarHistoryTable = () => {
   };
 
   const allColumns: ColumnProps<BloodSugarRecord>[] = [
-    ...bloodSugarPdfColumns,
+    ...bloodSugarDocumentColumns,
     {
       title: '수정 / 삭제',
       key: 'id',
@@ -115,7 +115,7 @@ export const BloodSugarHistoryTable = () => {
     },
   ];
 
-  return <Table columns={isExport ? bloodSugarPdfColumns : allColumns} data={data || []} />;
+  return <Table columns={isExport ? bloodSugarDocumentColumns : allColumns} data={data || []} />;
 };
 
 const ActionButtonClasses = 'rounded-md bg-(--color-gray-850) p-2';
