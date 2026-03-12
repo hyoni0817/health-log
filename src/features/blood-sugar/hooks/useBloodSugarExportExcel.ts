@@ -8,7 +8,7 @@ import { bloodSugarApi, BloodSugarRecord } from '@/entities/blood-sugar/model';
 import { useModal } from '@/shared/ui/Modal';
 import { ExportProgressModal, ExportProgressModalProps } from '@/shared/ui/ExportProgressModal';
 import { usePeriodFilter } from '@/shared/hooks/usePeriodFilter';
-import { BloodSugarPeriodFilterContext } from '@/widgets/blood-sugar/ui/BloodSugarAnalysisSection';
+import { BloodSugarPeriodFilterContext } from '@/features/blood-sugar/model';
 
 interface UseBloodSugarExportExcelReturn {
   handleDownloadExcel: () => Promise<void>;
