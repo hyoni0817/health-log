@@ -42,9 +42,6 @@ export const BloodSugarAnalysisDocument = () => {
               <BloodSugarStatSummary />
               <BloodSugarHistoryTable />
             </Document>
-            <Document>
-              <BloodSugarHistoryTable />
-            </Document>
           </DocumentGroup>
         </div>
       </BloodSugarPeriodFilterContext.Provider>
