@@ -4,6 +4,7 @@ import {
   BloodSugarRecord,
   BloodSugarStatsSummaryRecord,
   BloodSugarTrendRecord,
+  PaginatedBloodSugarHistory,
 } from '../types/bloodSugar';
 import { AllHistoryParams, HistoryParams } from '@/shared/types/history';
 import { RangeDate } from '@/shared/types/measurement';
@@ -79,7 +80,7 @@ export const bloodSugarApi = {
   async getBloodSugarHistory(
     params: HistoryParams,
     options?: { headers?: HeadersInit; signal?: AbortSignal }
-  ): Promise<BloodSugarRecord[]> {
+  ): Promise<PaginatedBloodSugarHistory> {
     const SUPABASE_URL = process.env.NEXT_PUBLIC_SUPABASE_URL;
     const SUPABASE_ANON_KEY = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
     const { periodType, days, month, startDate, endDate, limit, offset } = params;
@@ -104,11 +105,7 @@ export const bloodSugarApi = {
       ...options,
     });
 
-    const data = (await reponse.json()) as BloodSugarRecord[];
-
-    if (!data || data.length === 0) {
-      return [];
-    }
+    const data = (await reponse.json()) as PaginatedBloodSugarHistory;
 
     return data;
   },
@@ -126,10 +123,10 @@ export const bloodSugarApi = {
         offset,
       });
 
-      allData.push(...data);
+      allData.push(...data.items);
       offset += CHUNK_SIZE;
 
-      if (data.length < CHUNK_SIZE) break;
+      if (data.items.length < CHUNK_SIZE) break;
     }
 
     return allData;

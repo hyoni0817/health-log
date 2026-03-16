@@ -6,6 +6,11 @@ export interface BloodSugarPayload extends BaseMeasurementPayload {
 
 export interface BloodSugarRecord extends BloodSugarPayload, BaseMeasurementRecord {}
 
+export interface PaginatedBloodSugarHistory {
+  items: BloodSugarRecord[];
+  totalCount: number;
+}
+
 export interface BloodSugarTrendRecord {
   date: string;
   min_value: number;
