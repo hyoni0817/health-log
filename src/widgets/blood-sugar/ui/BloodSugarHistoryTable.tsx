@@ -16,6 +16,7 @@ import { usePeriodFilter } from '@/shared/hooks/usePeriodFilter';
 import { BloodSugarPeriodFilterContext } from '@/features/blood-sugar/model';
 import { useGetBloodSugarAllData } from '@/features/blood-sugar/hooks/useGetBloodSugarAllData';
 import { Pagination } from '@/shared/ui/pagination';
+import { keepPreviousData } from '@tanstack/react-query';
 
 export const BloodSugarHistoryTable = () => {
   const { periodType, days, month, startDate, endDate } = usePeriodFilter(BloodSugarPeriodFilterContext);
@@ -44,17 +45,18 @@ export const BloodSugarHistoryTable = () => {
       startDate,
       endDate,
     },
-    { enabled: !isExport }
+    { enabled: !isExport, placeholderData: keepPreviousData }
   );
 
   const data = isExport ? allDataQuery.data : historyQuery.data?.items;
 
   const handlePageChange = (page: number) => {
+    const marginTop = 10;
     const bloodSugarHistoryTableLocation =
-      (document.querySelector('.blood-sugar-history-table') as HTMLElement).offsetTop - 10;
+      (document.querySelector('.blood-sugar-history-table') as HTMLElement).offsetTop - marginTop;
     setCurrentPage(page);
 
-    window.scrollTo({ top: bloodSugarHistoryTableLocation || 0, behavior: 'auto' });
+    window.scrollTo({ top: bloodSugarHistoryTableLocation, behavior: 'auto' });
   };
 
   // PDF export 시 사용할 컬럼 정의 (수정/삭제 컬럼 제외)
