@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import { PostMealTime } from '@/shared/types/measurement';
 import { MeasurementTiming } from '@/shared/types/measurement';
 import { ColumnProps, Table } from '@/shared/ui/Table/ui';
@@ -15,10 +15,13 @@ import { useGetBloodSugarHistory } from '@/features/blood-sugar/hooks/useGetBloo
 import { usePeriodFilter } from '@/shared/hooks/usePeriodFilter';
 import { BloodSugarPeriodFilterContext } from '@/features/blood-sugar/model';
 import { useGetBloodSugarAllData } from '@/features/blood-sugar/hooks/useGetBloodSugarAllData';
+import { Pagination } from '@/shared/ui/pagination';
 
 export const BloodSugarHistoryTable = () => {
   const { periodType, days, month, startDate, endDate } = usePeriodFilter(BloodSugarPeriodFilterContext);
   const { isExport } = useContext(BloodSugarAnalysisExportContext);
+  const pageSize = 20;
+  const [currentPage, setCurrentPage] = useState<number>(1);
 
   const allDataQuery = useGetBloodSugarAllData(
     {
@@ -34,8 +37,8 @@ export const BloodSugarHistoryTable = () => {
   const historyQuery = useGetBloodSugarHistory(
     {
       periodType,
-      limit: 20,
-      offset: 0,
+      limit: pageSize,
+      offset: (currentPage - 1) * pageSize,
       days,
       month,
       startDate,
@@ -44,7 +47,15 @@ export const BloodSugarHistoryTable = () => {
     { enabled: !isExport }
   );
 
-  const data = isExport ? allDataQuery.data : historyQuery.data;
+  const data = isExport ? allDataQuery.data : historyQuery.data?.items;
+
+  const handlePageChange = (page: number) => {
+    const bloodSugarHistoryTableLocation =
+      (document.querySelector('.blood-sugar-history-table') as HTMLElement).offsetTop - 10;
+    setCurrentPage(page);
+
+    window.scrollTo({ top: bloodSugarHistoryTableLocation || 0, behavior: 'auto' });
+  };
 
   // PDF export 시 사용할 컬럼 정의 (수정/삭제 컬럼 제외)
   const bloodSugarDocumentColumns: ColumnProps<BloodSugarRecord>[] = [
@@ -115,7 +126,16 @@ export const BloodSugarHistoryTable = () => {
     },
   ];
 
-  return <Table columns={isExport ? bloodSugarDocumentColumns : allColumns} data={data || []} />;
+  return (
+    <div className="blood-sugar-history-table">
+      <Table columns={isExport ? bloodSugarDocumentColumns : allColumns} data={data || []} />
+      {!isExport && (
+        <div className="mt-4 flex justify-center">
+          <Pagination total={historyQuery.data?.totalCount || 0} pageSize={pageSize} onPageChange={handlePageChange} />
+        </div>
+      )}
+    </div>
+  );
 };
 
 const ActionButtonClasses = 'rounded-md bg-(--color-gray-850) p-2';
