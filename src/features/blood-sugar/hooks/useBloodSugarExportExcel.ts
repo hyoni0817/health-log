@@ -39,7 +39,7 @@ export const useBloodSugarExportExcel = (): UseBloodSugarExportExcelReturn => {
       let offset = 0;
 
       while (hasMore) {
-        const data = await bloodSugarApi.getBloodSugarHistory(
+        const { items } = await bloodSugarApi.getBloodSugarHistory(
           {
             periodType: periodType as PeriodFilterType,
             limit: CHUNK_SIZE,
@@ -54,10 +54,10 @@ export const useBloodSugarExportExcel = (): UseBloodSugarExportExcelReturn => {
 
         controllerRef.current = controller;
 
-        if (data.length === 0) {
+        if (items.length === 0) {
           hasMore = false;
         } else {
-          allDataRef.current = [...allDataRef.current, ...data];
+          allDataRef.current = [...allDataRef.current, ...items];
           offset += CHUNK_SIZE;
 
           // 진행률 업데이트 - 청크 단위로만 업데이트 (1000개당 1번)
@@ -71,7 +71,7 @@ export const useBloodSugarExportExcel = (): UseBloodSugarExportExcelReturn => {
         }
 
         // 데이터가 CHUNK_SIZE보다 적으면 마지막 청크
-        if (data.length < CHUNK_SIZE) {
+        if (items.length < CHUNK_SIZE) {
           hasMore = false;
         }
       }
