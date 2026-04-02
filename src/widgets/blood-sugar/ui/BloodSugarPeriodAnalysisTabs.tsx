@@ -7,6 +7,7 @@ import { BloodSugarHistoryTable } from './BloodSugarHistoryTable';
 import { BloodSugarExport } from '@/features/blood-sugar/ui/BloodSugarExport';
 import dayjs from 'dayjs';
 import { BloodSugarPeriodFilterContext } from '@/features/blood-sugar/model';
+import { AddBloodSugarButton } from '@/widgets/home/ui/AddBloodSugarButton';
 
 export const BloodSugarPeriodAnalysisTabs = () => {
   const now = dayjs().toDate();
@@ -31,6 +32,9 @@ export const BloodSugarPeriodAnalysisTabs = () => {
         )}
         <div className="blood-sugar-analysis-content">
           <BloodSugarStatSummary />
+          <div className="flex justify-end mb-4">
+            <AddBloodSugarButton />
+          </div>
           <BloodSugarHistoryTable />
         </div>
       </>
