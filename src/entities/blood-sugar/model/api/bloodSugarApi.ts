@@ -131,4 +131,12 @@ export const bloodSugarApi = {
 
     return allData;
   },
+
+  // 혈당 내역 제거
+  async deleteBloodSugarHistory(id: BloodSugarRecord['id']) {
+    const { error } = await supabase.from('glucose').delete().eq('id', id);
+
+    if (error) throw error;
+    return true;
+  },
 };
