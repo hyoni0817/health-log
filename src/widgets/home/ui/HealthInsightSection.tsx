@@ -19,7 +19,8 @@ export const HealthInsightSection = () => {
             href="/"
             className="py-2 text-center full-width flex justify-center items-center border-1 border-(--divider) rounded-md"
           >
-            <span className="text-(--text) text-sm mr-2">자세히 보기</span>
+            {/* <span className="text-(--text) text-sm mr-2">자세히 보기</span> */}
+            <span className="text-(--text) text-sm mr-2">준비중</span>
             <MoveRight className="text-(--text) w-4 h-4" />
           </Link>
         </div>

@@ -105,10 +105,11 @@ export const BloodSugarHistoryTable = () => {
   ];
 
   const onClickEdit = (id: BloodSugarRecord['id']) => {
-    alert(id);
+    alert('준비중입니다.');
   };
   const onClickDelete = (id: BloodSugarRecord['id']) => {
-    deleteBloodSugar(id);
+    // deleteBloodSugar(id);
+    alert('준비중입니다.');
   };
 
   const allColumns: ColumnProps<BloodSugarRecord>[] = [
