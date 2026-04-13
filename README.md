@@ -53,6 +53,16 @@ https://github.com/user-attachments/assets/d7bed7d4-f5cd-4d13-b7d1-6c97e9e03740
 
 🏠 [Health Log 보러가기](https://hyoni-health-log.vercel.app/)
 
+### ⚠️ 이슈 사항 및 해결 예정 사항
+
+- PDF 변환 서버 배포 환경(AWS EC2 t2.micro)의 리소스 제한 이슈로 인한 'PDF로 내려받기'오류 발생
+    - 현상: 로컬 환경에서는 모든 기능이 정상 동작하나, 현재 배포 서버인 AWS EC2 t2.micro(RAM 1GiB) 환경에서 npm install 및 Puppeteer 실행 시 메모리 부족으로 인해 프로세스가 강제 종료(killed)되는 현상이 있습니다. 이로 인해 'PDF로 내려받기' 클릭시 다운로드 오류가 발생하는 문제가 있습니다.
+    - 원인 파악:
+      - Puppeteer가 의존하는 Headless Chrome 설치 및 실행에는 최소 1~2GB 이상의 여유 메모리가 권장됩니다.
+      - t2.micro 인스턴스의 하드웨어 제약으로 인해 빌드 및 런타임에서 OOM(Out of Memory) 에러가 발생함을 확인했습니다.
+    - 계획:
+      - 단순히 서버 사양을 높여 비용을 발생시키기보다 AWS Lambda를 활용한 서버리스 아키텍처로 PDF 생성 로직을 분리하여 인프라 비용 효율성과 안정성을 동시에 확보할 예정입니다.
+
 ## 실행
 
 1. 프로젝트의 루트 경로에 아래 내용이 포함된 .env 파일을 생성합니다.
