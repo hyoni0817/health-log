@@ -17,10 +17,12 @@ import { BloodSugarPeriodFilterContext } from '@/features/blood-sugar/model';
 import { useGetBloodSugarAllData } from '@/features/blood-sugar/hooks/useGetBloodSugarAllData';
 import { Pagination } from '@/shared/ui/pagination';
 import { keepPreviousData } from '@tanstack/react-query';
+import { useDeleteBloodSugar } from '@/features/blood-sugar/hooks/useDeleteBloodSugar';
 
 export const BloodSugarHistoryTable = () => {
   const { periodType, days, month, startDate, endDate } = usePeriodFilter(BloodSugarPeriodFilterContext);
   const { isExport } = useContext(BloodSugarAnalysisExportContext);
+  const { mutate: deleteBloodSugar } = useDeleteBloodSugar();
   const pageSize = 20;
   const [currentPage, setCurrentPage] = useState<number>(1);
 
@@ -106,7 +108,7 @@ export const BloodSugarHistoryTable = () => {
     alert(id);
   };
   const onClickDelete = (id: BloodSugarRecord['id']) => {
-    alert(id);
+    deleteBloodSugar(id);
   };
 
   const allColumns: ColumnProps<BloodSugarRecord>[] = [
