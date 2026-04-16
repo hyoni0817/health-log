@@ -46,9 +46,9 @@
 - 기존 PDF 변환 라이브러리의 생산성 및 유지보수 한계를 파악하고, Cursor(AI)를 활용해 PDF 변환 기능을 직접 구현한 과정을 기록했습니다.
 - 작성 글: [바이브 코딩으로 React 코드를 PDF로 변환 기능 만들기](https://dev-sisun.tistory.com/53)
 
-## 미리보기
+<!-- ## 미리보기
 
-https://github.com/user-attachments/assets/d7bed7d4-f5cd-4d13-b7d1-6c97e9e03740
+https://github.com/user-attachments/assets/d7bed7d4-f5cd-4d13-b7d1-6c97e9e03740 -->
 
 ## 데모 사이트
 
