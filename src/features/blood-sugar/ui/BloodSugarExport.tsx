@@ -11,7 +11,7 @@ export const BloodSugarExport = () => {
   return (
     <div className="flex justify-end mb-4 gap-2">
       <ExportButton text="Excel로 내려받기" onClick={handleDownloadExcel} />
-      <ExportButton text="PDF로 내려받기" onClick={handleDownloadPdf} />
+      <ExportButton text="PDF로 내려받기" onClick={() => alert('재정비 후 재개 예정입니다.')} />
     </div>
   );
 };
