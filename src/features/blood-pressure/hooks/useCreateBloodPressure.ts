@@ -11,7 +11,7 @@ export const useCreateBloodPressure = () => {
   return useMutation({
     mutationFn: (data: BloodPressurePayload) => bloodPressureApi.createBloodPressure(data),
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: bloodPressureQueries.systolicPressureTrends() });
+      queryClient.invalidateQueries({ queryKey: bloodPressureQueries.all() });
     },
   });
 };
