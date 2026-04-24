@@ -18,11 +18,11 @@ export function Sidebar() {
       href: '/glucose',
       icon: <Droplet />,
     },
-    // {
-    //   label: '혈압',
-    //   href: '/blood-pressure',
-    //   icon: <HeartPulse />,
-    // },
+    {
+      label: '혈압',
+      href: '/blood-pressure',
+      icon: <Activity />,
+    },
   ];
 
   return (
