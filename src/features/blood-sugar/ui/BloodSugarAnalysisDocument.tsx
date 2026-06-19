@@ -3,18 +3,17 @@
 import React from 'react';
 import { BloodSugarHistoryTable } from '@/widgets/blood-sugar/ui/BloodSugarHistoryTable';
 import { BloodSugarStatSummary } from '@/widgets/blood-sugar/ui/BloodSugarStatSummary';
-import { Document, DocumentGroup, Footer, Header } from '@/shared/lib/document-export';
-import { PeriodFilter, PeriodFilterType } from '@/shared/types/measurement';
+import { Document, DocumentGroup, Footer, Header } from 'react-export-doc';
+import { PeriodFilter, PeriodFilterType, PeriodFilterValues } from '@/shared/types/measurement';
 import { BloodSugarPeriodFilterContext } from '../model';
 import { BloodSugarAnalysisExportContext } from '../model';
-import { useSearchParams } from 'next/navigation';
 
-export const BloodSugarAnalysisDocument = () => {
-  const searchParams = useSearchParams();
-  const periodType = searchParams.get('periodType');
-  const days = searchParams.get('days');
-  const startDate = searchParams.get('startDate');
-  const endDate = searchParams.get('endDate');
+interface BloodSugarAnalysisDocumentProps {
+  periodFilterFields: PeriodFilterValues;
+}
+
+export const BloodSugarAnalysisDocument = ({ periodFilterFields }: BloodSugarAnalysisDocumentProps) => {
+  const { periodType, days, startDate, endDate } = periodFilterFields;
 
   const periodFilter: PeriodFilter =
     periodType === PeriodFilterType.RANGE

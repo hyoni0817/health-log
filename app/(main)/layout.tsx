@@ -8,6 +8,7 @@ import { ToastContainer } from 'react-toastify';
 import dayjs from 'dayjs';
 import timezone from 'dayjs/plugin/timezone';
 import utc from 'dayjs/plugin/utc';
+import { ReactDocProvider } from 'react-export-doc';
 
 dayjs.extend(utc);
 dayjs.extend(timezone);
@@ -38,12 +39,14 @@ export default async function RootLayout({
       <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
         <QueryProvider>
           <ModalProvider>
-            <div className="flex h-screen">
-              <Sidebar />
+            <ReactDocProvider>
+              <div className="flex h-screen">
+                <Sidebar />
 
-              <div className="pl-[255px] w-full">{children}</div>
-            </div>
-            <ToastContainer />
+                <div className="pl-[255px] w-full">{children}</div>
+              </div>
+              <ToastContainer />
+            </ReactDocProvider>
           </ModalProvider>
         </QueryProvider>
       </body>
