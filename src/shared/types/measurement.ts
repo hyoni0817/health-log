@@ -46,6 +46,14 @@ export type PeriodFilter =
 
 export type PeriodFilterTypeKey = keyof typeof PeriodFilterType;
 
+export interface PeriodFilterValues {
+  periodType: PeriodFilterType;
+  days: Days | undefined;
+  month: Month | undefined;
+  startDate: RangeDate | undefined;
+  endDate: RangeDate | undefined;
+}
+
 /**
  * 측정 시간 (식사 전후 시간)
  */
