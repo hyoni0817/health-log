@@ -4,9 +4,7 @@ import { Suspense } from 'react';
 export default function BloodSugarExportDocumentPage() {
   return (
     <main>
-      <Suspense fallback={<div>Loading...</div>}>
-        <BloodSugarAnalysisDocument />
-      </Suspense>
+      <Suspense fallback={<div>Loading...</div>}>{/* <BloodSugarAnalysisDocument /> */}</Suspense>
     </main>
   );
 }
