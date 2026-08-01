@@ -12,6 +12,7 @@ export const bloodSugarQueries = {
   statsSummaries: () => [...bloodSugarQueries.all(), 'stats-summary'] as const,
   histories: () => [...bloodSugarQueries.all(), 'history'] as const,
   allHistories: () => [...bloodSugarQueries.all(), 'all-history'] as const,
+  latestRecords: () => [...bloodSugarQueries.all(), 'latest'] as const,
 
   // 쿼리 팩토리
   trend: (days?: number, startDate?: RangeDate, endDate?: RangeDate) =>
@@ -35,5 +36,10 @@ export const bloodSugarQueries = {
       queryKey: [...bloodSugarQueries.allHistories(), ...Object.values(params)],
       queryFn: () => bloodSugarApi.getAllBloodSugarHistory(params),
       ...options,
+    }),
+  latestRecord: () =>
+    queryOptions({
+      queryKey: [...bloodSugarQueries.latestRecords()],
+      queryFn: () => bloodSugarApi.getLatestBloodSugar(),
     }),
 };
