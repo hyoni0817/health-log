@@ -30,7 +30,7 @@ export const BloodSugarAnalysisDocument = ({ periodFilterFields }: BloodSugarAna
   return (
     <BloodSugarAnalysisExportContext.Provider value={{ isExport: true }}>
       <BloodSugarPeriodFilterContext.Provider value={periodFilter}>
-        <div className="blood-sugar-analysis-document">
+        <div data-doc-export className="blood-sugar-analysis-document">
           <DocumentGroup
             renderHeader={(currentPage, totalPages) => (
               <Header title="혈당 리포트" currentPage={currentPage} totalPages={totalPages} />

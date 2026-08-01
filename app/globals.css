@@ -66,6 +66,10 @@
     --chart-systolic: var(--color-blue-400);
     --chart-diastolic: var(--color-yellow-400);
   }
+
+  [data-doc-export] {
+    --text: var(--color-gray-700);
+  }
 }
 
 @theme inline {

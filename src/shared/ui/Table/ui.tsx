@@ -58,7 +58,7 @@ export const Table = <T extends DataRecord>({ columns, data, getRowKey }: TableP
                   <div
                     key={`td-${column.key}`}
                     role="cell"
-                    className="px-3 py-4 flex items-center text-(--color-gray-700)"
+                    className="px-3 py-4 flex items-center"
                     style={getCellStyle(column.width)}
                   >
                     {column.render
