@@ -2,13 +2,13 @@ import type { Metadata } from 'next';
 import { Geist, Geist_Mono } from 'next/font/google';
 import '../globals.css';
 import { Sidebar } from '@/widgets/sidebar';
-import { QueryProvider } from '@/providers/QueryProvider';
 import { ModalProvider } from '@/shared/ui/Modal';
 import { ToastContainer } from 'react-toastify';
 import dayjs from 'dayjs';
 import timezone from 'dayjs/plugin/timezone';
 import utc from 'dayjs/plugin/utc';
 import { ReactDocProvider } from 'react-export-doc';
+import { QueryProvider } from '@/providers/QueryProvider';
 
 dayjs.extend(utc);
 dayjs.extend(timezone);
