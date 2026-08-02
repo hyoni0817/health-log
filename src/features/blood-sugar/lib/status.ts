@@ -25,7 +25,7 @@ export const getBloodSugarStatusLabel = (status: BloodSugarStatusKey): string =>
 export const getBloodSugarStatus = (
   value: number,
   measurementTiming: MeasurementTiming,
-  postMealTime: PostMealTime
+  postMealTime?: PostMealTime | null
 ): BloodSugarStatusKey => {
   const { BEFORE_MEAL_TIME, AFTER_MEAL_TIME } = BLOOD_SUGAR_RANGES;
   const isBeforeMeasurementTiming = measurementTiming.includes('BEFORE');
@@ -48,14 +48,15 @@ export const getBloodSugarStatus = (
     if (BEFORE_MEAL_TIME.FASTING.HIGH_RISK.MIN <= value && value <= BEFORE_MEAL_TIME.FASTING.HIGH_RISK.MAX)
       return 'HIGH_RISK';
   } else {
-    // 식후
-    if (value <= AFTER_MEAL_TIME[postMealTime].LOW.MAX) return 'LOW';
-    if (AFTER_MEAL_TIME[postMealTime].NORMAL.MIN <= value && value <= AFTER_MEAL_TIME[postMealTime].NORMAL.MAX)
-      return 'NORMAL';
-    if (AFTER_MEAL_TIME[postMealTime].BORDERLINE.MIN <= value && value <= AFTER_MEAL_TIME[postMealTime].BORDERLINE.MAX)
-      return 'BORDERLINE';
-    if (AFTER_MEAL_TIME[postMealTime].HIGH_RISK.MIN <= value && value <= AFTER_MEAL_TIME[postMealTime].HIGH_RISK.MAX)
-      return 'HIGH_RISK';
+    // 식후: 측정 경과 시간이 없으면 판정 기준을 특정할 수 없음
+    if (!postMealTime) return 'RECHECK';
+
+    const afterMealRange = AFTER_MEAL_TIME[postMealTime];
+
+    if (value <= afterMealRange.LOW.MAX) return 'LOW';
+    if (afterMealRange.NORMAL.MIN <= value && value <= afterMealRange.NORMAL.MAX) return 'NORMAL';
+    if (afterMealRange.BORDERLINE.MIN <= value && value <= afterMealRange.BORDERLINE.MAX) return 'BORDERLINE';
+    if (afterMealRange.HIGH_RISK.MIN <= value && value <= afterMealRange.HIGH_RISK.MAX) return 'HIGH_RISK';
   }
 
   return 'RECHECK';

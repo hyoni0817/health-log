@@ -1,8 +1,6 @@
 'use client';
 
 import React, { useContext, useState } from 'react';
-import { PostMealTime } from '@/shared/types/measurement';
-import { MeasurementTiming } from '@/shared/types/measurement';
 import { ColumnProps, Table } from '@/shared/ui/Table/ui';
 import dayjs from 'dayjs';
 import { getCommonStatusTextColor } from '@/shared/utils/status';
@@ -77,14 +75,10 @@ export const BloodSugarHistoryTable = () => {
       render: (_, record) => (
         // 혈당 상태에 따라 텍스트 색상을 다르게 표시함.
         <span
-          className={`${getCommonStatusTextColor(getBloodSugarStatus(Number(record?.value), record?.measurement_timing as MeasurementTiming, record?.post_meal_time as PostMealTime))}`}
+          className={`${getCommonStatusTextColor(getBloodSugarStatus(Number(record?.value), record?.measurement_timing, record?.post_meal_time))}`}
         >
           {getBloodSugarStatusLabel(
-            getBloodSugarStatus(
-              Number(record?.value),
-              record?.measurement_timing,
-              record?.post_meal_time as PostMealTime
-            )
+            getBloodSugarStatus(Number(record?.value), record?.measurement_timing, record?.post_meal_time)
           )}
         </span>
       ),

@@ -1,6 +1,6 @@
 import { useCallback, useRef, useState } from 'react';
 import { utils, writeFile } from 'xlsx';
-import { PeriodFilterType, PostMealTime } from '@/shared/types/measurement';
+import { PeriodFilterType } from '@/shared/types/measurement';
 import { getBloodSugarStatus, getBloodSugarStatusLabel } from '../lib/status';
 import { getMeasurementTimingLabel } from '@/shared/utils';
 import dayjs from 'dayjs';
@@ -104,7 +104,7 @@ export const useBloodSugarExportExcel = (): UseBloodSugarExportExcelReturn => {
         item.date,
         item.value,
         getBloodSugarStatusLabel(
-          getBloodSugarStatus(Number(item?.value), item?.measurement_timing, item?.post_meal_time as PostMealTime)
+          getBloodSugarStatus(Number(item?.value), item?.measurement_timing, item?.post_meal_time)
         ),
         getMeasurementTimingLabel(item?.measurement_timing),
         item?.post_meal_time ? `${item?.post_meal_time}분 후` : '-',
