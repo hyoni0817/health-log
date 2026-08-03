@@ -1,6 +1,8 @@
 import React, { useEffect } from 'react';
 import type { Preview } from '@storybook/nextjs-vite';
 import '../app/globals.css';
+import { ModalProvider } from '../src/shared/ui/Modal';
+import { QueryProvider } from '../src/providers/QueryProvider';
 
 const preview: Preview = {
   globalTypes: {
@@ -19,6 +21,10 @@ const preview: Preview = {
     },
   },
   parameters: {
+    // next/navigation(useRouter 등)을 사용하는 컴포넌트를 App Router 환경으로 렌더링
+    nextjs: {
+      appDirectory: true,
+    },
     controls: {
       matchers: {
         color: /(background|color)$/i,
@@ -26,9 +32,9 @@ const preview: Preview = {
       },
     },
     a11y: {
-      // 'todo' - show a11y violations in the test UI only
-      // 'error' - fail CI on a11y violations
-      // 'off' - skip a11y checks entirely
+      // 'todo' - 접근성 위반 사항을 테스트 UI에만 표시
+      // 'error' - 접근성 위반 사항이 있으면 CI 실패
+      // 'off' - 접근성 검사를 하지 않음
       test: 'todo',
     },
   },
@@ -57,6 +63,13 @@ const preview: Preview = {
 
       return <Story {...context} />;
     },
+    (Story, context) => (
+      <QueryProvider>
+        <ModalProvider>
+          <Story {...context} />
+        </ModalProvider>
+      </QueryProvider>
+    ),
   ],
 };
 
