@@ -48,4 +48,5 @@ storybook-static
 /server/node_modules
 
 # notion chat upload state
-/scripts
+/scripts/.uploaded-chats.json
+/scripts/upload-chat-to-notion.mjs

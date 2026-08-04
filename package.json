@@ -12,7 +12,8 @@
     "test:e2e": "cypress open",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build",
-    "prepare": "husky"
+    "prepare": "husky",
+    "backfill:bp-status": "tsx scripts/backfill-blood-pressure-status.ts"
   },
   "dependencies": {
     "@react-pdf/renderer": "^4.3.2",
