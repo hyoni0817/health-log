@@ -5,7 +5,7 @@ import { useRouter } from 'next/navigation';
 import { Button } from '@/shared/ui/Button';
 import { ModalComponentProps } from '@/shared/ui/Modal';
 import { X } from 'lucide-react';
-import { DateField, MeasurementTimeField, NoteField } from '@/shared/ui/form';
+import { DateField, MeasurementTimeField, NoteField, PostMealTimeField } from '@/shared/ui/form';
 import { useBloodPressureForm } from '@/features/blood-pressure/hooks/useBloodPressureForm';
 import { toast } from 'react-toastify';
 import { HealthMessage } from '@/shared/ui/HealthMessage';
@@ -94,6 +94,14 @@ const AddBloodPressureDataModal = ({ close }: ModalComponentProps) => {
           onChange={handleChange.measurement_timing}
           error={errors.measurement_timing}
         />
+
+        {values.measurement_timing.includes('AFTER') && (
+          <PostMealTimeField
+            value={values.post_meal_time}
+            onChange={handleChange.post_meal_time}
+            error={errors.post_meal_time}
+          />
+        )}
 
         {values.systolic_bp && values.diastolic_bp && (
           <HealthMessage
