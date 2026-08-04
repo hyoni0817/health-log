@@ -91,7 +91,7 @@ export interface BaseMeasurementPayload {
  * 공통 측정 레코드 기본 정보
  */
 export interface BaseMeasurementRecord {
-  id: string;
+  id: number;
   created_at: string;
   updated_at: string;
 }
