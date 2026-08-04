@@ -22,6 +22,7 @@ export const BloodPressureTrendSection = () => {
           <BloodPressureLineChart
             systolicChartData={systolicPressureTrend || []}
             diastolicChartData={diastolicPressureTrend || []}
+            isMaintainAspectRatio
           />
         </div>
       </Card>
