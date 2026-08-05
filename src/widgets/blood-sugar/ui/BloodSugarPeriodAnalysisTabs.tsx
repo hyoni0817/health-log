@@ -7,7 +7,7 @@ import { BloodSugarHistoryTable } from './BloodSugarHistoryTable';
 import { BloodSugarExport } from '@/features/blood-sugar/ui/BloodSugarExport';
 import dayjs from 'dayjs';
 import { PeriodFilterContext } from '@/shared/model/periodFilter';
-import { AddDataButton } from '@/shared/ui/AddButton';
+import { AddDataButton } from '@/shared/ui/AddDataButton';
 import AddBloodSugarDataModal from '@/features/blood-sugar/ui/AddBloodSugarDataModal';
 
 export const BloodSugarPeriodAnalysisTabs = () => {
