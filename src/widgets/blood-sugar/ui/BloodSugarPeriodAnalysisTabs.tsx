@@ -6,7 +6,7 @@ import { BloodSugarStatSummary } from './BloodSugarStatSummary';
 import { BloodSugarHistoryTable } from './BloodSugarHistoryTable';
 import { BloodSugarExport } from '@/features/blood-sugar/ui/BloodSugarExport';
 import dayjs from 'dayjs';
-import { BloodSugarPeriodFilterContext } from '@/features/blood-sugar/model';
+import { PeriodFilterContext } from '@/shared/model/periodFilter';
 import { AddDataButton } from '@/shared/ui/AddButton';
 import AddBloodSugarDataModal from '@/features/blood-sugar/ui/AddBloodSugarDataModal';
 
@@ -70,8 +70,8 @@ export const BloodSugarPeriodAnalysisTabs = () => {
   };
 
   return (
-    <BloodSugarPeriodFilterContext.Provider value={periodFilter}>
+    <PeriodFilterContext.Provider value={periodFilter}>
       <Tabs items={tabItems} onChange={handleChangeActiveTab} tabLeftContent={<BloodSugarExport />} />
-    </BloodSugarPeriodFilterContext.Provider>
+    </PeriodFilterContext.Provider>
   );
 };

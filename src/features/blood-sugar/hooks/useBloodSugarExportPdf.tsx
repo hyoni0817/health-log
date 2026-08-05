@@ -1,6 +1,5 @@
 import { useCallback, useState } from 'react';
 import { usePeriodFilter } from '@/shared/hooks/usePeriodFilter';
-import { BloodSugarPeriodFilterContext } from '@/features/blood-sugar/model';
 import dayjs from 'dayjs';
 import { useModal } from '@/shared/ui/Modal';
 import { ExportProgressModal } from '@/shared/ui/ExportProgressModal';
@@ -10,7 +9,7 @@ import { ExportProgressModal } from '@/shared/ui/ExportProgressModal';
  * @returns 혈당 데이터를 PDF로 내려받을 수 있는 함수를 포함한 객체
  */
 export const useBloodSugarExportPdf = () => {
-  const { periodType, days, month, startDate, endDate } = usePeriodFilter(BloodSugarPeriodFilterContext);
+  const { periodType, days, month, startDate, endDate } = usePeriodFilter();
   const { openModal, closeModal, updateModalProps } = useModal();
   const [isExporting, setIsExporting] = useState<boolean>(false);
 

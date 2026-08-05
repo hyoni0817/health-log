@@ -11,14 +11,13 @@ import { PencilIcon, Trash2 } from 'lucide-react';
 import { BloodSugarAnalysisExportContext } from '@/features/blood-sugar/model';
 import { useGetBloodSugarHistory } from '@/features/blood-sugar/hooks/useGetBloodSugarHistory';
 import { usePeriodFilter } from '@/shared/hooks/usePeriodFilter';
-import { BloodSugarPeriodFilterContext } from '@/features/blood-sugar/model';
 import { useGetBloodSugarAllData } from '@/features/blood-sugar/hooks/useGetBloodSugarAllData';
 import { Pagination } from '@/shared/ui/pagination';
 import { keepPreviousData } from '@tanstack/react-query';
 import { useDeleteBloodSugar } from '@/features/blood-sugar/hooks/useDeleteBloodSugar';
 
 export const BloodSugarHistoryTable = () => {
-  const { periodType, days, month, startDate, endDate } = usePeriodFilter(BloodSugarPeriodFilterContext);
+  const { periodType, days, month, startDate, endDate } = usePeriodFilter();
   const { isExport } = useContext(BloodSugarAnalysisExportContext);
   const { mutate: deleteBloodSugar } = useDeleteBloodSugar();
   const pageSize = 20;

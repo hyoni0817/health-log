@@ -2,11 +2,10 @@ import React from 'react';
 import { useGetBloodSugarStatsSummary } from '@/features/blood-sugar/hooks/useGetBloodSugarStatsSummary';
 import { BloodSugarFloatingBar } from '@/features/blood-sugar/ui/BloodSugarFloatingBar';
 import { useGetBloodSugarTrend } from '@/features/blood-sugar';
-import { BloodSugarPeriodFilterContext } from '@/features/blood-sugar/model';
 import { usePeriodFilter } from '@/shared/hooks/usePeriodFilter';
 
 export const BloodSugarStatSummary = () => {
-  const { days, startDate, endDate } = usePeriodFilter(BloodSugarPeriodFilterContext);
+  const { days, startDate, endDate } = usePeriodFilter();
 
   const { data: statsSummary } = useGetBloodSugarStatsSummary(days, startDate, endDate);
   const { data: bloodSugarTrend } = useGetBloodSugarTrend(days, startDate, endDate);

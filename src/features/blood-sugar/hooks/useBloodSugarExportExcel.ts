@@ -8,7 +8,6 @@ import { bloodSugarApi, BloodSugarRecord } from '@/entities/blood-sugar/model';
 import { useModal } from '@/shared/ui/Modal';
 import { ExportProgressModal, ExportProgressModalProps } from '@/shared/ui/ExportProgressModal';
 import { usePeriodFilter } from '@/shared/hooks/usePeriodFilter';
-import { BloodSugarPeriodFilterContext } from '@/features/blood-sugar/model';
 
 interface UseBloodSugarExportExcelReturn {
   handleDownloadExcel: () => Promise<void>;
@@ -21,7 +20,7 @@ interface UseBloodSugarExportExcelReturn {
  */
 export const useBloodSugarExportExcel = (): UseBloodSugarExportExcelReturn => {
   const { openModal, closeModal, updateModalProps } = useModal();
-  const { periodType, days, month, startDate, endDate } = usePeriodFilter(BloodSugarPeriodFilterContext);
+  const { periodType, days, month, startDate, endDate } = usePeriodFilter();
   const [isExporting, setIsExporting] = useState<boolean>(false);
   const allDataRef = useRef<BloodSugarRecord[]>([]);
   const controllerRef = useRef<AbortController | null>(null);

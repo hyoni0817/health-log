@@ -5,7 +5,7 @@ import { BloodSugarHistoryTable } from '@/widgets/blood-sugar/ui/BloodSugarHisto
 import { BloodSugarStatSummary } from '@/widgets/blood-sugar/ui/BloodSugarStatSummary';
 import { Document, DocumentGroup, Footer, Header } from 'react-export-doc';
 import { PeriodFilter, PeriodFilterType, PeriodFilterValues } from '@/shared/types/measurement';
-import { BloodSugarPeriodFilterContext } from '../model';
+import { PeriodFilterContext } from '@/shared/model/periodFilter';
 import { BloodSugarAnalysisExportContext } from '../model';
 
 interface BloodSugarAnalysisDocumentProps {
@@ -29,7 +29,7 @@ export const BloodSugarAnalysisDocument = ({ periodFilterFields }: BloodSugarAna
 
   return (
     <BloodSugarAnalysisExportContext.Provider value={{ isExport: true }}>
-      <BloodSugarPeriodFilterContext.Provider value={periodFilter}>
+      <PeriodFilterContext.Provider value={periodFilter}>
         <div data-doc-export className="blood-sugar-analysis-document">
           <DocumentGroup
             renderHeader={(currentPage, totalPages) => (
@@ -43,7 +43,7 @@ export const BloodSugarAnalysisDocument = ({ periodFilterFields }: BloodSugarAna
             </Document>
           </DocumentGroup>
         </div>
-      </BloodSugarPeriodFilterContext.Provider>
+      </PeriodFilterContext.Provider>
     </BloodSugarAnalysisExportContext.Provider>
   );
 };

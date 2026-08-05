@@ -4,11 +4,10 @@ import { useExportDoc } from 'react-export-doc';
 import { ExportButton } from '@/shared/ui/ExportButton';
 import { useBloodSugarExportExcel } from '@/features/blood-sugar/hooks/useBloodSugarExportExcel';
 import { BloodSugarAnalysisDocument } from './BloodSugarAnalysisDocument';
-import { BloodSugarPeriodFilterContext } from '../model';
 import { usePeriodFilter } from '@/shared/hooks/usePeriodFilter';
 
 export const BloodSugarExport = () => {
-  const { periodType, days, month, startDate, endDate } = usePeriodFilter(BloodSugarPeriodFilterContext);
+  const { periodType, days, month, startDate, endDate } = usePeriodFilter();
   const { handleDownloadExcel } = useBloodSugarExportExcel();
   const { exportPDF } = useExportDoc();
 
