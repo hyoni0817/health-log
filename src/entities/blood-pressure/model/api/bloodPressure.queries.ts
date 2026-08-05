@@ -10,15 +10,15 @@ export const bloodPressureQueries = {
   statsSummaries: () => [...bloodPressureQueries.all(), 'stats-summary'] as const,
 
   // 쿼리 팩토리
-  systolicPressureTrend: (days?: number) =>
+  systolicPressureTrend: (days?: number, startDate?: RangeDate, endDate?: RangeDate) =>
     queryOptions({
-      queryKey: [...bloodPressureQueries.systolicPressureTrends(), days],
-      queryFn: () => bloodPressureApi.getSystolicPressureTrend(days),
+      queryKey: [...bloodPressureQueries.systolicPressureTrends(), days, startDate, endDate],
+      queryFn: () => bloodPressureApi.getSystolicPressureTrend(days, startDate, endDate),
     }),
-  diastolicPressureTrend: (days?: number) =>
+  diastolicPressureTrend: (days?: number, startDate?: RangeDate, endDate?: RangeDate) =>
     queryOptions({
-      queryKey: [...bloodPressureQueries.diastolicPressureTrends(), days],
-      queryFn: () => bloodPressureApi.getDiastolicPressureTrend(days),
+      queryKey: [...bloodPressureQueries.diastolicPressureTrends(), days, startDate, endDate],
+      queryFn: () => bloodPressureApi.getDiastolicPressureTrend(days, startDate, endDate),
     }),
   statsSummary: (days?: number, startDate?: RangeDate, endDate?: RangeDate) =>
     queryOptions({

@@ -28,8 +28,16 @@ export const bloodPressureApi = {
   },
 
   // 수축기 혈압 추이 조회
-  async getSystolicPressureTrend(days?: number): Promise<BloodPressureTrendRecord[]> {
-    const query = await supabase.rpc('get_systolic_pressure_trend', { days });
+  async getSystolicPressureTrend(
+    days?: number,
+    startDate?: RangeDate,
+    endDate?: RangeDate
+  ): Promise<BloodPressureTrendRecord[]> {
+    const query = await supabase.rpc('get_systolic_pressure_trend', {
+      days: days ?? null,
+      start_date: startDate ?? null,
+      end_date: endDate ?? null,
+    });
 
     const { data, error } = await query;
 
@@ -43,8 +51,16 @@ export const bloodPressureApi = {
   },
 
   // 이완기 혈압 추이 조회
-  async getDiastolicPressureTrend(days?: number): Promise<BloodPressureTrendRecord[]> {
-    const query = await supabase.rpc('get_diastolic_pressure_trend', { days });
+  async getDiastolicPressureTrend(
+    days?: number,
+    startDate?: RangeDate,
+    endDate?: RangeDate
+  ): Promise<BloodPressureTrendRecord[]> {
+    const query = await supabase.rpc('get_diastolic_pressure_trend', {
+      days: days ?? null,
+      start_date: startDate ?? null,
+      end_date: endDate ?? null,
+    });
 
     const { data, error } = await query;
 
