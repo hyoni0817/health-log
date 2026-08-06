@@ -5,7 +5,7 @@ import { Bar } from 'react-chartjs-2';
 import { Chart as ChartJS, CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend } from 'chart.js';
 import { type BloodSugarTrendRecord } from '@/entities/blood-sugar/model';
 import { mapToBloodSugarFloatingBarData } from '../lib/chartMapping';
-import { BloodSugarAnalysisExportContext } from '@/features/blood-sugar/model';
+import { FileExportContext } from '@/shared/model/fileExport';
 
 ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend);
 
@@ -15,7 +15,7 @@ interface BloodSugarFloatingBarProps {
 }
 
 export const BloodSugarFloatingBar = ({ chartData, isMaintainAspectRatio = false }: BloodSugarFloatingBarProps) => {
-  const { isExport } = useContext(BloodSugarAnalysisExportContext);
+  const { isExport } = useContext(FileExportContext);
 
   const options = {
     animation: isExport ? (false as const) : undefined, // animation이 undefined이면 기본 애니메이션 적용

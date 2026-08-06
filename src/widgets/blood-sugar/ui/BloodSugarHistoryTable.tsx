@@ -8,7 +8,7 @@ import { getBloodSugarStatus, getBloodSugarStatusLabel } from '@/features/blood-
 import { BloodSugarRecord } from '@/entities/blood-sugar/model';
 import { getMeasurementTimingLabel } from '@/shared/utils';
 import { PencilIcon, Trash2 } from 'lucide-react';
-import { BloodSugarAnalysisExportContext } from '@/features/blood-sugar/model';
+import { FileExportContext } from '@/shared/model/fileExport';
 import { useGetBloodSugarHistory } from '@/features/blood-sugar/hooks/useGetBloodSugarHistory';
 import { usePeriodFilter } from '@/shared/hooks/usePeriodFilter';
 import { useGetBloodSugarAllData } from '@/features/blood-sugar/hooks/useGetBloodSugarAllData';
@@ -18,7 +18,7 @@ import { useDeleteBloodSugar } from '@/features/blood-sugar/hooks/useDeleteBlood
 
 export const BloodSugarHistoryTable = () => {
   const { periodType, days, month, startDate, endDate } = usePeriodFilter();
-  const { isExport } = useContext(BloodSugarAnalysisExportContext);
+  const { isExport } = useContext(FileExportContext);
   const { mutate: deleteBloodSugar } = useDeleteBloodSugar();
   const pageSize = 20;
   const [currentPage, setCurrentPage] = useState<number>(1);

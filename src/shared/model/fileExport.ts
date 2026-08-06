@@ -1,4 +1,4 @@
 import { createContext } from 'react';
 import { FileExport } from '@/shared/types/fileExport';
 
-export const BloodSugarAnalysisExportContext = createContext<FileExport>({ isExport: false });
+export const FileExportContext = createContext<FileExport>({ isExport: false });
