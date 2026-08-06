@@ -9,6 +9,7 @@ import { AddDataButton } from '@/shared/ui/AddDataButton';
 import AddBloodPressureDataModal from '@/features/blood-pressure/ui/AddBloodPressureDataModal';
 import { BloodPressureStatSummary } from './BloodPressureStatSummary';
 import { BloodPressureHistoryTable } from './BloodPressureHistoryTable';
+import { BloodPressureExport } from '@/features/blood-pressure/ui/BloodPressureExport';
 
 export const BloodPressurePeriodAnalysisTabs = () => {
   const now = dayjs().toDate();
@@ -71,7 +72,7 @@ export const BloodPressurePeriodAnalysisTabs = () => {
 
   return (
     <PeriodFilterContext.Provider value={periodFilter}>
-      <Tabs items={tabItems} onChange={handleChangeActiveTab} />
+      <Tabs items={tabItems} onChange={handleChangeActiveTab} tabLeftContent={<BloodPressureExport />} />
     </PeriodFilterContext.Provider>
   );
 };
