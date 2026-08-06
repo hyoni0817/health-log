@@ -1,6 +1,6 @@
 import React from 'react';
 import { Card } from '@/shared/ui/Card';
-import { bloodPressureApi } from '@/entities/blood-pressure/model/api/bloodPressureApi';
+import { bloodPressureApi } from '@/entities/blood-pressure/model';
 import dayjs from 'dayjs';
 import relativeTime from 'dayjs/plugin/relativeTime';
 import { getCommonStatusTextColor } from '@/shared/utils/status';

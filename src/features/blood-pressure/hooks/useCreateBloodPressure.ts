@@ -1,5 +1,4 @@
-import { bloodPressureApi, BloodPressurePayload } from '@/entities/blood-pressure/model';
-import { bloodPressureQueries } from '@/entities/blood-pressure/model/api/bloodPressure.queries';
+import { bloodPressureApi, bloodPressureQueries, BloodPressurePayload } from '@/entities/blood-pressure/model';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 
 /**

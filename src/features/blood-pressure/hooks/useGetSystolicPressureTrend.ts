@@ -1,4 +1,4 @@
-import { bloodPressureQueries } from '@/entities/blood-pressure/model/api/bloodPressure.queries';
+import { bloodPressureQueries } from '@/entities/blood-pressure/model';
 import { RangeDate } from '@/shared/types/measurement';
 import { useQuery } from '@tanstack/react-query';
 
