@@ -4,6 +4,7 @@ import { validateBloodPressureForm, isRequiredField } from '../lib/validation';
 import { isDirtyField, isEmptyObject } from '@/shared/utils/form';
 import { MeasurementTiming, PostMealTime } from '@/shared/types/measurement';
 import { useCreateBloodPressure } from '@/features/blood-pressure/hooks/useCreateBloodPressure';
+import { getBloodPressureStatus } from '../lib';
 
 const initialFormData: BloodPressureFormData = {
   systolic_bp: '',
@@ -154,6 +155,7 @@ export const useBloodPressureForm = (
           post_meal_time: postMealTime,
           note: values.note,
           user_id: 1,
+          status: getBloodPressureStatus(Number(values.systolic_bp), Number(values.diastolic_bp)),
         });
 
         await onSubmit(values);
@@ -194,6 +196,7 @@ export const useBloodPressureForm = (
       date: values.date,
       measurement_timing: values.measurement_timing,
       note: values.note,
+      status: getBloodPressureStatus(Number(values.systolic_bp), Number(values.diastolic_bp)),
     }),
   };
 };

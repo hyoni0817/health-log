@@ -4,11 +4,13 @@ import {
   MeasurementTiming,
   PostMealTime,
 } from '@/shared/types/measurement';
+import { CommonStatusKey as BloodPressureStatusKey } from '@/shared/types/status';
 
 export interface BloodPressurePayload extends BaseMeasurementPayload {
   systolic_bp: number;
   diastolic_bp: number;
   heart_rate: number;
+  status: BloodPressureStatusKey;
 }
 
 export interface BloodPressureRecord extends BloodPressurePayload, BaseMeasurementRecord {}
