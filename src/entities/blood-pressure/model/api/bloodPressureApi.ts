@@ -6,6 +6,7 @@ import {
   BloodPressureTrendRecord,
 } from '../type/bloodPressure';
 import { RangeDate } from '@/shared/types/measurement';
+import { AllHistoryParams, HistoryParams, PaginatedHistory } from '@/shared/types/history';
 
 export const bloodPressureApi = {
   // 새로운 혈압 기록 추가
@@ -99,5 +100,61 @@ export const bloodPressureApi = {
     }
 
     return data[0];
+  },
+
+  // 혈압 내역 조회
+  async getBloodPressureHistory(
+    params: HistoryParams,
+    options?: { headers?: HeadersInit; signal?: AbortSignal }
+  ): Promise<PaginatedHistory<BloodPressureRecord>> {
+    const SUPABASE_URL = process.env.NEXT_PUBLIC_SUPABASE_URL;
+    const SUPABASE_ANON_KEY = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
+    const { periodType, days, month, startDate, endDate, limit, offset } = params;
+
+    const reponse = await fetch(`${SUPABASE_URL}/rest/v1/rpc/get_blood_pressure_history`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        apikey: SUPABASE_ANON_KEY,
+        Authorization: `Bearer ${SUPABASE_ANON_KEY}`,
+        ...options?.headers,
+      } as HeadersInit,
+      body: JSON.stringify({
+        p_period_type: periodType,
+        p_days: days,
+        p_month: month,
+        p_start_date: startDate,
+        p_end_date: endDate,
+        p_limit: limit,
+        p_offset: offset,
+      }),
+      ...options,
+    });
+
+    const data = (await reponse.json()) as PaginatedHistory<BloodPressureRecord>;
+
+    return data;
+  },
+
+  // 모든 혈압 내역 조회
+  async getAllBloodPressureHistory(params: AllHistoryParams): Promise<BloodPressureRecord[]> {
+    const CHUNK_SIZE = 1000;
+    let offset = 0;
+    const allData: BloodPressureRecord[] = [];
+
+    while (true) {
+      const data = await this.getBloodPressureHistory({
+        ...params,
+        limit: CHUNK_SIZE,
+        offset,
+      });
+
+      allData.push(...data.items);
+      offset += CHUNK_SIZE;
+
+      if (data.items.length < CHUNK_SIZE) break;
+    }
+
+    return allData;
   },
 };
