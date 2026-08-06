@@ -1,7 +1,7 @@
 import { queryOptions } from '@tanstack/react-query';
 import { bloodSugarApi } from './bloodSugarApi';
-import { AllHistoryParams, HistoryParams } from '@/shared/types/history';
-import { BloodSugarRecord, PaginatedBloodSugarHistory } from '../types/bloodSugar';
+import { AllHistoryParams, HistoryParams, PaginatedHistory } from '@/shared/types/history';
+import { BloodSugarRecord } from '../types/bloodSugar';
 import { CustomQueryOptions } from '@/shared/types/query';
 import { RangeDate } from '@/shared/types/measurement';
 
@@ -25,7 +25,7 @@ export const bloodSugarQueries = {
       queryKey: [...bloodSugarQueries.statsSummaries(), days, startDate, endDate],
       queryFn: () => bloodSugarApi.getBloodSugarStatsSummary(days, startDate, endDate),
     }),
-  history: (params: HistoryParams, options?: CustomQueryOptions<PaginatedBloodSugarHistory>) =>
+  history: (params: HistoryParams, options?: CustomQueryOptions<PaginatedHistory<BloodSugarRecord>>) =>
     queryOptions({
       queryKey: [...bloodSugarQueries.histories(), ...Object.values(params)],
       queryFn: () => bloodSugarApi.getBloodSugarHistory(params),

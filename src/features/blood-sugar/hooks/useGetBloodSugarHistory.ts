@@ -1,6 +1,5 @@
-import { bloodSugarQueries } from '@/entities/blood-sugar/model';
-import { PaginatedBloodSugarHistory } from '@/entities/blood-sugar/model/types/bloodSugar';
-import { HistoryParams } from '@/shared/types/history';
+import { bloodSugarQueries, BloodSugarRecord } from '@/entities/blood-sugar/model';
+import { HistoryParams, PaginatedHistory } from '@/shared/types/history';
 import { CustomQueryOptions } from '@/shared/types/query';
 import { useQuery } from '@tanstack/react-query';
 
@@ -17,7 +16,7 @@ import { useQuery } from '@tanstack/react-query';
  */
 export const useGetBloodSugarHistory = (
   params: HistoryParams,
-  options?: CustomQueryOptions<PaginatedBloodSugarHistory>
+  options?: CustomQueryOptions<PaginatedHistory<BloodSugarRecord>>
 ) => {
   return useQuery(bloodSugarQueries.history(params, options));
 };

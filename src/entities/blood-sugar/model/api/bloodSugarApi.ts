@@ -4,9 +4,8 @@ import {
   BloodSugarRecord,
   BloodSugarStatsSummaryRecord,
   BloodSugarTrendRecord,
-  PaginatedBloodSugarHistory,
 } from '../types/bloodSugar';
-import { AllHistoryParams, HistoryParams } from '@/shared/types/history';
+import { AllHistoryParams, HistoryParams, PaginatedHistory } from '@/shared/types/history';
 import { RangeDate } from '@/shared/types/measurement';
 
 export const bloodSugarApi = {
@@ -80,7 +79,7 @@ export const bloodSugarApi = {
   async getBloodSugarHistory(
     params: HistoryParams,
     options?: { headers?: HeadersInit; signal?: AbortSignal }
-  ): Promise<PaginatedBloodSugarHistory> {
+  ): Promise<PaginatedHistory<BloodSugarRecord>> {
     const SUPABASE_URL = process.env.NEXT_PUBLIC_SUPABASE_URL;
     const SUPABASE_ANON_KEY = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
     const { periodType, days, month, startDate, endDate, limit, offset } = params;
@@ -105,7 +104,7 @@ export const bloodSugarApi = {
       ...options,
     });
 
-    const data = (await reponse.json()) as PaginatedBloodSugarHistory;
+    const data = (await reponse.json()) as PaginatedHistory<BloodSugarRecord>;
 
     return data;
   },

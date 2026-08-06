@@ -11,3 +11,8 @@ export interface HistoryParams {
 }
 
 export type AllHistoryParams = Omit<HistoryParams, 'limit' | 'offset'>;
+
+export interface PaginatedHistory<T> {
+  items: T[];
+  totalCount: number;
+}
