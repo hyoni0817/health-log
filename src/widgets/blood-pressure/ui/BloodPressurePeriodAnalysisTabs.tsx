@@ -8,6 +8,7 @@ import { PeriodFilterContext } from '@/shared/model/periodFilter';
 import { AddDataButton } from '@/shared/ui/AddDataButton';
 import AddBloodPressureDataModal from '@/features/blood-pressure/ui/AddBloodPressureDataModal';
 import { BloodPressureStatSummary } from './BloodPressureStatSummary';
+import { BloodPressureHistoryTable } from './BloodPressureHistoryTable';
 
 export const BloodPressurePeriodAnalysisTabs = () => {
   const now = dayjs().toDate();
@@ -35,7 +36,7 @@ export const BloodPressurePeriodAnalysisTabs = () => {
           <div className="flex justify-end mb-4">
             <AddDataButton title="혈압 데이터 추가" modalComponent={AddBloodPressureDataModal} />
           </div>
-          {/* <BloodPressureHistoryTable /> */}
+          <BloodPressureHistoryTable />
         </div>
       </>
     );
