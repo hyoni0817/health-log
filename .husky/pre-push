@@ -1,4 +1,5 @@
 echo "🔨 Running build before push..."
+rm -rf .next
 npm run build || {
   echo "❌ Build failed. Push aborted."
   exit 1
