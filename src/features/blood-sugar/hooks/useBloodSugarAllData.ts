@@ -8,12 +8,12 @@ import { CustomQueryOptions } from '@/shared/types/query';
  * @param params AllHistoryParams (periodType, days, month, startDate, endDate)
  * @param options 리액트 쿼리 옵션 (enabled, staleTime, gcTime, refetchOnWindowFocus, refetchOnMount, refetchOnReconnect)
  * @example
- * const { data } = useGetBloodSugarAllData({
+ * const { data } = useBloodSugarAllData({
  *   periodType: PeriodFilterType.DAY,
  *   days: 7,
  * }, { enabled: true });
  * @returns 모든 혈당 내역 데이터
  */
-export const useGetBloodSugarAllData = (params: AllHistoryParams, options?: CustomQueryOptions<BloodSugarRecord[]>) => {
+export const useBloodSugarAllData = (params: AllHistoryParams, options?: CustomQueryOptions<BloodSugarRecord[]>) => {
   return useQuery(bloodSugarQueries.allHistory(params, options));
 };

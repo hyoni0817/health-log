@@ -3,12 +3,12 @@
 import React from 'react';
 import { Card } from '@/shared/ui/Card';
 import { BloodPressureLineChart } from '@/features/blood-pressure/ui/BloodPressureLineChart';
-import { useGetSystolicPressureTrend } from '@/features/blood-pressure/hooks/useGetSystolicPressureTrend';
-import { useGetDiastolicPressureTrend } from '@/features/blood-pressure/hooks/useGetDiastolicPressureTrend';
+import { useSystolicPressureTrend } from '@/features/blood-pressure/hooks/useSystolicPressureTrend';
+import { useDiastolicPressureTrend } from '@/features/blood-pressure/hooks/useDiastolicPressureTrend';
 
 export const BloodPressureTrendSection = () => {
-  const { data: systolicPressureTrend } = useGetSystolicPressureTrend(30);
-  const { data: diastolicPressureTrend } = useGetDiastolicPressureTrend(30);
+  const { data: systolicPressureTrend } = useSystolicPressureTrend(30);
+  const { data: diastolicPressureTrend } = useDiastolicPressureTrend(30);
 
   console.log(systolicPressureTrend);
 

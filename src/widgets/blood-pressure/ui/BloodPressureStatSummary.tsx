@@ -1,16 +1,16 @@
 import React from 'react';
 import { usePeriodFilter } from '@/shared/hooks/usePeriodFilter';
 import { BloodPressureLineChart } from '@/features/blood-pressure/ui/BloodPressureLineChart';
-import { useGetSystolicPressureTrend } from '@/features/blood-pressure/hooks/useGetSystolicPressureTrend';
-import { useGetDiastolicPressureTrend } from '@/features/blood-pressure/hooks/useGetDiastolicPressureTrend';
+import { useSystolicPressureTrend } from '@/features/blood-pressure/hooks/useSystolicPressureTrend';
+import { useDiastolicPressureTrend } from '@/features/blood-pressure/hooks/useDiastolicPressureTrend';
 import { useBloodPressureStatsSummary } from '@/page-components/blood-pressure/hooks/useBloodPressureStatsSummary';
 
 export const BloodPressureStatSummary = () => {
   const { days, startDate, endDate } = usePeriodFilter();
 
   const { data: statsSummary } = useBloodPressureStatsSummary(days, startDate, endDate);
-  const { data: systolicPressureTrend } = useGetSystolicPressureTrend(days, startDate, endDate);
-  const { data: diastolicPressureTrend } = useGetDiastolicPressureTrend(days, startDate, endDate);
+  const { data: systolicPressureTrend } = useSystolicPressureTrend(days, startDate, endDate);
+  const { data: diastolicPressureTrend } = useDiastolicPressureTrend(days, startDate, endDate);
 
   const getDisplayValue = (value: number | string | undefined) => {
     if (statsSummary?.total_record_count && statsSummary?.total_record_count > 0) {

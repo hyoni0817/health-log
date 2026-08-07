@@ -8,13 +8,13 @@ import { useQuery } from '@tanstack/react-query';
  * @param params HistoryParams (periodType, limit, offset, days, month, startDate, endDate)
  * @param options 리액트 쿼리 옵션 (enabled, staleTime, gcTime, refetchOnWindowFocus, refetchOnMount, refetchOnReconnect)
  * @example
- * const { data } = useGetBloodSugarHistory({
+ * const { data } = useBloodSugarHistory({
  *   periodType: PeriodFilterType.DAY,
  *   days: 7,
  * }, { enabled: true });
  * @returns 혈당 내역 데이터
  */
-export const useGetBloodSugarHistory = (
+export const useBloodSugarHistory = (
   params: HistoryParams,
   options?: CustomQueryOptions<PaginatedHistory<BloodSugarRecord>>
 ) => {

@@ -3,10 +3,10 @@
 import React from 'react';
 import { Card } from '@/shared/ui/Card';
 import { BloodSugarFloatingBar } from '@/features/blood-sugar/ui/BloodSugarFloatingBar';
-import { useGetBloodSugarTrend } from '@/features/blood-sugar';
+import { useBloodSugarTrend } from '@/features/blood-sugar';
 
 export const BloodSugarTrendSection = () => {
-  const { data: bloodSugarTrend } = useGetBloodSugarTrend(30);
+  const { data: bloodSugarTrend } = useBloodSugarTrend(30);
 
   return (
     <section className="mb-8 w-[45%] flex-1">

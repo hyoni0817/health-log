@@ -9,9 +9,9 @@ import { BloodSugarRecord } from '@/entities/blood-sugar/model';
 import { getMeasurementTimingLabel } from '@/shared/utils';
 import { PencilIcon, Trash2 } from 'lucide-react';
 import { FileExportContext } from '@/shared/model/fileExport';
-import { useGetBloodSugarHistory } from '@/features/blood-sugar/hooks/useGetBloodSugarHistory';
+import { useBloodSugarHistory } from '@/features/blood-sugar/hooks/useBloodSugarHistory';
 import { usePeriodFilter } from '@/shared/hooks/usePeriodFilter';
-import { useGetBloodSugarAllData } from '@/features/blood-sugar/hooks/useGetBloodSugarAllData';
+import { useBloodSugarAllData } from '@/features/blood-sugar/hooks/useBloodSugarAllData';
 import { Pagination } from '@/shared/ui/pagination';
 import { keepPreviousData } from '@tanstack/react-query';
 import { useDeleteBloodSugar } from '@/features/blood-sugar/hooks/useDeleteBloodSugar';
@@ -23,7 +23,7 @@ export const BloodSugarHistoryTable = () => {
   const pageSize = 20;
   const [currentPage, setCurrentPage] = useState<number>(1);
 
-  const allDataQuery = useGetBloodSugarAllData(
+  const allDataQuery = useBloodSugarAllData(
     {
       periodType,
       days,
@@ -34,7 +34,7 @@ export const BloodSugarHistoryTable = () => {
     { enabled: isExport }
   );
 
-  const historyQuery = useGetBloodSugarHistory(
+  const historyQuery = useBloodSugarHistory(
     {
       periodType,
       limit: pageSize,
