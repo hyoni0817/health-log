@@ -5,7 +5,6 @@ import {
   BloodPressureStatsSummaryRecord,
   BloodPressureTrendRecord,
 } from '../type/bloodPressure';
-import { RangeDate } from '@/shared/types/measurement';
 import { AllHistoryParams, HistoryParams, PaginatedHistory } from '@/shared/types/history';
 import { StatsSummaryParams } from '@/shared/types/stats';
 
@@ -30,11 +29,8 @@ export const bloodPressureApi = {
   },
 
   // 수축기 혈압 추이 조회
-  async getSystolicPressureTrend(
-    days?: number,
-    startDate?: RangeDate,
-    endDate?: RangeDate
-  ): Promise<BloodPressureTrendRecord[]> {
+  async getSystolicPressureTrend(params: StatsSummaryParams): Promise<BloodPressureTrendRecord[]> {
+    const { days, startDate, endDate } = params;
     const query = await supabase.rpc('get_systolic_pressure_trend', {
       days: days ?? null,
       start_date: startDate ?? null,
@@ -53,11 +49,8 @@ export const bloodPressureApi = {
   },
 
   // 이완기 혈압 추이 조회
-  async getDiastolicPressureTrend(
-    days?: number,
-    startDate?: RangeDate,
-    endDate?: RangeDate
-  ): Promise<BloodPressureTrendRecord[]> {
+  async getDiastolicPressureTrend(params: StatsSummaryParams): Promise<BloodPressureTrendRecord[]> {
+    const { days, startDate, endDate } = params;
     const query = await supabase.rpc('get_diastolic_pressure_trend', {
       days: days ?? null,
       start_date: startDate ?? null,

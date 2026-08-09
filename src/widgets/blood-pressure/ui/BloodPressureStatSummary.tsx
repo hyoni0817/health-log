@@ -5,18 +5,21 @@ import { useSystolicPressureTrend } from '@/features/blood-pressure/hooks/useSys
 import { useDiastolicPressureTrend } from '@/features/blood-pressure/hooks/useDiastolicPressureTrend';
 import { useBloodPressureStatsSummary } from '@/page-components/blood-pressure/hooks/useBloodPressureStatsSummary';
 import { keepPreviousData } from '@tanstack/react-query';
+import { StatsSummaryParams } from '@/shared/types/stats';
 
 export const BloodPressureStatSummary = () => {
   const { days, startDate, endDate } = usePeriodFilter();
+  const params: StatsSummaryParams = { days, startDate, endDate };
 
-  const { data: statsSummary } = useBloodPressureStatsSummary(
-    { days, startDate, endDate },
-    {
-      placeholderData: keepPreviousData,
-    }
-  );
-  const { data: systolicPressureTrend } = useSystolicPressureTrend(days, startDate, endDate);
-  const { data: diastolicPressureTrend } = useDiastolicPressureTrend(days, startDate, endDate);
+  const { data: statsSummary } = useBloodPressureStatsSummary(params, {
+    placeholderData: keepPreviousData,
+  });
+  const { data: systolicPressureTrend } = useSystolicPressureTrend(params, {
+    placeholderData: keepPreviousData,
+  });
+  const { data: diastolicPressureTrend } = useDiastolicPressureTrend(params, {
+    placeholderData: keepPreviousData,
+  });
 
   const getDisplayValue = (value: number | string | undefined) => {
     if (statsSummary?.total_record_count && statsSummary?.total_record_count > 0) {

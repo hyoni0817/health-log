@@ -1,9 +1,8 @@
 import { queryOptions } from '@tanstack/react-query';
 import { bloodPressureApi } from './bloodPressureApi';
-import { RangeDate } from '@/shared/types/measurement';
 import { CustomQueryOptions } from '@/shared/types/query';
 import { AllHistoryParams, HistoryParams, PaginatedHistory } from '@/shared/types/history';
-import { BloodPressureRecord, BloodPressureStatsSummaryRecord } from '../type/bloodPressure';
+import { BloodPressureRecord, BloodPressureStatsSummaryRecord, BloodPressureTrendRecord } from '../type/bloodPressure';
 import { StatsSummaryParams } from '@/shared/types/stats';
 
 export const bloodPressureQueries = {
@@ -16,15 +15,17 @@ export const bloodPressureQueries = {
   allHistories: () => [...bloodPressureQueries.all(), 'all-history'] as const,
 
   // 쿼리 팩토리
-  systolicPressureTrend: (days?: number, startDate?: RangeDate, endDate?: RangeDate) =>
+  systolicPressureTrend: (params: StatsSummaryParams, options?: CustomQueryOptions<BloodPressureTrendRecord[]>) =>
     queryOptions({
-      queryKey: [...bloodPressureQueries.systolicPressureTrends(), days, startDate, endDate],
-      queryFn: () => bloodPressureApi.getSystolicPressureTrend(days, startDate, endDate),
+      queryKey: [...bloodPressureQueries.systolicPressureTrends(), ...Object.values(params)],
+      queryFn: () => bloodPressureApi.getSystolicPressureTrend(params),
+      ...options,
     }),
-  diastolicPressureTrend: (days?: number, startDate?: RangeDate, endDate?: RangeDate) =>
+  diastolicPressureTrend: (params: StatsSummaryParams, options?: CustomQueryOptions<BloodPressureTrendRecord[]>) =>
     queryOptions({
-      queryKey: [...bloodPressureQueries.diastolicPressureTrends(), days, startDate, endDate],
-      queryFn: () => bloodPressureApi.getDiastolicPressureTrend(days, startDate, endDate),
+      queryKey: [...bloodPressureQueries.diastolicPressureTrends(), ...Object.values(params)],
+      queryFn: () => bloodPressureApi.getDiastolicPressureTrend(params),
+      ...options,
     }),
   statsSummary: (params: StatsSummaryParams, options?: CustomQueryOptions<BloodPressureStatsSummaryRecord | null>) =>
     queryOptions({
