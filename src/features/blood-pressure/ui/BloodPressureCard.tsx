@@ -5,18 +5,12 @@ import dayjs from 'dayjs';
 import relativeTime from 'dayjs/plugin/relativeTime';
 import { getCommonStatusTextColor } from '@/shared/utils/status';
 import { getBloodPressureStatusLabel } from '../lib/status';
-import { getBloodPressureStatus } from '../lib/status';
 
 dayjs.extend(relativeTime);
 dayjs.locale('ko');
 
 export const BloodPressureCard = async () => {
   const bloodPressureLatest = await bloodPressureApi.getLatestBloodPressure();
-
-  const bloodPressureStatus = getBloodPressureStatus(
-    Number(bloodPressureLatest?.systolic_bp),
-    Number(bloodPressureLatest?.diastolic_bp)
-  );
 
   return (
     <Card className="w-1/2">
@@ -39,8 +33,8 @@ export const BloodPressureCard = async () => {
               <span className="text-base text-(--text-subtitle)">mmHg</span>
             </div>
 
-            <div className={`text-sm ${getCommonStatusTextColor(bloodPressureStatus)}`}>
-              {getBloodPressureStatusLabel(bloodPressureStatus)}
+            <div className={`text-sm ${getCommonStatusTextColor(bloodPressureLatest?.status)}`}>
+              {getBloodPressureStatusLabel(bloodPressureLatest?.status)}
             </div>
           </div>
 
