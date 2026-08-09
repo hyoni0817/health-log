@@ -3,7 +3,8 @@ import { bloodPressureApi } from './bloodPressureApi';
 import { RangeDate } from '@/shared/types/measurement';
 import { CustomQueryOptions } from '@/shared/types/query';
 import { AllHistoryParams, HistoryParams, PaginatedHistory } from '@/shared/types/history';
-import { BloodPressureRecord } from '../type/bloodPressure';
+import { BloodPressureRecord, BloodPressureStatsSummaryRecord } from '../type/bloodPressure';
+import { StatsSummaryParams } from '@/shared/types/stats';
 
 export const bloodPressureQueries = {
   // 키 전용 항목
@@ -25,10 +26,11 @@ export const bloodPressureQueries = {
       queryKey: [...bloodPressureQueries.diastolicPressureTrends(), days, startDate, endDate],
       queryFn: () => bloodPressureApi.getDiastolicPressureTrend(days, startDate, endDate),
     }),
-  statsSummary: (days?: number, startDate?: RangeDate, endDate?: RangeDate) =>
+  statsSummary: (params: StatsSummaryParams, options?: CustomQueryOptions<BloodPressureStatsSummaryRecord | null>) =>
     queryOptions({
-      queryKey: [...bloodPressureQueries.statsSummaries(), days, startDate, endDate],
-      queryFn: () => bloodPressureApi.getBloodPressureStatsSummary(days, startDate, endDate),
+      queryKey: [...bloodPressureQueries.statsSummaries(), ...Object.values(params)],
+      queryFn: () => bloodPressureApi.getBloodPressureStatsSummary(params),
+      ...options,
     }),
   history: (params: HistoryParams, options?: CustomQueryOptions<PaginatedHistory<BloodPressureRecord>>) =>
     queryOptions({

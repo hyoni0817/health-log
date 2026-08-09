@@ -4,11 +4,17 @@ import { BloodPressureLineChart } from '@/features/blood-pressure/ui/BloodPressu
 import { useSystolicPressureTrend } from '@/features/blood-pressure/hooks/useSystolicPressureTrend';
 import { useDiastolicPressureTrend } from '@/features/blood-pressure/hooks/useDiastolicPressureTrend';
 import { useBloodPressureStatsSummary } from '@/page-components/blood-pressure/hooks/useBloodPressureStatsSummary';
+import { keepPreviousData } from '@tanstack/react-query';
 
 export const BloodPressureStatSummary = () => {
   const { days, startDate, endDate } = usePeriodFilter();
 
-  const { data: statsSummary } = useBloodPressureStatsSummary(days, startDate, endDate);
+  const { data: statsSummary } = useBloodPressureStatsSummary(
+    { days, startDate, endDate },
+    {
+      placeholderData: keepPreviousData,
+    }
+  );
   const { data: systolicPressureTrend } = useSystolicPressureTrend(days, startDate, endDate);
   const { data: diastolicPressureTrend } = useDiastolicPressureTrend(days, startDate, endDate);
 

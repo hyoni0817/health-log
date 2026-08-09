@@ -1,5 +1,7 @@
 import { bloodPressureQueries } from '@/entities/blood-pressure/model';
-import { RangeDate } from '@/shared/types/measurement';
+import { BloodPressureStatsSummaryRecord } from '@/entities/blood-pressure/model/type/bloodPressure';
+import { CustomQueryOptions } from '@/shared/types/query';
+import { StatsSummaryParams } from '@/shared/types/stats';
 import { useQuery } from '@tanstack/react-query';
 
 /**
@@ -9,6 +11,9 @@ import { useQuery } from '@tanstack/react-query';
  * @param endDate 종료 날짜
  * @returns 혈압 통계 요약 데이터
  */
-export const useBloodPressureStatsSummary = (days?: number, startDate?: RangeDate, endDate?: RangeDate) => {
-  return useQuery(bloodPressureQueries.statsSummary(days, startDate as Date | null, endDate as Date | null));
+export const useBloodPressureStatsSummary = (
+  params: StatsSummaryParams,
+  options?: CustomQueryOptions<BloodPressureStatsSummaryRecord | null>
+) => {
+  return useQuery(bloodPressureQueries.statsSummary(params, options));
 };

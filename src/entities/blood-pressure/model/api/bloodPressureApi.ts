@@ -7,6 +7,7 @@ import {
 } from '../type/bloodPressure';
 import { RangeDate } from '@/shared/types/measurement';
 import { AllHistoryParams, HistoryParams, PaginatedHistory } from '@/shared/types/history';
+import { StatsSummaryParams } from '@/shared/types/stats';
 
 export const bloodPressureApi = {
   // 새로운 혈압 기록 추가
@@ -75,20 +76,12 @@ export const bloodPressureApi = {
   },
 
   // 혈압 통계 요약 조회
-  async getBloodPressureStatsSummary(
-    days?: number,
-    startDate?: RangeDate,
-    endDate?: RangeDate
-  ): Promise<BloodPressureStatsSummaryRecord | null> {
-    // days가 존재하지 않거나 start_date와 end_date가 모두 존재하지 않으면 api를 호출하지 않음
-    if (!days && (!startDate || !endDate)) {
-      return null;
-    }
-
+  async getBloodPressureStatsSummary(params: StatsSummaryParams): Promise<BloodPressureStatsSummaryRecord | null> {
+    const { days, startDate, endDate } = params;
     const query = await supabase.rpc('get_blood_pressure_stats_summary', {
-      days,
-      start_date: startDate,
-      end_date: endDate,
+      days: days ?? null,
+      start_date: startDate ?? null,
+      end_date: endDate ?? null,
     });
 
     const { data, error } = await query;
