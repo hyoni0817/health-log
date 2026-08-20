@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import type { Preview } from '@storybook/nextjs-vite';
-import '../app/globals.css';
+import '@app/globals.css';
 import { ModalProvider } from '../src/shared/ui/Modal';
 import { QueryProvider } from '../src/providers/QueryProvider';
 

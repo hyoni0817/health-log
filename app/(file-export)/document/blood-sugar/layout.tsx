@@ -1,6 +1,6 @@
 import type { Metadata } from 'next';
 import { Geist, Geist_Mono } from 'next/font/google';
-import '../../../globals.css';
+import '@app/globals.css';
 import { ModalProvider } from '@/shared/ui/Modal';
 import { ToastContainer } from 'react-toastify';
 import dayjs from 'dayjs';
